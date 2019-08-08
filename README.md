@@ -667,6 +667,84 @@ Content-length: 1298
 | 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
 | 33 | Decimal | 12     | amount| Amount |
 
+### 5.1.5 Prepaid Advice Request
+
+**Message Sample**
+
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
+Content-length: 879
+
+{
+	"command":"advice",
+	"product_code":"00500050001",
+	"data":{
+		"date_time":"2019-10T23:58:59.987Z",
+		"reference_number":"1234567891",
+		"customer_id":"149999999911",
+		"meter_id":"14987654321",
+		"id_selector":"0",
+		"merchant_type":"6021",
+		"locket_name":"PPOB",
+		"locket_address":"Jalan Anggrek Neli Murni",
+		"locket_code":"1234",
+		"locket_phone":"02199999",
+		"fwd_stan":"000003",
+		"fwd_reference_number":"000000002161",
+		"purchase_option":"0",
+		"maximum_power_unit_print":"06000",
+		"power_purchase_unsold_print_1":"0",
+		"power_purchase_unsold_print_2":"0",
+		"tariff":"R1",
+		"distribution_code_print":"51",
+		"ceiling":"000000900",
+		"amount":"20000",
+		"admin_fee":"2500",
+		"transaction_currency_code":"360",
+		"service_unit_name_print":"51106",
+		"service_unit_phone_print":"123",
+		"customer_name":"HAMDANIE LESTALUHUANI"
+	}
+}
+```
+
+**Field Description**
+
+| No | Type    | Length | Variable                      | Description                                                                        |
+|----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
+| 1  | String  | 11     | meter_id                      | Meter ID                                                                           |
+| 2  | String  | 12     | customer_id                   | Customer ID                                                                        |
+| 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 4  | String  | 32     | biller_reference_number       | Biller reference number                                                            |
+| 5  | String  | 32     | ba_reference_number           | Biller aggregator reference number                                                 |
+| 6  | String  | 25     | customer_name                 | Customer Name                                                                      |
+| 7  | String  | 4      | tariff                        | Tariff applied                                                                     |
+| 8  | String  | 9      | ceiling                       | Maximum power limits that can be used                                              |
+| 9  | Decimal | 1      | purchase_option               | Purchase Option                                                                    |
+| 10 | String  | 2      | distribution_code_print       | Distribution Code for Print                                                        |
+| 11 | String  | 5      | service_unit_name_print       | Service Unit Name for Print                                                        |
+| 12 | String  | 15     | service_unit_phone_print      | Service Unit Phone for Print                                                       |
+| 13 | String  | 5      | maximum_power_unit_print      | Maximum power unit for print                                                       |
+| 14 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                             |
+| 15 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                  |
+| 16 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                  |
+| 17 | String  | 32     | locket_code                   | Locket code where customer pay                                                     |
+| 18 | String  | 30     | locket_name                   | Locket name where customer pay                                                     |
+| 19 | String  | 50     | locket_address                | Locket address where customer pay                                                  |
+| 20 | String  | 18     | locket_phone                  | Locket phone where customer pay                                                    |
+
+### 5.1.6 Prepaid Advice Response
+
 ## Prepaid Cell Phone Credit
 
 ### Payment Request
