@@ -480,6 +480,9 @@ Content-length: 935
 | 21 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                                                                                                                                                                                                                                                                                        |
 
 ### 5.1.3 Purchase Request
+
+**Message Sample**
+
 ```
 POST /biller/ HTTP/1.1
 Content-type: application/json
@@ -527,6 +530,7 @@ Content-length: 879
 }
 ```
 **Field Description**
+
 | No | Type    | Length | Variable                      | Description                                                                        |
 |----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
 | 1  | String  | 11     | meter_id                      | Meter ID                                                                           |
@@ -552,6 +556,7 @@ Content-length: 879
 
 
 ### 5.1.4 Purchase Response
+
 **Message Sample**
 ```
 HTTP/1.1 200 OK
@@ -612,6 +617,7 @@ Content-length: 1298
 ```
 
 **Field Description**
+
 | No | Type    | Length | Variable                | Description                                                                        |
 |----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
 | 1  | Decimal | 11     | meter_id                | Meter ID                                                                           |
