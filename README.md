@@ -15,14 +15,13 @@ The message format used is JavaScript Object Notation (JSON). JSON is sent throu
 HTTP headers allow the client and the server to pass additional information with the request or the response. An HTTP header consists of its case-insensitive name followed by a colon '`:`', then by its value (without line breaks). Leading white space before the value is ignored. Some of headers used to make Inquiry Request and Payment are as follows:
 
 1. **X-timestamp**
-`X-timestamp` is the time stamp of the transaction with ISO Format in UTC. Time stamp can be used to validate the transaction time.
-For example **2019-12-31T23:59:59.999Z**
+**`X-timestamp`** is the time stamp of the transaction with ISO Format in UTC. Time stamp can be used to validate the transaction time. For example `2019-12-31T23:59:59.999Z`.
 
 2. **X-api-key**
-`X-api-key` is used to identity the client.
+**`X-api-key`** is used to identity the client.
 
 3. **X-signature**
-`X-signature` is required for transaction such as Inquiry and Payment. Signature using _hmac_ and _sha256_ with request method, relative path, times tamp, hash of entity body, username and password as parameters.
+**`X-signature`** is required for transaction such as Inquiry and Payment. Signature using _hmac_ and _sha256_ with request method, relative path, times tamp, hash of entity body, username and password as parameters.
 **Example**
 ```php
 function signature($method, $path, $body, $timestamp, $apikey, $password)
@@ -73,37 +72,44 @@ curl_close( $ch );
 a. timestamp and apikey sent on request header.
 b. password is not sent on request.
 
-4. **Content-length**
-`Content-length` is the length of the request body in bytes. The client must calculate the length of the  request body before sending it to the server. Therefore, the merchant may not send a request with partial content.
-
 5. **Content-type**
-`Content-type` is filled with json/application.
+**`Content-type`** is filled with `json/application`.
+
+5. **Content-encoding**
+**`Content-type`** is filled with `identity`.
+
+4. **Content-length**
+**`Content-length`** is the length of the request body in bytes. The client must calculate the length of the  request body before sending it to the server. Therefore, the merchant may not send a request with partial content.
+
+
 6. **Host**
-`Host` is server address that will be accessed by merchant. This address contains: domain/subdomain, domain/subdomain and port, IP address, IP address and port.
+**`Host`** is server address that will be accessed by merchant. This address contains: domain/subdomain, domain/subdomain and port, IP address, IP address and port. For example ``dev.altopay.id:9090``.
 
 ## 1.4 Request Body
 
 Every request body always contains this two properties:
 
-1. **command  (string)**
+1. **`command`  (String)**
 It is a command that must be execute by the server. This command must be write in lowercase letters. If the command is written incorrectly, the server will send a response with response code “Invalid Transaction” with an error message “Invalid Command”.
-2. **product_code (string)**
+2. **`product_code` (String)**
 It is the product code that will be requested on the transaction. If product is not found, AltoPay Biller will reject the transaction.
 
-2. **process_category (string)**
+2. **`process_category` (String)**
 It is the the alternative of the `product_code`. AltoPay Biller will find the product by combinating the `process_category`, `cutomer_number`, and `amount`. It will simplify the message for prepaid and postpaid cell phone credit payment. If product is not found, AltoPay Biller will reject the transaction.
 
-4. **data (object)**
+4. **`data` (Object)**
 The data (object) contains the request message detail. Every command has different data properties.
 
 ## 1.5 URL
-Merchants must provide at least an URL to accept requests for inquiry and payment virtual accounts. Merchants can unify or separate the URL. If the merchant unites the inquiry and payment URL, the merchant can distinguish between the two requests from the command parameter on the body request received.
+The URL for production is different from the URL for development. The URL for production will be informed after signing the collaboration. For development purposes, use the development URL provided. This URL might change.
 
 # Chapter 2 - Topology
 
 # Chapter 3 – Transaction Flow
 
 # Chapter 4 – General Message Format
+
+The message format on one product will be different from the message format on other products. However, in general, each product has a uniform message format. This chapter will explain the general message format for all products.
 
 ## 4.1 Inquiry
 
@@ -172,7 +178,6 @@ The `X-signature` is signature of the request to guarantee data integrity. The p
 6. password
 
 See **Request Headers** section on Chapter 1.
-
 
 #### b. Body
 
@@ -361,8 +366,16 @@ Some products that have the same attributes and processes are combined into one 
 Every message is always listed one of _product_code_ and _category_process. category_process_ is only used for prepaid cellular phone top up and postpaid cell phone bill payments.
 
 ## 5.1 Prepaid Electricity
+Prepaid electricity is a product of the _Perusahaan Listrik Negara_ (PLN) where customers can use electricity in accordance with the quota that has been purchased. By purchasing a power quota, customers will get a token that can be entered into the power controller.
+
+The customer must enter the customer ID or meter number at the time of purchase because the generated token will be adjusted to the customer's meter number.
+
+To prevent mistakes when purchasing, PLN requires customers to conduct an inquiry to confirm whether the customer number or meter number entered is correct.
 
 ### 5.1.1 Inquiry Request
+
+**Message Sample**
+
 ```
 POST /biller/ HTTP/1.1
 Content-type: application/json
@@ -394,8 +407,15 @@ Content-length: 388
 	}
 }
 ```
+**Field Description**
+| No | Type    | Length | Variable    | Description                                                                        |
+|----|---------|--------|-------------|------------------------------------------------------------------------------------|
+| 1  | String  | 11     | meter_id    | Meter ID                                                                           |
+| 2  | String  | 12     | customer_id | Customer ID                                                                        |
+| 3  | Decimal | 1      | id_selector | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
 
 ### 5.1.2 Inquiry Response
+**Message Sample**
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -434,6 +454,30 @@ Content-length: 935
 	}
 }
 ```
+**Field Description**
+| No | Type    | Length | Variable                      | Description                                                                                                                                                                                                                                                                                                                                              |
+|----|---------|--------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Decimal | 11     | meter_id                      | Meter ID                                                                                                                                                                                                                                                                                                                                                 |
+| 2  | Decimal | 12     | customer_id                   | Costomer ID |
+| 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID.                                                                                                                                                                                                                                                                       |
+| 4  | String  | 32     | biller_reference_number       | Biller reference number                                                                                                                                                                                                                                                                                                                                  |
+| 5  | String  | 32     | ba_reference_number           | Biller aggregator reference number                                                                                                                                                                                                                                                                                                                       |
+| 6  | String  | 25     | customer_name                 | Customer Name                                                                                                                                                                                                                                                                                                                                            |
+| 7  | String  | 4      | tariff                        | Tariff applied                                                                                                                                                                                                                                                                                                                                           |
+| 8  | String  | 9      | ceiling                       | Maximum power limits that can be used                                                                                                                                                                                                                                                                                                                    |
+| 9  | String  | 2      | distribution_code             | Distribution Code                                                                                                                                                                                                                                                                                                                                        |
+| 10 | String  | 5      | service_unit_name             | Service Unit Name                                                                                                                                                                                                                                                                                                                                        |
+| 11 | String  | 15     | service_unit_phone            | Service Unit Phone                                                                                                                                                                                                                                                                                                                                       |
+| 12 | String  | 5      | maximum_power_unit            | Maximum power unit                                                                                                                                                                                                                                                                                                                                       |
+| 13 | String  | 1      | total_repeat                  | Total Repeat                                                                                                                                                                                                                                                                                                                                             |
+| 14 | String  | 11     | power_purchase_unsold         | Power Purchase Unsold                                                                                                                                                                                                                                                                                                                                    |
+| 15 | String  | 2      | distribution_code_print       | Distribution Code for Print                                                                                                                                                                                                                                                                                                                              |
+| 16 | String  | 5      | service_unit_name_print       | Service Unit Name for Print                                                                                                                                                                                                                                                                                                                              |
+| 17 | String  | 15     | service_unit_phone_print      | Service Unit Phone for Print                                                                                                                                                                                                                                                                                                                             |
+| 18 | String  | 5      | maximum_power_unit_print      | Maximum power unit for print                                                                                                                                                                                                                                                                                                                             |
+| 19 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                                                                                                                                                                                                                                                                                                   |
+| 20 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                                                                                                                                                                                                                                                                                        |
+| 21 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                                                                                                                                                                                                                                                                                        |
 
 ### 5.1.3 Purchase Request
 ```
@@ -482,8 +526,33 @@ Content-length: 879
 	}
 }
 ```
+**Field Description**
+| No | Type    | Length | Variable                      | Description                                                                        |
+|----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
+| 1  | String  | 11     | meter_id                      | Meter ID                                                                           |
+| 2  | String  | 12     | customer_id                   | Customer ID                                                                        |
+| 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 4  | String  | 32     | biller_reference_number       | Biller reference number                                                            |
+| 5  | String  | 32     | ba_reference_number           | Biller aggregator reference number                                                 |
+| 6  | String  | 25     | customer_name                 | Customer Name                                                                      |
+| 7  | String  | 4      | tariff                        | Tariff applied                                                                     |
+| 8  | String  | 9      | ceiling                       | Maximum power limits that can be used                                              |
+| 9  | Decimal | 1      | purchase_option               | Purchase Option                                                                    |
+| 10 | String  | 2      | distribution_code_print       | Distribution Code for Print                                                        |
+| 11 | String  | 5      | service_unit_name_print       | Service Unit Name for Print                                                        |
+| 12 | String  | 15     | service_unit_phone_print      | Service Unit Phone for Print                                                       |
+| 13 | String  | 5      | maximum_power_unit_print      | Maximum power unit for print                                                       |
+| 14 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                             |
+| 15 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                  |
+| 16 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                  |
+| 17 | String  | 32     | locket_code                   | Locket code where customer pay                                                     |
+| 18 | String  | 30     | locket_name                   | Locket name where customer pay                                                     |
+| 19 | String  | 50     | locket_address                | Locket address where customer pay                                                  |
+| 20 | String  | 18     | locket_phone                  | Locket phone where customer pay                                                    |
+
 
 ### 5.1.4 Purchase Response
+**Message Sample**
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -541,6 +610,42 @@ Content-length: 1298
 	}
 }
 ```
+
+**Field Description**
+| No | Type    | Length | Variable                | Description                                                                        |
+|----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
+| 1  | Decimal | 11     | meter_id                | Meter ID                                                                           |
+| 2  | Decimal | 12     | customer_id             | Customer ID                                                                        |
+| 3  | Decimal | 1      | id_selector             | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 4  | String  | 32     | biller_reference_number | Biller reference number                                                            |
+| 5  | String  | 32     | ba_reference_number     | Biller aggregator reference number                                                 |
+| 6  | Decimal | 8      | vending_receipt_number  | Vending Receipt Number                                                             |
+| 7  | String  | 25     | customer_name           | Customer Name                                                                      |
+| 8  | String  | 4      | tariff                  | Tariff applied                                                                     |
+| 9  | String  | 9      | ceiling                 | Maximum power limits that can be used                                              |
+| 10 | String  | 1      | purchase_option         | Purchase Option                                                                    |
+| 11 | Decimal | 1      | decimal_admin_fee       | Decimal Admin Fee                                                                  |
+| 12 | Decimal | 10     | admin_fee               | Admin fee for the transaction                                                      |
+| 13 | Decimal | 1      | decimal_stamp           | Decimal Stamp                                                                      |
+| 14 | Decimal | 10     | stamp                   | Stamp                                                                              |
+| 15 | Decimal | 1      | decimal_ppn             | Decimal PPN                                                                        |
+| 16 | Decimal | 10     | ppn                     | PPN                                                                                |
+| 17 | Decimal | 1      | decimal_ppju            | Decimal PPJU                                                                       |
+| 18 | Decimal | 10     | ppju                    | PPJU                                                                               |
+| 19 | Decimal | 1      | decimal_installment     | Decimal Installment                                                                |
+| 20 | Decimal | 10     | installment             | Installment                                                                        |
+| 21 | Decimal | 1      | decimal_power           | Decimal Power                                                                      |
+| 22 | Decimal | 12     | power                   | Power                                                                              |
+| 23 | Decimal | 1      | decimal_unit_price      | Decimal Unit Price                                                                 |
+| 24 | Decimal | 10     | unit_price              | Unit Price                                                                         |
+| 25 | String  | 20     | token                   | Token of electrical quota                                                          |
+| 26 | String  | 14     | date_paid_off           | Date Paid Off                                                                      |
+| 27 | String  | 2      | distribution_code       | Distribution Code                                                                  |
+| 28 | String  | 5      | service_unit_name       | Service Unit Name                                                                  |
+| 29 | String  | 15     | service_unit_phone      | Service Unit Phone                                                                 |
+| 30 | Decimal | 5      | maximum_power_unit      | Maximum power unit                                                                 |
+| 31 | Decimal | 1      | total_repeat            | Total Repeat                                                                       |
+| 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
 
 ## Prepaid Cell Phone Credit
 
