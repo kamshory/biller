@@ -840,6 +840,20 @@ Content-length: 1819
 | 31 | Decimal | 1      | total_repeat            | Total Repeat                                                                       |
 | 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
 
+## 5.2 Postpaid Electrictity
+
+### 5.2.1 Inquiry Request
+
+### 5.2.2 Inquiry Response
+
+### 5.2.3 Payment Request
+
+### 5.2.4 Payment Response
+
+### 5.2.5 Advice Request
+
+### 5.2.6 Advice Response
+
 
 ## Prepaid Cell Phone Credit
 
