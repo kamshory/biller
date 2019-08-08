@@ -213,6 +213,7 @@ The `Content-type` entity header indicates the size of the entity-body, in bytes
 The `Content-length` entity header indicates the size of the entity-body, in bytes, sent to recipient.
 
 **Date**
+
 The `Date` general HTTP header contains the date and time at which the message was originated.
 
 #### b. Body
@@ -336,6 +337,7 @@ The `Content-type` entity header indicates the size of the entity-body, in bytes
 The `Content-length` entity header indicates the size of the entity-body, in bytes, sent to recipient.
 
 **Date**
+
 The `Date` general HTTP header contains the date and time at which the message was originated.
 
 #### b. Body
@@ -366,6 +368,7 @@ Some products that have the same attributes and processes are combined into one 
 Every message is always listed one of _product_code_ and _category_process. category_process_ is only used for prepaid cellular phone top up and postpaid cell phone bill payments.
 
 ## 5.1 Prepaid Electricity
+
 Prepaid electricity is a product of the _Perusahaan Listrik Negara_ (PLN) where customers can use electricity in accordance with the quota that has been purchased. By purchasing a power quota, customers will get a token that can be entered into the power controller.
 
 The customer must enter the customer ID or meter number at the time of purchase because the generated token will be adjusted to the customer's meter number.
@@ -692,6 +695,9 @@ Content-length: 200
 ```
 
 ### Payment Response
+
+**Message Sample**
+
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -721,6 +727,8 @@ Content-length: 336
 
 ### Inquiry Request
 
+**Message Sample**
+
 ```
 POST /biller/ HTTP/1.1
 Content-type: application/json
@@ -749,6 +757,8 @@ Content-length: 176
 
 ### Inquiry Response
 
+**Message Sample**
+
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -775,6 +785,8 @@ Content-length: 363
 ```
 
 ### Payment Request
+
+**Message Sample**
 
 ```
 POST /biller/ HTTP/1.1
@@ -808,6 +820,8 @@ Content-length: 296
 
 ### Payment Response
 
+**Message Sample**
+
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -838,6 +852,9 @@ Content-length: 363
 
 
 ### Inquiry Request
+
+**Message Sample**
+
 ```
 POST /biller/ HTTP/1.1
 Content-type: application/json
@@ -864,6 +881,9 @@ Content-length: 177
 ```
 
 ### Inquiry Response
+
+**Message Sample**
+
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -890,6 +910,8 @@ Content-length: 364
 ```
 
 ### Payment Request
+
+**Message Sample**
 
 ```
 POST /biller/ HTTP/1.1
@@ -921,6 +943,8 @@ Content-length: 285
 ```
 
 ### Payment Response
+
+**Message Sample**
 
 ```
 HTTP/1.1 200 OK
