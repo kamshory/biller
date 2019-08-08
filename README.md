@@ -487,6 +487,7 @@ Content-length: 935
 | 19 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                                                                                                                                                                                                                                                                                                   |
 | 20 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                                                                                                                                                                                                                                                                                        |
 | 21 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                                                                                                                                                                                                                                                                                        |
+| 22 | Decimal | 12     | amount| Amount |
 
 ### 5.1.3 Purchase Request
 
@@ -563,6 +564,7 @@ Content-length: 879
 | 18 | String  | 30     | locket_name                   | Locket name where customer pay                                                     |
 | 19 | String  | 50     | locket_address                | Locket address where customer pay                                                  |
 | 20 | String  | 18     | locket_phone                  | Locket phone where customer pay                                                    |
+| 21 | Decimal | 12     | amount| Amount |
 
 
 ### 5.1.4 Purchase Response
@@ -663,6 +665,7 @@ Content-length: 1298
 | 30 | Decimal | 5      | maximum_power_unit      | Maximum power unit                                                                 |
 | 31 | Decimal | 1      | total_repeat            | Total Repeat                                                                       |
 | 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
+| 33 | Decimal | 12     | amount| Amount |
 
 ## Prepaid Cell Phone Credit
 
