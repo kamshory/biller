@@ -407,7 +407,9 @@ Content-length: 388
 	}
 }
 ```
+
 **Field Description**
+
 | No | Type    | Length | Variable    | Description                                                                        |
 |----|---------|--------|-------------|------------------------------------------------------------------------------------|
 | 1  | String  | 11     | meter_id    | Meter ID                                                                           |
@@ -415,7 +417,9 @@ Content-length: 388
 | 3  | Decimal | 1      | id_selector | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
 
 ### 5.1.2 Inquiry Response
+
 **Message Sample**
+
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
@@ -454,7 +458,9 @@ Content-length: 935
 	}
 }
 ```
+
 **Field Description**
+
 | No | Type    | Length | Variable                      | Description                                                                                                                                                                                                                                                                                                                                              |
 |----|---------|--------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1  | Decimal | 11     | meter_id                      | Meter ID                                                                                                                                                                                                                                                                                                                                                 |
@@ -529,6 +535,7 @@ Content-length: 879
 	}
 }
 ```
+
 **Field Description**
 
 | No | Type    | Length | Variable                      | Description                                                                        |
@@ -558,6 +565,7 @@ Content-length: 879
 ### 5.1.4 Purchase Response
 
 **Message Sample**
+
 ```
 HTTP/1.1 200 OK
 Content-type: application/json
