@@ -844,11 +844,271 @@ Content-length: 1819
 
 ### 5.2.1 Inquiry Request
 
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
+Content-length: 274
+
+{
+	"command":"inquiry",
+	"product_code":"00500050001",
+	"data":{
+		"date_time":"2019-10T23:58:59.987Z",
+		"reference_number":"1234567891",
+		"customer_id":"149999999911",
+		"reference_number":"000000002161"
+	}
+}
+```
+
+**Field Description**
+
+| No | Type    | Length | Variable                      | Description                                                                        |
+|----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
+| 1  | String  | 12     | customer_id                   | Customer ID                                                                        |
+| 2  | String  | 32     | adv_reference_number       | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+
 ### 5.2.2 Inquiry Response
+
+**Field Description**
+
+| No | Type    | Length | Variable                | Description                                    |
+|----|---------|--------|-------------------------|------------------------------------------------|
+| 1  | String  | 12     | customer_id             | Customer ID                                    |
+| 2  | Decimal | 1      | bill_count              | Count of bills to pay                          |
+| 3  | Decimal | 2      | outstanding_bill_count  | Count of outstanding bill to pay               |
+| 4  | String  | 32     | biller_reference_number | Biller reference number                        |
+| 5  | String  | 25     | customer_name           | Customer Name                                  |
+| 6  | String  | 5      | service_unit_name       | Service Unit Name                              |
+| 7  | String  | 15     | service_unit_phone      | Service Unit Phone                             |
+| 8  | String  | 4      | tariff                  | Tariff applied                                 |
+| 9  | Decimal | 9      | ceiling                 | Maximum power limits that can be used          |
+| 10 | Decimal | 9      | admin_fee               | Admin fee for the transaction                  |
+| 11 | String  | 6      | bill_period_1           | The first bill period                          |
+| 12 | String  | 8      | due_date_1              | The first period billing due date              |
+| 13 | String  | 8      | bill_record_date_1      | Date of the first period of electricity usage  |
+| 14 | Decimal | 12     | bill_amount_1           | Total bill amount for the first period         |
+| 15 | String  | 1      | incentive_sign_1        | Incentive sign of the first bills period       |
+| 16 | Decimal | 10     | incentive_amount_1      | Incentive amount of the first bills period     |
+| 17 | Decimal | 10     | ppn_1                   | PPN for period 1                              |
+| 18 | Decimal | 12     | late_fees_1             | Late fee for period 1                          |
+| 19 | Decimal | 8      | lwbp_before_1           | LWBP before period 1                           |
+| 20 | Decimal | 8      | lwbp_after_1            | LWBP after for period 1                        |
+| 21 | Decimal | 8      | wbp_before_1            | WBP after for period 1                         |
+| 22 | Decimal | 8      | wbp_after_1             | BWP after for period 1                         |
+| 23 | Decimal | 8      | kvarh_before_1          | KVARH before for period 1                      |
+| 24 | Decimal | 8      | kvarh_after_1           | KVARH after for period 1                       |
+| 25 | String  | 6      | bill_period_2           | The second bill period                         |
+| 26 | String  | 8      | due_date_2              | The second period billing due date             |
+| 27 | String  | 8      | bill_record_date_2      | Date of the second period of electricity usage |
+| 28 | Decimal | 12     | bill_amount_2           | Total bill amount for the second period        |
+| 29 | String  | 1      | incentive_sign_2        | Incentive sign of the second bills period      |
+| 30 | String  | 10     | incentive_amount_2      | Incentive amount of the second bills period    |
+| 31 | Decimal | 10     | ppn_2                   | PPN for period 2                              |
+| 32 | Decimal | 12     | late_fees_2             | Late fees for period 2                         |
+| 33 | Decimal | 8      | lwbp_before_2           | LWBP before for period 2                       |
+| 34 | Decimal | 8      | lwbp_after_2            | LWBP after for period 2                        |
+| 35 | Decimal | 8      | wbp_before_2            | WBP before for period 2                        |
+| 36 | Decimal | 8      | wbp_after_2             | BWP after for period 2                         |
+| 37 | Decimal | 8      | kvarh_before_2          | KVARH before for period 2                      |
+| 38 | Decimal | 8      | kvarh_after_2           | KVARH after for period 2                       |
+| 39 | String  | 6      | bill_period_3           | The third bill period                          |
+| 40 | String  | 8      | due_date_3              | The third period billing due date              |
+| 41 | String  | 8      | bill_record_date_3      | Date of the third period of electricity usage  |
+| 42 | Decimal | 12     | bill_amount_3           | Total bill amount for the third period         |
+| 43 | String  | 1      | incentive_sign_3        | Incentive sign of the third bills period       |
+| 44 | Decimal | 10     | incentive_amount_3      | Incentive amount of the third bills period     |
+| 45 | Decimal | 10     | ppn_3                   | PPN for period 3                              |
+| 46 | Decimal | 12     | late_fees_3             | Late fees for period 3                         |
+| 47 | Decimal | 8      | lwbp_before_3           | LWBP before for period 3                       |
+| 48 | Decimal | 8      | lwbp_after_3            | LWBP after for period 3                        |
+| 49 | Decimal | 8      | wbp_before_3            | WBP before for period 3                        |
+| 50 | Decimal | 8      | wbp_after_3             | BWP after for period 3                         |
+| 51 | Decimal | 8      | kvarh_before_3          | KVARH before for period 3                      |
+| 52 | Decimal | 8      | kvarh_after_3           | KVARH after for period 3                       |
+| 53 | String  | 6      | bill_period_4           | The fourth bill period                         |
+| 54 | String  | 8      | due_date_4              | The fourth period billing due date             |
+| 55 | String  | 8      | bill_record_date_4      | Date of the fourth period of electricity usage |
+| 56 | Decimal | 12     | bill_amount_4           | Total bill amount for the fourth period        |
+| 57 | String  | 1      | incentive_sign_4        | Incentive sign of the fourth bills period      |
+| 58 | Decimal | 10     | incentive_amount_4      | Incentive amount of the fourth bills period    |
+| 59 | Decimal | 10     | ppn_4                   | PPN for period 4                               |
+| 60 | Decimal | 12     | late_fees_4             | Late fees for period 4                         |
+| 61 | Decimal | 8      | lwbp_before_4           | LWBP before for period 4                       |
+| 62 | Decimal | 8      | lwbp_after_4            | LWBP after for period 4                        |
+| 63 | Decimal | 8      | wbp_before_4            | WBP before for period 4                        |
+| 64 | Decimal | 8      | wbp_after_4             | BWP after for period 4                         |
+| 65 | Decimal | 8      | kvarh_before_4          | LWBP before for period 4                       |
+| 66 | Decimal | 8      | kvarh_after_4           | KVARH after for period 4                       |
+| 67 | Decimal | 12     | amount                  | Amount                                         |
 
 ### 5.2.3 Payment Request
 
+**Field Description**
+
+| No | Type    | Length | Variable                | Description                                                                        |
+|----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
+| 1  | String  | 12     | customer_id             | Customer ID                                                                        |
+| 2  | Decimal | 1      | bill_count              | Count of bills to pay                                                              |
+| 3  | Decimal | 1      | payment_count           | The number of payment on the date                                                  |
+| 4  | Decimal | 2      | outstanding_bill_count  | Count of outstanding bill to pay                                                   |
+| 5  | String  | 32     | biller_reference_number | Biller reference number                                                            |
+| 6  | String  | 25     | customer_name           | Customer Name                                                                      |
+| 7  | String  | 5      | service_unit_name       | Service Unit Name                                                                  |
+| 8  | String  | 15     | service_unit_phone      | Service Unit Phone                                                                 |
+| 9  | String  | 4      | tariff                  | Tariff applied                                                                     |
+| 10 | Decimal | 9      | ceiling                 | Maximum power limits that can be used                                              |
+| 11 | Decimal | 9      | admin_fee               | Admin fee for the transaction                                                      |
+| 12 | String  | 6      | bill_period_1           | The first bill period                                                              |
+| 13 | String  | 8      | due_date_1              | The first period billing due date                                                  |
+| 14 | String  | 8      | bill_record_date_1      | Date of the first period of electricity usage                                      |
+| 15 | Decimal | 12     | bill_amount_1           | Total bill amount for the first period                                             |
+| 16 | String  | 1      | incentive_sign_1        | Incentive sign of the first bills period                                           |
+| 17 | Decimal | 10     | incentive_amount_1      | Incentive amount of the first bills period                                         |
+| 18 | Decimal | 10     | ppn_1                   | PPN for periode 1                                                                  |
+| 19 | Decimal | 12     | late_fees_1             | Late fee for period 1                                                              |
+| 20 | Decimal | 8      | lwbp_before_1           | LWBP before period 1                                                               |
+| 21 | Decimal | 8      | lwbp_after_1            | LWBP after for period 1                                                            |
+| 22 | Decimal | 8      | wbp_before_1            | WBP after for period 1                                                             |
+| 23 | Decimal | 8      | wbp_after_1             | BWP after for period 1                                                             |
+| 24 | Decimal | 8      | kvarh_before_1          | KVARH before for period 1                                                          |
+| 25 | Decimal | 8      | kvarh_after_1           | KVARH after for period 1                                                           |
+| 26 | String  | 6      | bill_period_2           | The second bill period                                                             |
+| 27 | String  | 8      | due_date_2              | The second period billing due date                                                 |
+| 28 | String  | 8      | bill_record_date_2      | Date of the second period of electricity usage                                     |
+| 29 | Decimal | 12     | bill_amount_2           | Total bill amount for the second period                                            |
+| 30 | String  | 1      | incentive_sign_2        | Incentive sign of the second bills period                                          |
+| 31 | String  | 10     | incentive_amount_2      | Incentive amount of the second bills period                                        |
+| 32 | Decimal | 10     | ppn_2                   | PPN for periode 2                                                                  |
+| 33 | Decimal | 12     | late_fees_2             | Late fees for period 2                                                             |
+| 34 | Decimal | 8      | lwbp_before_2           | LWBP before for period 2                                                           |
+| 35 | Decimal | 8      | lwbp_after_2            | LWBP after for period 2                                                            |
+| 36 | Decimal | 8      | wbp_before_2            | WBP before for period 2                                                            |
+| 37 | Decimal | 8      | wbp_after_2             | BWP after for period 2                                                             |
+| 38 | Decimal | 8      | kvarh_before_2          | KVARH before for period 2                                                          |
+| 39 | Decimal | 8      | kvarh_after_2           | KVARH after for period 2                                                           |
+| 40 | String  | 6      | bill_period_3           | The third bill period                                                              |
+| 41 | String  | 8      | due_date_3              | The third period billing due date                                                  |
+| 42 | String  | 8      | bill_record_date_3      | Date of the third period of electricity usage                                      |
+| 43 | Decimal | 12     | bill_amount_3           | Total bill amount for the third period                                             |
+| 44 | String  | 1      | incentive_sign_3        | Incentive sign of the third bills period                                           |
+| 45 | Decimal | 10     | incentive_amount_3      | Incentive amount of the third bills period                                         |
+| 46 | Decimal | 10     | ppn_3                   | PPN for periode 3                                                                  |
+| 47 | Decimal | 12     | late_fees_3             | Late fees for period 3                                                             |
+| 48 | Decimal | 8      | lwbp_before_3           | LWBP before for period 3                                                           |
+| 49 | Decimal | 8      | lwbp_after_3            | LWBP after for period 3                                                            |
+| 50 | Decimal | 8      | wbp_before_3            | WBP before for period 3                                                            |
+| 51 | Decimal | 8      | wbp_after_3             | BWP after for period 3                                                             |
+| 52 | Decimal | 8      | kvarh_before_3          | KVARH before for period 3                                                          |
+| 53 | Decimal | 8      | kvarh_after_3           | KVARH after for period 3                                                           |
+| 54 | String  | 6      | bill_period_4           | The fourth bill period                                                             |
+| 55 | String  | 8      | due_date_4              | The fourth period billing due date                                                 |
+| 56 | String  | 8      | bill_record_date_4      | Date of the fourth period of electricity usage                                     |
+| 57 | Decimal | 12     | bill_amount_4           | Total bill amount for the fourth period                                            |
+| 58 | String  | 1      | incentive_sign_4        | Incentive sign of the fourth bills period                                          |
+| 59 | Decimal | 10     | incentive_amount_4      | Incentive amount of the fourth bills period                                        |
+| 60 | Decimal | 10     | ppn_4                   | PPN for period 4                                                                   |
+| 61 | Decimal | 12     | late_fees_4             | Late fees for period 4                                                             |
+| 62 | Decimal | 8      | lwbp_before_4           | LWBP before for period 4                                                           |
+| 63 | Decimal | 8      | lwbp_after_4            | LWBP after for period 4                                                            |
+| 64 | Decimal | 8      | wbp_before_4            | WBP before for period 4                                                            |
+| 65 | Decimal | 8      | wbp_after_4             | BWP after for period 4                                                             |
+| 66 | Decimal | 8      | kvarh_before_4          | LWBP before for period 4                                                           |
+| 67 | Decimal | 8      | kvarh_after_4           | KVARH after for period 4                                                           |
+| 68 | String  | 6      | fwd_stan                | STAN forwarded from inquiry response to be used on related transaction             |
+| 69 | String  | 12     | fwd_reference_number    | Reference number forwarded from inquiry response to be used on related transaction |
+| 70 | String  | 32     | locket_code             | Locket code where customer pay                                                     |
+| 71 | String  | 30     | locket_name             | Locket name where customer pay                                                     |
+| 72 | String  | 50     | locket_address          | Locket address where customer pay                                                  |
+| 73 | String  | 18     | locket_phone            | Locket phone where customer pay                                                    |
+| 74 | Decimal | 12     | amount                  | Amount                                                                             |
+
 ### 5.2.4 Payment Response
+
+**Field Description**
+
+| No | Type    | Length | Variable                | Description                                    |
+|----|---------|--------|-------------------------|------------------------------------------------|
+| 1  | String  | 12     | customer_id             | Customer ID                                    |
+| 2  | Decimal | 1      | bill_count              | Count of bills to pay                          |
+| 3  | Decimal | 1      | payment_count           | The number of payment on the date              |
+| 4  | Decimal | 2      | outstanding_bill_count  | Count of outstanding bill to pay               |
+| 5  | String  | 32     | biller_reference_number | Biller reference number                        |
+| 6  | String  | 32     | ba_reference_number     | Biller aggregator reference number             |
+| 7  | String  | 25     | customer_name           | Customer Name                                  |
+| 8  | String  | 5      | service_unit_name       | Service Unit Name                              |
+| 9  | String  | 15     | service_unit_phone      | Service Unit Phone                             |
+| 10 | String  | 4      | tariff                  | Tariff applied                                 |
+| 11 | Decimal | 9      | ceiling                 | Maximum power limits that can be used          |
+| 12 | Decimal | 9      | admin_fee               | Admin fee for the transaction                  |
+| 13 | String  | 6      | bill_period_1           | The first bill period                          |
+| 14 | String  | 8      | due_date_1              | The first period billing due date              |
+| 15 | String  | 8      | bill_record_date_1      | Date of the first period of electricity usage  |
+| 16 | Decimal | 12     | bill_amount_1           | Total bill amount for the first period         |
+| 17 | String  | 1      | incentive_sign_1        | Incentive sign of the first bills period       |
+| 18 | Decimal | 10     | incentive_amount_1      | Incentive amount of the first bills period     |
+| 19 | Decimal | 10     | ppn_1                   | PPN for period 1                              |
+| 20 | Decimal | 12     | late_fees_1             | Late fee for period 1                          |
+| 21 | Decimal | 8      | lwbp_before_1           | LWBP before period 1                           |
+| 22 | Decimal | 8      | lwbp_after_1            | LWBP after for period 1                        |
+| 23 | Decimal | 8      | wbp_before_1            | WBP after for period 1                         |
+| 24 | Decimal | 8      | wbp_after_1             | BWP after for period 1                         |
+| 25 | Decimal | 8      | kvarh_before_1          | KVARH before for period 1                      |
+| 26 | Decimal | 8      | kvarh_after_1           | KVARH after for period 1                       |
+| 27 | String  | 6      | bill_period_2           | The second bill period                         |
+| 28 | String  | 8      | due_date_2              | The second period billing due date             |
+| 29 | String  | 8      | bill_record_date_2      | Date of the second period of electricity usage |
+| 30 | Decimal | 12     | bill_amount_2           | Total bill amount for the second period        |
+| 31 | String  | 1      | incentive_sign_2        | Incentive sign of the second bills period      |
+| 32 | String  | 10     | incentive_amount_2      | Incentive amount of the second bills period    |
+| 33 | Decimal | 10     | ppn_2                   | PPN for period 2                              |
+| 34 | Decimal | 12     | late_fees_2             | Late fees for period 2                         |
+| 35 | Decimal | 8      | lwbp_before_2           | LWBP before for period 2                       |
+| 36 | Decimal | 8      | lwbp_after_2            | LWBP after for period 2                        |
+| 37 | Decimal | 8      | wbp_before_2            | WBP before for period 2                        |
+| 38 | Decimal | 8      | wbp_after_2             | BWP after for period 2                         |
+| 39 | Decimal | 8      | kvarh_before_2          | KVARH before for period 2                      |
+| 40 | Decimal | 8      | kvarh_after_2           | KVARH after for period 2                       |
+| 41 | String  | 6      | bill_period_3           | The third bill period                          |
+| 42 | String  | 8      | due_date_3              | The third period billing due date              |
+| 43 | String  | 8      | bill_record_date_3      | Date of the third period of electricity usage  |
+| 44 | Decimal | 12     | bill_amount_3           | Total bill amount for the third period         |
+| 45 | String  | 1      | incentive_sign_3        | Incentive sign of the third bills period       |
+| 46 | Decimal | 10     | incentive_amount_3      | Incentive amount of the third bills period     |
+| 47 | Decimal | 10     | ppn_3                   | PPN for period 3                              |
+| 48 | Decimal | 12     | late_fees_3             | Late fees for period 3                         |
+| 49 | Decimal | 8      | lwbp_before_3           | LWBP before for period 3                       |
+| 50 | Decimal | 8      | lwbp_after_3            | LWBP after for period 3                        |
+| 51 | Decimal | 8      | wbp_before_3            | WBP before for period 3                        |
+| 52 | Decimal | 8      | wbp_after_3             | BWP after for period 3                         |
+| 53 | Decimal | 8      | kvarh_before_3          | KVARH before for period 3                      |
+| 54 | Decimal | 8      | kvarh_after_3           | KVARH after for period 3                       |
+| 55 | String  | 6      | bill_period_4           | The fourth bill period                         |
+| 56 | String  | 8      | due_date_4              | The fourth period billing due date             |
+| 57 | String  | 8      | bill_record_date_4      | Date of the fourth period of electricity usage |
+| 58 | Decimal | 12     | bill_amount_4           | Total bill amount for the fourth period        |
+| 59 | String  | 1      | incentive_sign_4        | Incentive sign of the fourth bills period      |
+| 60 | Decimal | 10     | incentive_amount_4      | Incentive amount of the fourth bills period    |
+| 61 | Decimal | 10     | ppn_4                   | PPN for period 4                               |
+| 62 | Decimal | 12     | late_fees_4             | Late fees for period 4                         |
+| 63 | Decimal | 8      | lwbp_before_4           | LWBP before for period 4                       |
+| 64 | Decimal | 8      | lwbp_after_4            | LWBP after for period 4                        |
+| 65 | Decimal | 8      | wbp_before_4            | WBP before for period 4                        |
+| 66 | Decimal | 8      | wbp_after_4             | BWP after for period 4                         |
+| 67 | Decimal | 8      | kvarh_before_4          | LWBP before for period 4                       |
+| 68 | Decimal | 8      | kvarh_after_4           | KVARH after for period 4                       |
+| 69 | String  | 8      | payment_date            | Payment date                                   |
+| 70 | String  | 6      | payment_time            | Payment date                                   |
+| 71 | Decimal | 12     | amount                  | Amount                                         |
 
 ### 5.2.5 Advice Request
 
