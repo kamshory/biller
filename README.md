@@ -683,7 +683,7 @@ User-agent: Planet POS
 X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
 X-timestamp: 2019-08-08T08:08:08
 X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
-Content-length: 879
+Content-length: 274
 
 {
 	"command":"advice",
@@ -694,26 +694,7 @@ Content-length: 879
 		"customer_id":"149999999911",
 		"meter_id":"14987654321",
 		"id_selector":"0",
-		"merchant_type":"6021",
-		"locket_name":"PPOB",
-		"locket_address":"Jalan Anggrek Neli Murni",
-		"locket_code":"1234",
-		"locket_phone":"02199999",
-		"fwd_stan":"000003",
-		"fwd_reference_number":"000000002161",
-		"purchase_option":"0",
-		"maximum_power_unit_print":"06000",
-		"power_purchase_unsold_print_1":"0",
-		"power_purchase_unsold_print_2":"0",
-		"tariff":"R1",
-		"distribution_code_print":"51",
-		"ceiling":"000000900",
-		"amount":"20000",
-		"admin_fee":"2500",
-		"transaction_currency_code":"360",
-		"service_unit_name_print":"51106",
-		"service_unit_phone_print":"123",
-		"customer_name":"HAMDANIE LESTALUHUANI"
+		"adv_reference_number":"000000002161"
 	}
 }
 ```
@@ -725,25 +706,115 @@ Content-length: 879
 | 1  | String  | 11     | meter_id                      | Meter ID                                                                           |
 | 2  | String  | 12     | customer_id                   | Customer ID                                                                        |
 | 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 4  | String  | 32     | biller_reference_number       | Biller reference number                                                            |
-| 5  | String  | 32     | ba_reference_number           | Biller aggregator reference number                                                 |
-| 6  | String  | 25     | customer_name                 | Customer Name                                                                      |
-| 7  | String  | 4      | tariff                        | Tariff applied                                                                     |
-| 8  | String  | 9      | ceiling                       | Maximum power limits that can be used                                              |
-| 9  | Decimal | 1      | purchase_option               | Purchase Option                                                                    |
-| 10 | String  | 2      | distribution_code_print       | Distribution Code for Print                                                        |
-| 11 | String  | 5      | service_unit_name_print       | Service Unit Name for Print                                                        |
-| 12 | String  | 15     | service_unit_phone_print      | Service Unit Phone for Print                                                       |
-| 13 | String  | 5      | maximum_power_unit_print      | Maximum power unit for print                                                       |
-| 14 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                             |
-| 15 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                  |
-| 16 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                  |
-| 17 | String  | 32     | locket_code                   | Locket code where customer pay                                                     |
-| 18 | String  | 30     | locket_name                   | Locket name where customer pay                                                     |
-| 19 | String  | 50     | locket_address                | Locket address where customer pay                                                  |
-| 20 | String  | 18     | locket_phone                  | Locket phone where customer pay                                                    |
+| 4  | String  | 32     | adv_reference_number       | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
 
 ### 5.1.6 Prepaid Advice Response
+
+**Message Sample**
+
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 1298
+
+{
+	"command": "advice",
+	"product_code": "00500050001",
+	"response_code": "00",
+	"biller_message": "Sukses",
+	"biller_response": "Sukses",
+	"response_text": "Sukses",
+	"data": {
+		"customer_id": "149999999911",
+		"meter_id": "14987654321",
+		"id_selector": "0",
+		"customer_name": "Kamshory",
+		"purchase_option": "0",
+		"time_stamp": "2019-08-08T05:15:24.238Z",
+		"power_purchase_unsold": "0",
+		"reference_number": "28",
+		"fwd_reference_number": "00000000869",
+		"fwd_stan": "000025",
+		"ba_reference_number": "764937988121A58D555D849F6A01B2BE",
+		"biller_reference_number": "FC032C2F8B26C0000253C22367005D81",
+		"amount": "5000000",
+		"stamp": "0",
+		"decimal_stamp": "0",
+		"ppn": "0",
+		"decimal_ppn": "0",
+		"ppju": "0"
+		"decimal_ppju": "0",
+		"power": "0",
+		"decimal_power": "0",
+		"installment": "0",
+		"decimal_installment": "0",
+		"unit_price": "0",
+		"decimal_unit_price": "0",
+		"admin_fee": "0",
+		"decimal_admin_fee": "0",
+		"maximum_power_unit": "0",
+		"transaction_currency_code": "IDR",
+		"service_unit_name": "",
+		"vending_receipt_number": "HAMDANIE",
+		"tariff": "R1",
+		"ceiling": "000000900",
+		"service_unit_phone": "",
+		"distribution_code": "",
+		"advice_count": 4,
+		"adv_reference_number_1": "00000000869 ",
+		"date_time_1": "2019-08-08T05:15:24.000Z",
+		"adv_reference_number_2": "00000000869 ",
+		"date_time_2": "2019-08-08T05:15:21.000Z",
+		"adv_reference_number_3": "00000000869 ",
+		"date_time_3": "2019-08-08T05:15:08.000Z",
+		"adv_reference_number_4": "00000000869 ",
+		"date_time_4": "2019-08-08T05:15:05.000Z",
+		"total_repeat": "0",
+		"token": "53684812841284184121",
+		"date_paid_off": "",
+	}
+}
+```
+
+**Field Description**
+
+| No | Type    | Length | Variable                | Description                                                                        |
+|----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
+| 1  | Decimal | 11     | meter_id                | Meter ID                                                                           |
+| 2  | Decimal | 12     | customer_id             | Customer ID                                                                        |
+| 3  | Decimal | 1      | id_selector             | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 4  | String  | 32     | biller_reference_number | Biller reference number                                                            |
+| 5  | String  | 32     | ba_reference_number     | Biller aggregator reference number                                                 |
+| 6  | Decimal | 8      | vending_receipt_number  | Vending Receipt Number                                                             |
+| 7  | String  | 25     | customer_name           | Customer Name                                                                      |
+| 8  | String  | 4      | tariff                  | Tariff applied                                                                     |
+| 9  | String  | 9      | ceiling                 | Maximum power limits that can be used                                              |
+| 10 | Decimal | 1      | purchase_option         | Purchase Option                                                                    |
+| 11 | Decimal | 1      | decimal_admin_fee       | Decimal Admin Fee                                                                  |
+| 12 | Decimal | 10     | admin_fee               | Admin fee for the transaction                                                      |
+| 13 | Decimal | 1      | decimal_stamp           | Decimal Stamp                                                                      |
+| 14 | Decimal | 10     | stamp                   | Stamp                                                                              |
+| 15 | Decimal | 1      | decimal_ppn             | Decimal PPN                                                                        |
+| 16 | Decimal | 10     | ppn                     | PPN                                                                                |
+| 17 | Decimal | 1      | decimal_ppju            | Decimal PPJU                                                                       |
+| 18 | Decimal | 10     | ppju                    | PPJU                                                                               |
+| 19 | Decimal | 1      | decimal_installment     | Decimal Installment                                                                |
+| 20 | Decimal | 10     | installment             | Installment                                                                        |
+| 21 | Decimal | 1      | decimal_power           | Decimal Power                                                                      |
+| 22 | Decimal | 12     | power                   | Power                                                                              |
+| 23 | Decimal | 1      | decimal_unit_price      | Decimal Unit Price                                                                 |
+| 24 | Decimal | 10     | unit_price              | Unit Price                                                                         |
+| 25 | String  | 20     | token                   | Token of electrical quota                                                          |
+| 26 | String  | 14     | date_paid_off           | Date Paid Off                                                                      |
+| 27 | String  | 2      | distribution_code       | Distribution Code                                                                  |
+| 28 | String  | 5      | service_unit_name       | Service Unit Name                                                                  |
+| 29 | String  | 15     | service_unit_phone      | Service Unit Phone                                                                 |
+| 30 | Decimal | 5      | maximum_power_unit      | Maximum power unit                                                                 |
+| 31 | Decimal | 1      | total_repeat            | Total Repeat                                                                       |
+| 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
+
 
 ## Prepaid Cell Phone Credit
 
