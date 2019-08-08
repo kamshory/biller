@@ -1,24 +1,28 @@
 
+
 # Chapter 1 – Introduction
 
-## Protocol
+## 1.1 Protocol
 
-AltoPay Biller API used the HTTP protocol version 1.1. The method used for the request is **POST** or **PUT**.
+AltoPay Biller API used the HTTP protocol version 1.1. The method used for the request is `POST` or `PUT`.
 
-## Messge Format
+## 1.2 Messge Format
 
 The message format used is JavaScript Object Notation (JSON). JSON is sent through the request body. The request body length must be included in the header.
 
-## Request Headers
+## 1.3 Request Headers
 
 HTTP headers allow the client and the server to pass additional information with the request or the response. An HTTP header consists of its case-insensitive name followed by a colon '`:`', then by its value (without line breaks). Leading white space before the value is ignored. Some of headers used to make Inquiry Request and Payment are as follows:
 
-1. **X-Timestamp**
-X-Timestamp is the time stamp of the transaction with ISO Format in UTC. Time stamp can be used to validate the transaction time.
+1. **X-timestamp**
+`X-timestamp` is the time stamp of the transaction with ISO Format in UTC. Time stamp can be used to validate the transaction time.
 For example **2019-12-31T23:59:59.999Z**
 
-2. **X-signature**
-The signature is required for transaction such as Inquiry and Payment. Signature using **hmac and sha256** with request method, relative path, times tamp, hash of entity body, username and password as parameters.
+2. **X-api-key**
+`X-api-key` is used to identity the client.
+
+3. **X-signature**
+`X-signature` is required for transaction such as Inquiry and Payment. Signature using _hmac_ and _sha256_ with request method, relative path, times tamp, hash of entity body, username and password as parameters.
 **Example**
 ```php
 function signature($method, $path, $body, $timestamp, $apikey, $password)
@@ -66,15 +70,16 @@ curl_close( $ch );
 | password | Client password | |
 
 **Note:**
-timestamp and apikey sent on request header.
+a. timestamp and apikey sent on request header.
+b. password is not sent on request.
 
-3. **Content-length**
-Content length is the length of the request body in bytes. The client must calculate the length of the  request body before sending it to the server. Therefore, the merchant may not send a request with partial content.
+4. **Content-length**
+`Content-length` is the length of the request body in bytes. The client must calculate the length of the  request body before sending it to the server. Therefore, the merchant may not send a request with partial content.
 
-4. **Content-type**
-The content type is filled with json/application.
-5. **Host**
-Server address that will be accessed by merchant. This address contains: domain/subdomain, domain/subdomain and port, IP address, IP address and port.
+5. **Content-type**
+`Content-type` is filled with json/application.
+6. **Host**
+`Host` is server address that will be accessed by merchant. This address contains: domain/subdomain, domain/subdomain and port, IP address, IP address and port.
 
 ## 1.4 Request Body
 
@@ -83,9 +88,12 @@ Every request body always contains this two properties:
 1. **command  (string)**
 It is a command that must be execute by the server. This command must be write in lowercase letters. If the command is written incorrectly, the server will send a response with response code “Invalid Transaction” with an error message “Invalid Command”.
 2. **product_code (string)**
-It is a command that must be execute by the server. This command must be write in lowercase letters. If the command is written incorrectly, the server will send a response with response code “Invalid Transaction” with an error message “Invalid Command”.
+It is the product code that will be requested on the transaction. If product is not found, AltoPay Biller will reject the transaction.
 
-2. **data (object)**
+2. **process_category (string)**
+It is the the alternative of the `product_code`. AltoPay Biller will find the product by combinating the `process_category`, `cutomer_number`, and `amount`. It will simplify the message for prepaid and postpaid cell phone credit payment. If product is not found, AltoPay Biller will reject the transaction.
+
+4. **data (object)**
 The data (object) contains the request message detail. Every command has different data properties.
 
 ## 1.5 URL
@@ -101,32 +109,60 @@ Merchants must provide at least an URL to accept requests for inquiry and paymen
 
 Inquiry is an electronic transaction to find out billing information for certain customer ID of the biller.
 
-### Request
+### 4.1.1 Request
 
-#### Header
+#### a. Header
+
+**Accept**
+
+The `Accept` request HTTP header advertises which content types, expressed as MIME types, the client is able to understand. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice with the Content-Type response header.
 
 **Accept-encoding**
 
-Accept-encoding is encoding that can be accepted by AltoPay. Acceptable encoding, namely:
+`Accept-encoding` is encoding that can be accepted by client. Acceptable encoding, namely:
 
 1. identity (without compression)
 2. gzip (with GZIP compression)
 
+**Content-type**
+
+The `Content-type` entity header indicates the size of the entity-body, in bytes, sent to the recipient.
+
+**Content-Encoding**
+
+The `Content-Encoding` entity header is used to compress the media-type. When present, its value indicates which encodings were applied to the entity-body. It lets the client know how to decode in order to obtain the media-type referenced by the `Content-Type` header.
+
+**Content-length**
+
+The `Content-length` entity header indicates the size of the entity-body, in bytes, sent to recipient.
+
+**Connection**
+
+The `Connection` general header controls whether or not the network connection stays open after the current transaction finishes. If the value sent is `keep-alive`, the connection is persistent and not closed, allowing for subsequent requests to the same server to be done.
+
+**User-agent**
+
+The **User-Agent** request header contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent.  
+
+**Host**
+
+Host is the name of the server accessed by AltoPay. From this header, the merchant server can find out how AltoPay is connected to the merchant server.
+
 **X-api-key**
 
-The X-api-key is used to identity the client.
+The `X-api-key` is used to identity the client.
 
 See **Request Headers** section on Chapter 1.
 
 **X-timestamp**
 
-The X-timestamp is one of signature component of the request to guarantee data integrity.
+The `X-timestamp` is one of signature component of the request to guarantee data integrity.
 
 See **Request Headers** section on Chapter 1.
 
 **X-signature**
 
-The X-signature is signature of the request to guarantee data integrity. The parameters of the X-Signature are:
+The `X-signature` is signature of the request to guarantee data integrity. The parameters of the X-Signature are:
 
 1. metod
 2. path
@@ -137,13 +173,91 @@ The X-signature is signature of the request to guarantee data integrity. The par
 
 See **Request Headers** section on Chapter 1.
 
+
+#### b. Body
+
+| **No** | **Parameter**|**Type**|**Description**|**Note**|
+|---|---|---|---|---|
+|1|command|String|Transaction command. See **Transaction Command List**|Mandatory|
+|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
+|3|process_category|Numeric, can begin with 0, alternative of product code|Process category|Conditional|
+|4|data|Object|Container of the transaction data|Mandatory|
+|5|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
+|6|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
+|7|data.reference_number|String (32)|Reference number|Mandatory|
+
+Note: The data length above is the maximum allowed. Shorter will be better.
+
+### 4.1.2 Response
+
+#### a. Header
+
 **Content-type**
 
-Content-type is a format for data sent by AltoPay. The format of the data sent is application/json with charset utf-8.
+The `Content-type` entity header indicates the size of the entity-body, in bytes, sent to the recipient.
+
+**Content-encoding**
+
+`Content-encoding` is content encoding that sent by AltoPay. Content encoding, namely:
+
+1. identity (without compression)
+2. gzip (with GZIP compression)
+
+**Content-length**
+
+The `Content-length` entity header indicates the size of the entity-body, in bytes, sent to recipient.
+
+**Date**
+The `Date` general HTTP header contains the date and time at which the message was originated.
+
+#### b. Body
+
+| **No** | **Parameter**|**Type**|**Description**|**Note**|
+|---|---|---|---|---|
+|1|command|String|Transaction command|Mandatory|
+|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
+|3|response_code|Numeric, can begin with 0|Product code|Mandatory|
+|4|response_text|String|Description of the response transaction|Mandatory|
+|5|data|Object|Container of the transaction data|Mandatory|
+|6|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
+|7|data.customer_name|String (32)|Customer name|Mandatory|
+|8|data.amount|Numeric|Bill amount|Mandatory|
+|9|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
+|10|data.reference_number|String (32)|Reference number|Mandatory|
+
+Note: The data length above is the maximum allowed. Shorter will be better.
+
+## 4.2 Payment
+
+Payment is an electronic transaction to pay the bills for certain customer ID of the biller.
+
+
+### 4.2.1 Request
+
+#### a. Header
 
 **Accept**
 
 The `Accept` request HTTP header advertises which content types, expressed as MIME types, the client is able to understand. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice with the Content-Type response header.
+
+**Accept-encoding**
+
+`Accept-encoding` is encoding that can be accepted by client. Acceptable encoding, namely:
+
+1. identity (without compression)
+2. gzip (with GZIP compression)
+
+**Content-type**
+
+The `Content-type` entity header indicates the size of the entity-body, in bytes, sent to the recipient.
+
+**Content-Encoding**
+
+The `Content-Encoding` entity header is used to compress the media-type. When present, its value indicates which encodings were applied to the entity-body. It lets the client know how to decode in order to obtain the media-type referenced by the `Content-Type` header.
+
+**Content-length**
+
+The `Content-length` entity header indicates the size of the entity-body, in bytes, sent to recipient.
 
 **Connection**
 
@@ -151,15 +265,36 @@ The `Connection` general header controls whether or not the network connection s
 
 **User-agent**
 
-The **User-Agent** request header contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent.  AltoPay will send specific **User-Agent**  **to merchant.**
-
-**Content-Length**
-
-The `Content-Length` entity header indicates the size of the entity-body, in bytes, sent to merchant.
+The **User-Agent** request header contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent.  
 
 **Host**
 
 Host is the name of the server accessed by AltoPay. From this header, the merchant server can find out how AltoPay is connected to the merchant server.
+
+**X-api-key**
+
+The `X-api-key` is used to identity the client.
+
+See **Request Headers** section on Chapter 1.
+
+**X-timestamp**
+
+The `X-timestamp` is one of signature component of the request to guarantee data integrity.
+
+See **Request Headers** section on Chapter 1.
+
+**X-signature**
+
+The `X-signature` is signature of the request to guarantee data integrity. The parameters of the X-Signature are:
+
+1. metod
+2. path
+3. body
+4. timestamp
+5. apikey
+6. password
+
+See **Request Headers** section on Chapter 1.
 
 #### Body
 
@@ -167,12 +302,55 @@ Host is the name of the server accessed by AltoPay. From this header, the mercha
 |---|---|---|---|---|
 |1|command|String|Transaction command|Mandatory|
 |2|product_code|Numeric, can begin with 0|Product code|Mandatory|
-|3|data|Object|Container of the transaction data|Mandatory|
-|4|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
-|5|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-dd’T’HH:mm:ss.SSS’Z’)|Mandatory|
-|6|data.reference_number|String (32)|Reference number|Mandatory|
+|3|process_category|Numeric, can begin with 0, alternative of product code|Process category|Conditional|
+|4|data|Object|Container of the transaction data|Mandatory|
+|5|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
+|6|data.customer_name|String|Customer ID|Mandatory for several billers|
+|7|data.amount|Numeric|Payment amount|For several product, amount must be same with amount on inquiry response
+|8|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
+|9|data.fwd_reference_number|String (32)|Reference number|For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response|
+|8|data.fwd_stan|Numeric|Payment amount|For several product, fwd_stan must be same with fwd_stan on inquiry response|
+
+### 4.2.2 Response
+
+#### a. Header
+
+**Content-type**
+
+The `Content-type` entity header indicates the size of the entity-body, in bytes, sent to the recipient.
+
+**Content-encoding**
+
+`Content-encoding` is content encoding that sent by AltoPay. Content encoding, namely:
+
+1. identity (without compression)
+2. gzip (with GZIP compression)
+
+**Content-length**
+
+The `Content-length` entity header indicates the size of the entity-body, in bytes, sent to recipient.
+
+**Date**
+The `Date` general HTTP header contains the date and time at which the message was originated.
+
+#### b. Body
+
+| **No** | **Parameter**|**Type**|**Description**|**Note**|
+|---|---|---|---|---|
+|1|command|String|Transaction command|Mandatory|
+|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
+|3|response_code|Numeric, can begin with 0|Product code|Mandatory|
+|4|response_text|String|Description of the response transaction|Mandatory|
+|5|data|Object|Container of the transaction data|Mandatory|
+|6|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
+|7|data.customer_name|String|Customer ID|Mandatory|
+|8|data.amount|Numeric|Payment amount||
+|9|data.time_stamp|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
+|10|data.fwd_reference_number|String (32)|Reference number|Mandatory|
+|11|data.fwd_stan|Numeric|Payment amount|Mandatory|
 
 Note: The data length above is the maximum allowed. Shorter will be better.
+
 
 # Chapter 5 – Product Message Format
 
@@ -182,10 +360,23 @@ Some products that have the same attributes and processes are combined into one 
 
 Every message is always listed one of _product_code_ and _category_process. category_process_ is only used for prepaid cellular phone top up and postpaid cell phone bill payments.
 
-## Prepaid Electricity
+## 5.1 Prepaid Electricity
 
-### Inquiry Request
-```json
+### 5.1.1 Inquiry Request
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 769ab57e146beaefa1f0536f230e2ca0a86bafbe4186a8c9b2fe69fdac1f2026
+Content-length: 388
+
 {
 	"command":"inquiry",
 	"product_code":"00500050001",
@@ -204,8 +395,14 @@ Every message is always listed one of _product_code_ and _category_process. cate
 }
 ```
 
-### Inquiry Response
-```json
+### 5.1.2 Inquiry Response
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 935
+
 {
 	"command":"inquiry",
 	"product_code":"00500050001",
@@ -238,8 +435,21 @@ Every message is always listed one of _product_code_ and _category_process. cate
 }
 ```
 
-### Purchase Request
-```json
+### 5.1.3 Purchase Request
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
+Content-length: 879
+
 {
 	"command":"payment",
 	"product_code":"00500050001",
@@ -273,8 +483,14 @@ Every message is always listed one of _product_code_ and _category_process. cate
 }
 ```
 
-### Purchase Response
-```json
+### 5.1.4 Purchase Response
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 1298
+
 {
 	"command":"payment",
 	"product_code":"00500050001",
@@ -330,7 +546,20 @@ Every message is always listed one of _product_code_ and _category_process. cate
 
 ### Payment Request
 
-```json
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 21834cad678df58049af0a0b17d44d850a84f0525e4443e41e9385a4208ceb1e
+Content-length: 200
+
 {
 	"command":"payment",
 	"process_category":"1010",
@@ -343,9 +572,14 @@ Every message is always listed one of _product_code_ and _category_process. cate
 }
 ```
 
-
 ### Payment Response
-```json
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 336
+
 {
 	"command":"payment",
 	"process_category":"1010",
@@ -368,7 +602,20 @@ Every message is always listed one of _product_code_ and _category_process. cate
 
 ### Inquiry Request
 
-```json
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: f3571b283dfd6579e9208c25e24a19e07941dae1e0c5b11d905ece2f34ec8585
+Content-length: 176
+
 {
 	"command":"inquiry",
 	"process_category":"1011",
@@ -384,6 +631,12 @@ Every message is always listed one of _product_code_ and _category_process. cate
 ### Inquiry Response
 
 ```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 363
+
 {
 	"command":"payment",
 	"process_category":"1011",
@@ -404,13 +657,28 @@ Every message is always listed one of _product_code_ and _category_process. cate
 
 ### Payment Request
 
-```json
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 8a3f728a8b2ae70e80b46742c74dc9bad45dea8a9671bb7b2e403c6ba4cca125
+Content-length: 296
+
 {
 	"command":"payment",
 	"process_category":"6666",
 	"data":{
 		"date_time":"2019-10T23:56:59.987Z",
 		"reference_number":"1234567889",
+		"reference_number":"1234567889",
+		"fwd_reference_number":"99999",
 		"customer_id":"081234567",
 		"customer_name":"Jono",
 		"amount":"100000"
@@ -421,7 +689,13 @@ Every message is always listed one of _product_code_ and _category_process. cate
 
 ### Payment Response
 
-```json
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 363
+
 {
 	"command":"payment",
 	"process_category":"6666",
@@ -445,7 +719,20 @@ Every message is always listed one of _product_code_ and _category_process. cate
 
 
 ### Inquiry Request
-```json
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 526709aaf22e9523cb5dcea826e586b36955a17d6ceb0da06d9d629913d29c48
+Content-length: 177
+
 {
 	"command":"inquiry",
 	"product_code":"482382366",
@@ -458,7 +745,13 @@ Every message is always listed one of _product_code_ and _category_process. cate
 ```
 
 ### Inquiry Response
-```json
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 364
+
 {
 	"command":"payment",
 	"product_code":"482382366",
@@ -479,13 +772,28 @@ Every message is always listed one of _product_code_ and _category_process. cate
 
 ### Payment Request
 
-```json
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 41479a908c083b4c782b2fe8be7f9582c932d83126e5ad3fa3fde941b025a6c1
+Content-length: 285
+
 {
 	"command":"payment",
 	"product_code":"482382366",
 	"data":{
 		"date_time":"2019-10T23:56:59.987Z",
 		"reference_number":"1234567889",
+		"fwd_reference_number":"99999",
+		"fwd_stan":"556287",
 		"customer_id":"081234567",
 		"customer_name":"Jono",
 		"amount":"100000"
@@ -493,10 +801,15 @@ Every message is always listed one of _product_code_ and _category_process. cate
 }
 ```
 
-
 ### Payment Response
 
-```json
+```
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 364
+
 {
 	"command":"payment",
 	"product_code":"482382366",
@@ -514,3 +827,4 @@ Every message is always listed one of _product_code_ and _category_process. cate
 	}
 }
 ```
+
