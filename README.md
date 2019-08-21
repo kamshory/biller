@@ -1,4 +1,5 @@
 
+
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -1336,7 +1337,7 @@ Content-length: 200
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time| String | | Response time stamp |
+| 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1379,7 +1380,7 @@ Content-length: 336
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
 | 3 | response_code | String | | Response code |
 | 4 | response_text | String | | Response text |
-| 5 | data.time_stamp | String | | Response time stamp |
+| 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1423,7 +1424,7 @@ Content-length: 176
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time| String | | Response time stamp |
+| 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1466,7 +1467,7 @@ Content-length: 363
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
 | 3 | response_code | String | | Response code |
 | 4 | response_text | String | | Response text |
-| 5 | data.time_stamp | String | | Response time stamp |
+| 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1511,7 +1512,7 @@ Content-length: 296
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time| String | | Response time stamp |
+| 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1556,7 +1557,7 @@ Content-length: 363
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
 | 3 | response_code | String | | Response code |
 | 4 | response_text | String | | Response text |
-| 5 | data.time_stamp | String | | Response time stamp |
+| 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1600,7 +1601,7 @@ Content-length: 177
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time| String | | Response time stamp |
+| 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1643,7 +1644,7 @@ Content-length: 364
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
 | 3 | response_code | String | | Response code |
 | 4 | response_text | String | | Response text |
-| 5 | data.time_stamp | String | | Response time stamp |
+| 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1690,7 +1691,7 @@ Content-length: 285
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time| String | | Response time stamp |
+| 3 | data.date_time| String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
@@ -1735,7 +1736,7 @@ Content-length: 364
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
 | 3 | response_code | String | | Response code |
 | 4 | response_text | String | | Response text |
-| 5 | data.time_stamp | String | | Response time stamp |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
