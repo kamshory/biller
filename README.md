@@ -412,8 +412,8 @@ Content-length: 388
 
 | No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
-| 1 | command | String | [sp /] | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | [sp /] | Product code |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.meter_id | String | 11 | Meter ID |
@@ -1339,7 +1339,7 @@ Content-length: 200
 | 3 | data.date_time| String | | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.amount | Decimal | 12 | Amount |
 
@@ -1382,7 +1382,7 @@ Content-length: 336
 | 5 | data.time_stamp | String | | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
@@ -1426,7 +1426,7 @@ Content-length: 176
 | 3 | data.date_time| String | | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 
 ### Inquiry Response
@@ -1469,7 +1469,7 @@ Content-length: 363
 | 5 | data.time_stamp | String | | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
@@ -1514,7 +1514,7 @@ Content-length: 296
 | 3 | data.date_time| String | | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.customer_name | String | 40 | Customer Name |
 | 9 | data.amount | Decimal | 12 | Amount |
@@ -1559,7 +1559,7 @@ Content-length: 363
 | 5 | data.time_stamp | String | | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
@@ -1603,7 +1603,7 @@ Content-length: 177
 | 3 | data.date_time| String | | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 
 ### Inquiry Response
@@ -1646,7 +1646,7 @@ Content-length: 364
 | 5 | data.time_stamp | String | | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
@@ -1693,7 +1693,7 @@ Content-length: 285
 | 3 | data.date_time| String | | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.customer_name | String | 40 | Customer Name |
 | 9 | data.amount | Decimal | 12 | Amount |
@@ -1738,7 +1738,7 @@ Content-length: 364
 | 5 | data.time_stamp | String | | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
