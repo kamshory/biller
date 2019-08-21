@@ -1,5 +1,4 @@
 
-
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -59,14 +58,14 @@ $err = curl_error($ch);
 curl_close( $ch );
 ```
 
-| **Parameter** |  **Description** | **Example** |
-| --- | --- | --- |
-| method | Request Method (GET, PUT, POST) |  POST |
+| Parameter | Description | Example |
+| -- | -- | -- |
+| method | Request Method (GET, PUT, POST) | POST |
 | path | Relative path of URL | /virtual-account/ |
 | body | Original request body without any modification | {“command”:”inquiry”, “data”:{}} |
 | timestamp | ISO Time Stamp | 2019-07-07T23:59:59.999Z |
-| apikey | API Key | |
-| password | Client password | |
+| apikey | API Key |   |
+| password | Client password |   |
 
 **Note:**
 a. timestamp and apikey sent on request header.
@@ -81,13 +80,12 @@ b. password is not sent on request.
 4. **Content-length**
 **`Content-length`** is the length of the request body in bytes. The client must calculate the length of the  request body before sending it to the server. Therefore, the merchant may not send a request with partial content.
 
-
 6. **Host**
 **`Host`** is server address that will be accessed by merchant. This address contains: domain/subdomain, domain/subdomain and port, IP address, IP address and port. For example ``dev.altopay.id:9090``.
 
 ## 1.4 Request Body
 
-Every request body always contains this two properties:
+Every request body always contains properties:
 
 1. **`command`  (String)**
 It is a command that must be execute by the server. This command must be write in lowercase letters. If the command is written incorrectly, the server will send a response with response code “Invalid Transaction” with an error message “Invalid Command”.
@@ -127,8 +125,8 @@ The `Accept` request HTTP header advertises which content types, expressed as MI
 
 `Accept-encoding` is encoding that can be accepted by client. Acceptable encoding, namely:
 
-1. identity (without compression)
-2. gzip (with GZIP compression)
+1. `identity` (without compression)
+2. `gzip` (with GZIP compression)
 
 **Content-type**
 
@@ -148,11 +146,11 @@ The `Connection` general header controls whether or not the network connection s
 
 **User-agent**
 
-The **User-Agent** request header contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent.  
+The `User-Agent` request header contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent.  
 
 **Host**
 
-Host is the name of the server accessed by AltoPay. From this header, the merchant server can find out how AltoPay is connected to the merchant server.
+`Host` is the name of the server accessed by AltoPay. From this header, the merchant server can find out how AltoPay is connected to the merchant server.
 
 **X-api-key**
 
@@ -168,7 +166,7 @@ See **Request Headers** section on Chapter 1.
 
 **X-signature**
 
-The `X-signature` is signature of the request to guarantee data integrity. The parameters of the X-Signature are:
+The `X-signature` is signature of the request to guarantee data integrity. The parameters of the `X-Signature` are:
 
 1. metod
 2. path
@@ -181,15 +179,15 @@ See **Request Headers** section on Chapter 1.
 
 #### b. Body
 
-| **No** | **Parameter**|**Type**|**Description**|**Note**|
-|---|---|---|---|---|
-|1|command|String|Transaction command. See **Transaction Command List**|Mandatory|
-|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
-|3|process_category|Numeric, can begin with 0, alternative of product code|Process category|Conditional|
-|4|data|Object|Container of the transaction data|Mandatory|
-|5|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
-|6|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
-|7|data.reference_number|String (32)|Reference number|Mandatory|
+| No | Parameter | Type | Description | Note |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | Transaction command. See **Transaction Command List** | Mandatory |
+| 2 | product_code | Numeric, can begin with 0 | Product code | Mandatory |
+| 3 | process_category | Numeric, can begin with 0, alternative of product code | Process category | Conditional |
+| 4 | data | Object | Container of the transaction data | Mandatory |
+| 5 | data.customer_id | Numeric, can begin with 0 | Customer ID | Mandatory |
+| 6 | data.date_time | String | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) | Mandatory |
+| 7 | data.reference_number | String (32) | Reference number | Mandatory |
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
@@ -205,8 +203,8 @@ The `Content-type` entity header indicates the size of the entity-body, in bytes
 
 `Content-encoding` is content encoding that sent by AltoPay. Content encoding, namely:
 
-1. identity (without compression)
-2. gzip (with GZIP compression)
+1. `identity` (without compression)
+2. `gzip` (with GZIP compression)
 
 **Content-length**
 
@@ -218,25 +216,24 @@ The `Date` general HTTP header contains the date and time at which the message w
 
 #### b. Body
 
-| **No** | **Parameter**|**Type**|**Description**|**Note**|
-|---|---|---|---|---|
-|1|command|String|Transaction command|Mandatory|
-|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
-|3|response_code|Numeric, can begin with 0|Product code|Mandatory|
-|4|response_text|String|Description of the response transaction|Mandatory|
-|5|data|Object|Container of the transaction data|Mandatory|
-|6|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
-|7|data.customer_name|String (32)|Customer name|Mandatory|
-|8|data.amount|Numeric|Bill amount|Mandatory|
-|9|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
-|10|data.reference_number|String (32)|Reference number|Mandatory|
+| No | Parameter | Type | Description | Note |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | Transaction command | Mandatory |
+| 2 | product_code | Numeric, can begin with 0 | Product code | Mandatory |
+| 3 | response_code | Numeric, can begin with 0 | Product code | Mandatory |
+| 4 | response_text | String | Description of the response transaction | Mandatory |
+| 5 | data | Object | Container of the transaction data | Mandatory |
+| 6 | data.customer_id | Numeric, can begin with 0 | Customer ID | Mandatory |
+| 7 | data.customer_name | String (32) | Customer name | Mandatory |
+| 8 | data.amount | Numeric | Bill amount | Mandatory |
+| 9 | data.date_time | String | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) | Mandatory |
+| 10 | data.reference_number | String (32) | Reference number | Mandatory |
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
 ## 4.2 Payment
 
 Payment is an electronic transaction to pay the bills for certain customer ID of the biller.
-
 
 ### 4.2.1 Request
 
@@ -250,8 +247,8 @@ The `Accept` request HTTP header advertises which content types, expressed as MI
 
 `Accept-encoding` is encoding that can be accepted by client. Acceptable encoding, namely:
 
-1. identity (without compression)
-2. gzip (with GZIP compression)
+1. `identity` (without compression)
+2. `gzip` (with GZIP compression)
 
 **Content-type**
 
@@ -304,18 +301,18 @@ See **Request Headers** section on Chapter 1.
 
 #### Body
 
-| **No** | **Parameter**|**Type**|**Description**|**Note**|
-|---|---|---|---|---|
-|1|command|String|Transaction command|Mandatory|
-|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
-|3|process_category|Numeric, can begin with 0, alternative of product code|Process category|Conditional|
-|4|data|Object|Container of the transaction data|Mandatory|
-|5|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
-|6|data.customer_name|String|Customer ID|Mandatory for several billers|
-|7|data.amount|Numeric|Payment amount|For several product, amount must be same with amount on inquiry response
-|8|data.date_time|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
-|9|data.fwd_reference_number|String (32)|Reference number|For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response|
-|8|data.fwd_stan|Numeric|Payment amount|For several product, fwd_stan must be same with fwd_stan on inquiry response|
+| No | Parameter | Type | Description | Note |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | Transaction command | Mandatory |
+| 2 | product_code | Numeric, can begin with 0 | Product code | Mandatory |
+| 3 | process_category | Numeric, can begin with 0, alternative of product code | Process category | Conditional |
+| 4 | data | Object | Container of the transaction data | Mandatory |
+| 5 | data.customer_id | Numeric, can begin with 0 | Customer ID | Mandatory |
+| 6 | data.customer_name | String | Customer ID | Mandatory for several billers |
+| 7 | data.amount | Numeric | Payment amount | For several product, amount must be same with amount on inquiry response |
+| 8 | data.date_time | String | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) | Mandatory |
+| 9 | data.fwd_reference_number | String (32) | Reference number | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | Payment amount | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 
 ### 4.2.2 Response
 
@@ -329,8 +326,8 @@ The `Content-type` entity header indicates the size of the entity-body, in bytes
 
 `Content-encoding` is content encoding that sent by AltoPay. Content encoding, namely:
 
-1. identity (without compression)
-2. gzip (with GZIP compression)
+1. `identity` (without compression)
+2. `gzip` (with GZIP compression)
 
 **Content-length**
 
@@ -342,19 +339,19 @@ The `Date` general HTTP header contains the date and time at which the message w
 
 #### b. Body
 
-| **No** | **Parameter**|**Type**|**Description**|**Note**|
-|---|---|---|---|---|
-|1|command|String|Transaction command|Mandatory|
-|2|product_code|Numeric, can begin with 0|Product code|Mandatory|
-|3|response_code|Numeric, can begin with 0|Product code|Mandatory|
-|4|response_text|String|Description of the response transaction|Mandatory|
-|5|data|Object|Container of the transaction data|Mandatory|
-|6|data.customer_id|Numeric, can begin with 0|Customer ID|Mandatory|
-|7|data.customer_name|String|Customer ID|Mandatory|
-|8|data.amount|Numeric|Payment amount||
-|9|data.time_stamp|String|Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’)|Mandatory|
-|10|data.fwd_reference_number|String (32)|Reference number|Mandatory|
-|11|data.fwd_stan|Numeric|Payment amount|Mandatory|
+| No | Parameter | Type | Description | Note |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | Transaction command | Mandatory |
+| 2 | product_code | Numeric, can begin with 0 | Product code | Mandatory |
+| 3 | process_category | Numeric, can begin with 0, alternative of product code | Process category | Conditional |
+| 4 | data | Object | Container of the transaction data | Mandatory |
+| 5 | data.customer_id | Numeric, can begin with 0 | Customer ID | Mandatory |
+| 6 | data.customer_name | String | Customer ID | Mandatory for several billers |
+| 7 | data.amount | Numeric | Payment amount | For several product, amount must be same with amount on inquiry response |
+| 8 | data.date_time | String | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) | Mandatory |
+| 9 | data.reference_number | String (32) | Reference number | Mandatory |
+| 10 | data.fwd_reference_number | String (32) | Reference number | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 11 | data.fwd_stan | Numeric | Payment amount | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
@@ -413,11 +410,20 @@ Content-length: 388
 
 **Field Description**
 
-| No | Type    | Length | Variable    | Description                                                                        |
-|----|---------|--------|-------------|------------------------------------------------------------------------------------|
-| 1  | String  | 11     | meter_id    | Meter ID                                                                           |
-| 2  | String  | 12     | customer_id | Customer ID                                                                        |
-| 3  | Decimal | 1      | id_selector | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | [sp /] | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | [sp /] | Product code |
+| 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.meter_id | String | 11 | Meter ID |
+| 6 | data.customer_id | String | 12 | Customer ID |
+| 7 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 8 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay |
+| 9 | data.locket_code | String | 32 | Locket code where customer pay |
+| 10 | data.locket_name | String | 30 | Locket name where customer pay |
+| 11 | data.locket_address | String | 50 | Locket address where customer pay |
+| 12 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.1.2 Inquiry Response
 
@@ -464,30 +470,33 @@ Content-length: 935
 
 **Field Description**
 
-| No | Type    | Length | Variable                      | Description                                                                                                                                                                                                                                                                                                                                              |
-|----|---------|--------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | Decimal | 11     | meter_id                      | Meter ID                                                                                                                                                                                                                                                                                                                                                 |
-| 2  | Decimal | 12     | customer_id                   | Costomer ID |
-| 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID.                                                                                                                                                                                                                                                                       |
-| 4  | String  | 32     | biller_reference_number       | Biller reference number                                                                                                                                                                                                                                                                                                                                  |
-| 5  | String  | 32     | ba_reference_number           | Biller aggregator reference number                                                                                                                                                                                                                                                                                                                       |
-| 6  | String  | 25     | customer_name                 | Customer Name                                                                                                                                                                                                                                                                                                                                            |
-| 7  | String  | 4      | tariff                        | Tariff applied                                                                                                                                                                                                                                                                                                                                           |
-| 8  | String  | 9      | ceiling                       | Maximum power limits that can be used                                                                                                                                                                                                                                                                                                                    |
-| 9  | String  | 2      | distribution_code             | Distribution Code                                                                                                                                                                                                                                                                                                                                        |
-| 10 | String  | 5      | service_unit_name             | Service Unit Name                                                                                                                                                                                                                                                                                                                                        |
-| 11 | String  | 15     | service_unit_phone            | Service Unit Phone                                                                                                                                                                                                                                                                                                                                       |
-| 12 | String  | 5      | maximum_power_unit            | Maximum power unit                                                                                                                                                                                                                                                                                                                                       |
-| 13 | String  | 1      | total_repeat                  | Total Repeat                                                                                                                                                                                                                                                                                                                                             |
-| 14 | String  | 11     | power_purchase_unsold         | Power Purchase Unsold                                                                                                                                                                                                                                                                                                                                    |
-| 15 | String  | 2      | distribution_code_print       | Distribution Code for Print                                                                                                                                                                                                                                                                                                                              |
-| 16 | String  | 5      | service_unit_name_print       | Service Unit Name for Print                                                                                                                                                                                                                                                                                                                              |
-| 17 | String  | 15     | service_unit_phone_print      | Service Unit Phone for Print                                                                                                                                                                                                                                                                                                                             |
-| 18 | String  | 5      | maximum_power_unit_print      | Maximum power unit for print                                                                                                                                                                                                                                                                                                                             |
-| 19 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                                                                                                                                                                                                                                                                                                   |
-| 20 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                                                                                                                                                                                                                                                                                        |
-| 21 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                                                                                                                                                                                                                                                                                        |
-| 22 | Decimal | 12     | amount| Amount |
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | |
+| 4 | response_text | String |  |  |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String  | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.meter_id | String | 11 | Meter ID |
+| 10 | data.customer_id | String | 12 | Customer ID |
+| 11 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 12 | data.biller_reference_number | String | 32 | Biller reference number |
+| 13 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 14 | data.customer_name | String | 25 | Customer Name |
+| 15 | data.ariff | String | 4 | Tariff applied |
+| 16 | data.ceiling | String | 9 | Maximum power limits that can be used |
+| 17 | data.fwd_stan | String | 6 | STAN forwarded from inquiry response to be used on related transaction |
+| 18 | data.fwd_reference_number | String | 12 | Reference number forwarded from inquiry response to be used on related transaction |
+| 19 | data.distribution_code_print | String | 2 | Distribution Code for Print |
+| 20 | data.service_unit_name_print | String | 5 | Service Unit Name for Print |
+| 21 | data.service_unit_phone_print | String | 15 | Service Unit Phone for Print |
+| 22 | data.maximum_power_unit_print | String | 5 | Maximum power unit for print |
+| 23 | data.total_repeat_print | String | 1 | Total Repeat for Print |
+| 24 | data.power_purchase_unsold_print_1 | Decimal | 11 | Power purchase unsold 1 for print |
+| 25 | data.power_purchase_unsold_print_2 | Decimal | 11 | Power purchase unsold 2 for print |
 
 ### 5.1.3 Purchase Request
 
@@ -542,30 +551,33 @@ Content-length: 879
 
 **Field Description**
 
-| No | Type    | Length | Variable                      | Description                                                                        |
-|----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
-| 1  | String  | 11     | meter_id                      | Meter ID                                                                           |
-| 2  | String  | 12     | customer_id                   | Customer ID                                                                        |
-| 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 4  | String  | 32     | biller_reference_number       | Biller reference number                                                            |
-| 5  | String  | 32     | ba_reference_number           | Biller aggregator reference number                                                 |
-| 6  | String  | 25     | customer_name                 | Customer Name                                                                      |
-| 7  | String  | 4      | tariff                        | Tariff applied                                                                     |
-| 8  | String  | 9      | ceiling                       | Maximum power limits that can be used                                              |
-| 9  | Decimal | 1      | purchase_option               | Purchase Option                                                                    |
-| 10 | String  | 2      | distribution_code_print       | Distribution Code for Print                                                        |
-| 11 | String  | 5      | service_unit_name_print       | Service Unit Name for Print                                                        |
-| 12 | String  | 15     | service_unit_phone_print      | Service Unit Phone for Print                                                       |
-| 13 | String  | 5      | maximum_power_unit_print      | Maximum power unit for print                                                       |
-| 14 | String  | 1      | total_repeat_print            | Total Repeat for Print                                                             |
-| 15 | Decimal | 11     | power_purchase_unsold_print_1 | Power purchase unsold 1 for print                                                  |
-| 16 | Decimal | 11     | power_purchase_unsold_print_2 | Power purchase unsold 2 for print                                                  |
-| 17 | String  | 32     | locket_code                   | Locket code where customer pay                                                     |
-| 18 | String  | 30     | locket_name                   | Locket name where customer pay                                                     |
-| 19 | String  | 50     | locket_address                | Locket address where customer pay                                                  |
-| 20 | String  | 18     | locket_phone                  | Locket phone where customer pay                                                    |
-| 21 | Decimal | 12     | amount| Amount |
-
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time | String (23) | | Response time stamp |
+| 4 | data.data.reference_number | String (32) | | Reference number |
+| 5 | data.meter_id | String | 11 | Meter ID |
+| 6 | data.customer_id | String | 12 | Customer ID |
+| 7 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 8 | data.biller_reference_number | String | 32 | Biller reference number |
+| 9 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 10 | data.customer_name | String | 25 | Customer Name |
+| 11 | data.tariff | String | 4 | Tariff applied |
+| 12 | data.ceiling | String | 9 | Maximum power limits that can be used |
+| 13 | data.purchase_option | Decimal | 1 | Purchase Option |
+| 14 | data.distribution_code_print | String | 2 | Distribution Code for Print |
+| 15 | data.service_unit_name_print | String | 5 | Service Unit Name for Print |
+| 16 | data.service_unit_phone_print | String | 15 | Service Unit Phone for Print |
+| 17 | data.maximum_power_unit_print | String | 5 | Maximum power unit for print |
+| 18 | data.total_repeat_print | String | 1 | Total Repeat for Print |
+| 19 | data.power_purchase_unsold_print_1 | Decimal | 11 | Power purchase unsold 1 for print |
+| 20 | data.power_purchase_unsold_print_2 | Decimal | 11 | Power purchase unsold 2 for print |
+| 21 | data.locket_code | String | 32 | Locket code where customer pay |
+| 22 | data.locket_name | String | 30 | Locket name where customer pay |
+| 23 | data.locket_address | String | 50 | Locket address where customer pay |
+| 24 | data.locket_phone | String | 18 | Locket phone where customer pay |
+| 25 | data.amount | Decimal | 12 | Amount |
 
 ### 5.1.4 Purchase Response
 
@@ -631,41 +643,49 @@ Content-length: 1298
 
 **Field Description**
 
-| No | Type    | Length | Variable                | Description                                                                        |
-|----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
-| 1  | Decimal | 11     | meter_id                | Meter ID                                                                           |
-| 2  | Decimal | 12     | customer_id             | Customer ID                                                                        |
-| 3  | Decimal | 1      | id_selector             | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 4  | String  | 32     | biller_reference_number | Biller reference number                                                            |
-| 5  | String  | 32     | ba_reference_number     | Biller aggregator reference number                                                 |
-| 6  | Decimal | 8      | vending_receipt_number  | Vending Receipt Number                                                             |
-| 7  | String  | 25     | customer_name           | Customer Name                                                                      |
-| 8  | String  | 4      | tariff                  | Tariff applied                                                                     |
-| 9  | String  | 9      | ceiling                 | Maximum power limits that can be used                                              |
-| 10 | String  | 1      | purchase_option         | Purchase Option                                                                    |
-| 11 | Decimal | 1      | decimal_admin_fee       | Decimal Admin Fee                                                                  |
-| 12 | Decimal | 10     | admin_fee               | Admin fee for the transaction                                                      |
-| 13 | Decimal | 1      | decimal_stamp           | Decimal Stamp                                                                      |
-| 14 | Decimal | 10     | stamp                   | Stamp                                                                              |
-| 15 | Decimal | 1      | decimal_ppn             | Decimal PPN                                                                        |
-| 16 | Decimal | 10     | ppn                     | PPN                                                                                |
-| 17 | Decimal | 1      | decimal_ppju            | Decimal PPJU                                                                       |
-| 18 | Decimal | 10     | ppju                    | PPJU                                                                               |
-| 19 | Decimal | 1      | decimal_installment     | Decimal Installment                                                                |
-| 20 | Decimal | 10     | installment             | Installment                                                                        |
-| 21 | Decimal | 1      | decimal_power           | Decimal Power                                                                      |
-| 22 | Decimal | 12     | power                   | Power                                                                              |
-| 23 | Decimal | 1      | decimal_unit_price      | Decimal Unit Price                                                                 |
-| 24 | Decimal | 10     | unit_price              | Unit Price                                                                         |
-| 25 | String  | 20     | token                   | Token of electrical quota                                                          |
-| 26 | String  | 14     | date_paid_off           | Date Paid Off                                                                      |
-| 27 | String  | 2      | distribution_code       | Distribution Code                                                                  |
-| 28 | String  | 5      | service_unit_name       | Service Unit Name                                                                  |
-| 29 | String  | 15     | service_unit_phone      | Service Unit Phone                                                                 |
-| 30 | Decimal | 5      | maximum_power_unit      | Maximum power unit                                                                 |
-| 31 | Decimal | 1      | total_repeat            | Total Repeat                                                                       |
-| 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
-| 33 | Decimal | 12     | amount| Amount |
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.meter_id | Decimal | 11 | Meter ID |
+| 10 | data.customer_id | Decimal | 12 | Customer ID |
+| 11 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 12 | data.biller_reference_number | String | 32 | Biller reference number |
+| 13 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 14 | data.vending_receipt_number | Decimal | 8 | Vending Receipt Number |
+| 15 | data.customer_name | String | 25 | Customer Name |
+| 16 | data.tariff | String | 4 | Tariff applied |
+| 17 | data.ceiling | String | 9 | Maximum power limits that can be used |
+| 18 | data.purchase_option | String | 1 | Purchase Option |
+| 19 | data.decimal_admin_fee | Decimal | 1 | Decimal Admin Fee |
+| 20 | data.admin_fee | Decimal | 10 | Admin fee for the transaction |
+| 21 | data.decimal_stamp | Decimal | 1 | Decimal Stamp |
+| 22 | data.stamp | Decimal | 10 | Stamp |
+| 23 | data.decimal_ppn | Decimal | 1 | Decimal PPN |
+| 24 | data.ppn | Decimal | 10 | PPN |
+| 25 | data.decimal_ppju | Decimal | 1 | Decimal PPJU |
+| 26 | data.ppju | Decimal | 10 | PPJU |
+| 27 | data.decimal_installment | Decimal | 1 | Decimal Installment |
+| 28 | data.installment | Decimal | 10 | Installment |
+| 29 | data.decimal_power | Decimal | 1 | Decimal Power |
+| 30 | data.power | Decimal | 12 | Power |
+| 31 | data.decimal_unit_price | Decimal | 1 | Decimal Unit Price |
+| 32 | data.unit_price | Decimal | 10 | Unit Price |
+| 33 | data.token | String | 20 | Token of electrical quota |
+| 34 | data.date_paid_off | String | 14 | Date Paid Off |
+| 35 | data.distribution_code | String | 2 | Distribution Code |
+| 36 | data.service_unit_name | String | 5 | Service Unit Name |
+| 37 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 38 | data.maximum_power_unit | Decimal | 5 | Maximum power unit |
+| 39 | data.total_repeat | Decimal | 1 | Total Repeat |
+| 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
+| 41 | data.amount | Decimal | 12 | Amount |
 
 ### 5.1.5 Prepaid Advice Request
 
@@ -713,12 +733,21 @@ Content-length: 274
 
 **Field Description**
 
-| No | Type    | Length | Variable                      | Description                                                                        |
-|----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
-| 1  | String  | 11     | meter_id                      | Meter ID                                                                           |
-| 2  | String  | 12     | customer_id                   | Customer ID                                                                        |
-| 3  | Decimal | 1      | id_selector                   | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 4  | String  | 32     | adv_reference_number       | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | adv_reference_number | String | 32 | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+| 6 | data.meter_id | String | 11 | Meter ID |
+| 7 | data.customer_id | String | 12 | Customer ID |
+| 8 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 9 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay |
+| 10 | data.locket_code | String | 32 | Locket code where customer pay |
+| 11 | data.locket_name | String | 30 | Locket name where customer pay |
+| 12 | data.locket_address | String | 50 | Locket address where customer pay |
+| 13 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.1.6 Prepaid Advice Response
 
@@ -805,44 +834,55 @@ Content-length: 1819
 
 **Field Description**
 
-| No | Type    | Length | Variable                | Description                                                                        |
-|----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
-| 1  | Decimal | 11     | meter_id                | Meter ID                                                                           |
-| 2  | Decimal | 12     | customer_id             | Customer ID                                                                        |
-| 3  | Decimal | 1      | id_selector             | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 4  | String  | 32     | biller_reference_number | Biller reference number                                                            |
-| 5  | String  | 32     | ba_reference_number     | Biller aggregator reference number                                                 |
-| 6  | Decimal | 8      | vending_receipt_number  | Vending Receipt Number                                                             |
-| 7  | String  | 25     | customer_name           | Customer Name                                                                      |
-| 8  | String  | 4      | tariff                  | Tariff applied                                                                     |
-| 9  | String  | 9      | ceiling                 | Maximum power limits that can be used                                              |
-| 10 | Decimal | 1      | purchase_option         | Purchase Option                                                                    |
-| 11 | Decimal | 1      | decimal_admin_fee       | Decimal Admin Fee                                                                  |
-| 12 | Decimal | 10     | admin_fee               | Admin fee for the transaction                                                      |
-| 13 | Decimal | 1      | decimal_stamp           | Decimal Stamp                                                                      |
-| 14 | Decimal | 10     | stamp                   | Stamp                                                                              |
-| 15 | Decimal | 1      | decimal_ppn             | Decimal PPN                                                                        |
-| 16 | Decimal | 10     | ppn                     | PPN                                                                                |
-| 17 | Decimal | 1      | decimal_ppju            | Decimal PPJU                                                                       |
-| 18 | Decimal | 10     | ppju                    | PPJU                                                                               |
-| 19 | Decimal | 1      | decimal_installment     | Decimal Installment                                                                |
-| 20 | Decimal | 10     | installment             | Installment                                                                        |
-| 21 | Decimal | 1      | decimal_power           | Decimal Power                                                                      |
-| 22 | Decimal | 12     | power                   | Power                                                                              |
-| 23 | Decimal | 1      | decimal_unit_price      | Decimal Unit Price                                                                 |
-| 24 | Decimal | 10     | unit_price              | Unit Price                                                                         |
-| 25 | String  | 20     | token                   | Token of electrical quota                                                          |
-| 26 | String  | 14     | date_paid_off           | Date Paid Off                                                                      |
-| 27 | String  | 2      | distribution_code       | Distribution Code                                                                  |
-| 28 | String  | 5      | service_unit_name       | Service Unit Name                                                                  |
-| 29 | String  | 15     | service_unit_phone      | Service Unit Phone                                                                 |
-| 30 | Decimal | 5      | maximum_power_unit      | Maximum power unit                                                                 |
-| 31 | Decimal | 1      | total_repeat            | Total Repeat                                                                       |
-| 32 | Decimal | 11     | power_purchase_unsold   | Power Purchase Unsold                                                              |
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String | | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.meter_id | Decimal | 11 | Meter ID |
+| 10 | data.customer_id | Decimal | 12 | Customer ID |
+| 11 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
+| 12 | data.biller_reference_number | String | 32 | Biller reference number |
+| 13 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 14 | data.vending_receipt_number | Decimal | 8 | Vending Receipt Number |
+| 15 | data.customer_name | String | 25 | Customer Name |
+| 16 | data.tariff | String | 4 | Tariff applied |
+| 17 | data.ceiling | String | 9 | Maximum power limits that can be used |
+| 18 | data.purchase_option | Decimal | 1 | Purchase Option |
+| 19 | data.decimal_admin_fee | Decimal | 1 | Decimal Admin Fee |
+| 20 | data.admin_fee | Decimal | 10 | Admin fee for the transaction |
+| 21 | data.decimal_stamp | Decimal | 1 | Decimal Stamp |
+| 22 | data.stamp | Decimal | 10 | Stamp |
+| 23 | data.decimal_ppn | Decimal | 1 | Decimal PPN |
+| 24 | data.ppn | Decimal | 10 | PPN |
+| 25 | data.decimal_ppju | Decimal | 1 | Decimal PPJU |
+| 26 | data.ppju | Decimal | 10 | PPJU |
+| 27 | data.decimal_installment | Decimal | 1 | Decimal Installment |
+| 28 | data.installment | Decimal | 10 | Installment |
+| 29 | data.decimal_power | Decimal | 1 | Decimal Power |
+| 30 | data.power | Decimal | 12 | Power |
+| 31 | data.decimal_unit_price | Decimal | 1 | Decimal Unit Price |
+| 32 | data.unit_price | Decimal | 10 | Unit Price |
+| 33 | data.token | String | 20 | Token of electrical quota |
+| 34 | data.date_paid_off | String | 14 | Date Paid Off |
+| 35 | data.distribution_code | String | 2 | Distribution Code |
+| 36 | data.service_unit_name | String | 5 | Service Unit Name |
+| 37 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 38 | data.maximum_power_unit | Decimal | 5 | Maximum power unit |
+| 39 | data.total_repeat | Decimal | 1 | Total Repeat |
+| 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
+
 
 ## 5.2 Postpaid Electrictity
 
 ### 5.2.1 Inquiry Request
+
+**Message Sample**
 
 ```
 POST /biller/ HTTP/1.1
@@ -863,7 +903,6 @@ Content-length: 274
 	"product_code":"00500050001",
 	"data":{
 		"date_time":"2019-10T23:58:59.987Z",
-		"reference_number":"1234567891",
 		"customer_id":"149999999911",
 		"reference_number":"000000002161"
 	}
@@ -872,248 +911,394 @@ Content-length: 274
 
 **Field Description**
 
-| No | Type    | Length | Variable                      | Description                                                                        |
-|----|---------|--------|-------------------------------|------------------------------------------------------------------------------------|
-| 1  | String  | 12     | customer_id                   | Customer ID                                                                        |
-| 2  | String  | 32     | adv_reference_number       | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | data.date_time | String | 23 | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 6 | data.customer_id | String | 12 | Customer ID |
 
 ### 5.2.2 Inquiry Response
 
 **Field Description**
 
-| No | Type    | Length | Variable                | Description                                    |
-|----|---------|--------|-------------------------|------------------------------------------------|
-| 1  | String  | 12     | customer_id             | Customer ID                                    |
-| 2  | Decimal | 1      | bill_count              | Count of bills to pay                          |
-| 3  | Decimal | 2      | outstanding_bill_count  | Count of outstanding bill to pay               |
-| 4  | String  | 32     | biller_reference_number | Biller reference number                        |
-| 5  | String  | 25     | customer_name           | Customer Name                                  |
-| 6  | String  | 5      | service_unit_name       | Service Unit Name                              |
-| 7  | String  | 15     | service_unit_phone      | Service Unit Phone                             |
-| 8  | String  | 4      | tariff                  | Tariff applied                                 |
-| 9  | Decimal | 9      | ceiling                 | Maximum power limits that can be used          |
-| 10 | Decimal | 9      | admin_fee               | Admin fee for the transaction                  |
-| 11 | String  | 6      | bill_period_1           | The first bill period                          |
-| 12 | String  | 8      | due_date_1              | The first period billing due date              |
-| 13 | String  | 8      | bill_record_date_1      | Date of the first period of electricity usage  |
-| 14 | Decimal | 12     | bill_amount_1           | Total bill amount for the first period         |
-| 15 | String  | 1      | incentive_sign_1        | Incentive sign of the first bills period       |
-| 16 | Decimal | 10     | incentive_amount_1      | Incentive amount of the first bills period     |
-| 17 | Decimal | 10     | ppn_1                   | PPN for period 1                              |
-| 18 | Decimal | 12     | late_fees_1             | Late fee for period 1                          |
-| 19 | Decimal | 8      | lwbp_before_1           | LWBP before period 1                           |
-| 20 | Decimal | 8      | lwbp_after_1            | LWBP after for period 1                        |
-| 21 | Decimal | 8      | wbp_before_1            | WBP after for period 1                         |
-| 22 | Decimal | 8      | wbp_after_1             | BWP after for period 1                         |
-| 23 | Decimal | 8      | kvarh_before_1          | KVARH before for period 1                      |
-| 24 | Decimal | 8      | kvarh_after_1           | KVARH after for period 1                       |
-| 25 | String  | 6      | bill_period_2           | The second bill period                         |
-| 26 | String  | 8      | due_date_2              | The second period billing due date             |
-| 27 | String  | 8      | bill_record_date_2      | Date of the second period of electricity usage |
-| 28 | Decimal | 12     | bill_amount_2           | Total bill amount for the second period        |
-| 29 | String  | 1      | incentive_sign_2        | Incentive sign of the second bills period      |
-| 30 | String  | 10     | incentive_amount_2      | Incentive amount of the second bills period    |
-| 31 | Decimal | 10     | ppn_2                   | PPN for period 2                              |
-| 32 | Decimal | 12     | late_fees_2             | Late fees for period 2                         |
-| 33 | Decimal | 8      | lwbp_before_2           | LWBP before for period 2                       |
-| 34 | Decimal | 8      | lwbp_after_2            | LWBP after for period 2                        |
-| 35 | Decimal | 8      | wbp_before_2            | WBP before for period 2                        |
-| 36 | Decimal | 8      | wbp_after_2             | BWP after for period 2                         |
-| 37 | Decimal | 8      | kvarh_before_2          | KVARH before for period 2                      |
-| 38 | Decimal | 8      | kvarh_after_2           | KVARH after for period 2                       |
-| 39 | String  | 6      | bill_period_3           | The third bill period                          |
-| 40 | String  | 8      | due_date_3              | The third period billing due date              |
-| 41 | String  | 8      | bill_record_date_3      | Date of the third period of electricity usage  |
-| 42 | Decimal | 12     | bill_amount_3           | Total bill amount for the third period         |
-| 43 | String  | 1      | incentive_sign_3        | Incentive sign of the third bills period       |
-| 44 | Decimal | 10     | incentive_amount_3      | Incentive amount of the third bills period     |
-| 45 | Decimal | 10     | ppn_3                   | PPN for period 3                              |
-| 46 | Decimal | 12     | late_fees_3             | Late fees for period 3                         |
-| 47 | Decimal | 8      | lwbp_before_3           | LWBP before for period 3                       |
-| 48 | Decimal | 8      | lwbp_after_3            | LWBP after for period 3                        |
-| 49 | Decimal | 8      | wbp_before_3            | WBP before for period 3                        |
-| 50 | Decimal | 8      | wbp_after_3             | BWP after for period 3                         |
-| 51 | Decimal | 8      | kvarh_before_3          | KVARH before for period 3                      |
-| 52 | Decimal | 8      | kvarh_after_3           | KVARH after for period 3                       |
-| 53 | String  | 6      | bill_period_4           | The fourth bill period                         |
-| 54 | String  | 8      | due_date_4              | The fourth period billing due date             |
-| 55 | String  | 8      | bill_record_date_4      | Date of the fourth period of electricity usage |
-| 56 | Decimal | 12     | bill_amount_4           | Total bill amount for the fourth period        |
-| 57 | String  | 1      | incentive_sign_4        | Incentive sign of the fourth bills period      |
-| 58 | Decimal | 10     | incentive_amount_4      | Incentive amount of the fourth bills period    |
-| 59 | Decimal | 10     | ppn_4                   | PPN for period 4                               |
-| 60 | Decimal | 12     | late_fees_4             | Late fees for period 4                         |
-| 61 | Decimal | 8      | lwbp_before_4           | LWBP before for period 4                       |
-| 62 | Decimal | 8      | lwbp_after_4            | LWBP after for period 4                        |
-| 63 | Decimal | 8      | wbp_before_4            | WBP before for period 4                        |
-| 64 | Decimal | 8      | wbp_after_4             | BWP after for period 4                         |
-| 65 | Decimal | 8      | kvarh_before_4          | LWBP before for period 4                       |
-| 66 | Decimal | 8      | kvarh_after_4           | KVARH after for period 4                       |
-| 67 | Decimal | 12     | amount                  | Amount                                         |
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
+| 11 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
+| 12 | data.biller_reference_number | String | 32 | Biller reference number |
+| 13 | data.customer_name | String | 25 | Customer Name |
+| 14 | data.service_unit_name | String | 5 | Service Unit Name |
+| 15 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 16 | data.tariff | String | 4 | Tariff applied |
+| 17 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
+| 18 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
+| 19 | data.bill_period_1 | String | 6 | The first bill period |
+| 20 | data.due_date_1 | String | 8 | The first period billing due date |
+| 21 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
+| 22 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
+| 23 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
+| 24 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
+| 25 | data.ppn_1 | Decimal | 10 | PPN for period 1 |
+| 26 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
+| 27 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
+| 28 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
+| 29 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
+| 30 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
+| 31 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
+| 32 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
+| 33 | data.bill_period_2 | String | 6 | The second bill period |
+| 34 | data.due_date_2 | String | 8 | The second period billing due date |
+| 35 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
+| 36 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
+| 37 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
+| 38 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
+| 39 | data.ppn_2 | Decimal | 10 | PPN for period 2 |
+| 40 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
+| 41 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
+| 42 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
+| 43 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
+| 44 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
+| 45 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
+| 46 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
+| 47 | data.bill_period_3 | String | 6 | The third bill period |
+| 48 | data.due_date_3 | String | 8 | The third period billing due date |
+| 49 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
+| 50 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
+| 51 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
+| 52 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
+| 53 | data.ppn_3 | Decimal | 10 | PPN for period 3 |
+| 54 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
+| 55 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
+| 56 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
+| 57 | data.wbp_before_3 | Decimal | 8 | WBP before for period 3 |
+| 58 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
+| 59 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
+| 60 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
+| 61 | data.bill_period_4 | String | 6 | The fourth bill period |
+| 62 | data.due_date_4 | String | 8 | The fourth period billing due date |
+| 63 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
+| 64 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
+| 65 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
+| 66 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
+| 67 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
+| 68 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
+| 69 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 70 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
+| 71 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
+| 72 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
+| 73 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 74 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
+| 75 | data.amount | Decimal | 12 | Amount |
 
 ### 5.2.3 Payment Request
 
 **Field Description**
 
-| No | Type    | Length | Variable                | Description                                                                        |
-|----|---------|--------|-------------------------|------------------------------------------------------------------------------------|
-| 1  | String  | 12     | customer_id             | Customer ID                                                                        |
-| 2  | Decimal | 1      | bill_count              | Count of bills to pay                                                              |
-| 3  | Decimal | 1      | payment_count           | The number of payment on the date                                                  |
-| 4  | Decimal | 2      | outstanding_bill_count  | Count of outstanding bill to pay                                                   |
-| 5  | String  | 32     | biller_reference_number | Biller reference number                                                            |
-| 6  | String  | 25     | customer_name           | Customer Name                                                                      |
-| 7  | String  | 5      | service_unit_name       | Service Unit Name                                                                  |
-| 8  | String  | 15     | service_unit_phone      | Service Unit Phone                                                                 |
-| 9  | String  | 4      | tariff                  | Tariff applied                                                                     |
-| 10 | Decimal | 9      | ceiling                 | Maximum power limits that can be used                                              |
-| 11 | Decimal | 9      | admin_fee               | Admin fee for the transaction                                                      |
-| 12 | String  | 6      | bill_period_1           | The first bill period                                                              |
-| 13 | String  | 8      | due_date_1              | The first period billing due date                                                  |
-| 14 | String  | 8      | bill_record_date_1      | Date of the first period of electricity usage                                      |
-| 15 | Decimal | 12     | bill_amount_1           | Total bill amount for the first period                                             |
-| 16 | String  | 1      | incentive_sign_1        | Incentive sign of the first bills period                                           |
-| 17 | Decimal | 10     | incentive_amount_1      | Incentive amount of the first bills period                                         |
-| 18 | Decimal | 10     | ppn_1                   | PPN for periode 1                                                                  |
-| 19 | Decimal | 12     | late_fees_1             | Late fee for period 1                                                              |
-| 20 | Decimal | 8      | lwbp_before_1           | LWBP before period 1                                                               |
-| 21 | Decimal | 8      | lwbp_after_1            | LWBP after for period 1                                                            |
-| 22 | Decimal | 8      | wbp_before_1            | WBP after for period 1                                                             |
-| 23 | Decimal | 8      | wbp_after_1             | BWP after for period 1                                                             |
-| 24 | Decimal | 8      | kvarh_before_1          | KVARH before for period 1                                                          |
-| 25 | Decimal | 8      | kvarh_after_1           | KVARH after for period 1                                                           |
-| 26 | String  | 6      | bill_period_2           | The second bill period                                                             |
-| 27 | String  | 8      | due_date_2              | The second period billing due date                                                 |
-| 28 | String  | 8      | bill_record_date_2      | Date of the second period of electricity usage                                     |
-| 29 | Decimal | 12     | bill_amount_2           | Total bill amount for the second period                                            |
-| 30 | String  | 1      | incentive_sign_2        | Incentive sign of the second bills period                                          |
-| 31 | String  | 10     | incentive_amount_2      | Incentive amount of the second bills period                                        |
-| 32 | Decimal | 10     | ppn_2                   | PPN for periode 2                                                                  |
-| 33 | Decimal | 12     | late_fees_2             | Late fees for period 2                                                             |
-| 34 | Decimal | 8      | lwbp_before_2           | LWBP before for period 2                                                           |
-| 35 | Decimal | 8      | lwbp_after_2            | LWBP after for period 2                                                            |
-| 36 | Decimal | 8      | wbp_before_2            | WBP before for period 2                                                            |
-| 37 | Decimal | 8      | wbp_after_2             | BWP after for period 2                                                             |
-| 38 | Decimal | 8      | kvarh_before_2          | KVARH before for period 2                                                          |
-| 39 | Decimal | 8      | kvarh_after_2           | KVARH after for period 2                                                           |
-| 40 | String  | 6      | bill_period_3           | The third bill period                                                              |
-| 41 | String  | 8      | due_date_3              | The third period billing due date                                                  |
-| 42 | String  | 8      | bill_record_date_3      | Date of the third period of electricity usage                                      |
-| 43 | Decimal | 12     | bill_amount_3           | Total bill amount for the third period                                             |
-| 44 | String  | 1      | incentive_sign_3        | Incentive sign of the third bills period                                           |
-| 45 | Decimal | 10     | incentive_amount_3      | Incentive amount of the third bills period                                         |
-| 46 | Decimal | 10     | ppn_3                   | PPN for periode 3                                                                  |
-| 47 | Decimal | 12     | late_fees_3             | Late fees for period 3                                                             |
-| 48 | Decimal | 8      | lwbp_before_3           | LWBP before for period 3                                                           |
-| 49 | Decimal | 8      | lwbp_after_3            | LWBP after for period 3                                                            |
-| 50 | Decimal | 8      | wbp_before_3            | WBP before for period 3                                                            |
-| 51 | Decimal | 8      | wbp_after_3             | BWP after for period 3                                                             |
-| 52 | Decimal | 8      | kvarh_before_3          | KVARH before for period 3                                                          |
-| 53 | Decimal | 8      | kvarh_after_3           | KVARH after for period 3                                                           |
-| 54 | String  | 6      | bill_period_4           | The fourth bill period                                                             |
-| 55 | String  | 8      | due_date_4              | The fourth period billing due date                                                 |
-| 56 | String  | 8      | bill_record_date_4      | Date of the fourth period of electricity usage                                     |
-| 57 | Decimal | 12     | bill_amount_4           | Total bill amount for the fourth period                                            |
-| 58 | String  | 1      | incentive_sign_4        | Incentive sign of the fourth bills period                                          |
-| 59 | Decimal | 10     | incentive_amount_4      | Incentive amount of the fourth bills period                                        |
-| 60 | Decimal | 10     | ppn_4                   | PPN for period 4                                                                   |
-| 61 | Decimal | 12     | late_fees_4             | Late fees for period 4                                                             |
-| 62 | Decimal | 8      | lwbp_before_4           | LWBP before for period 4                                                           |
-| 63 | Decimal | 8      | lwbp_after_4            | LWBP after for period 4                                                            |
-| 64 | Decimal | 8      | wbp_before_4            | WBP before for period 4                                                            |
-| 65 | Decimal | 8      | wbp_after_4             | BWP after for period 4                                                             |
-| 66 | Decimal | 8      | kvarh_before_4          | LWBP before for period 4                                                           |
-| 67 | Decimal | 8      | kvarh_after_4           | KVARH after for period 4                                                           |
-| 68 | String  | 6      | fwd_stan                | STAN forwarded from inquiry response to be used on related transaction             |
-| 69 | String  | 12     | fwd_reference_number    | Reference number forwarded from inquiry response to be used on related transaction |
-| 70 | String  | 32     | locket_code             | Locket code where customer pay                                                     |
-| 71 | String  | 30     | locket_name             | Locket name where customer pay                                                     |
-| 72 | String  | 50     | locket_address          | Locket address where customer pay                                                  |
-| 73 | String  | 18     | locket_phone            | Locket phone where customer pay                                                    |
-| 74 | Decimal | 12     | amount                  | Amount                                                                             |
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.customer_id | String | 12 | Customer ID |
+| 6 | data.bill_count | Decimal | 1 | Count of bills to pay |
+| 7 | data.payment_count | Decimal | 1 | The number of payment on the date |
+| 8 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
+| 9 | data.biller_reference_number | String | 32 | Biller reference number |
+| 10 | data.customer_name | String | 25 | Customer Name |
+| 11 | data.service_unit_name | String | 5 | Service Unit Name |
+| 12 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 13 | data.tariff | String | 4 | Tariff applied |
+| 14 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
+| 15 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
+| 16 | data.bill_period_1 | String | 6 | The first bill period |
+| 17 | data.due_date_1 | String | 8 | The first period billing due date |
+| 18 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
+| 19 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
+| 20 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
+| 21 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
+| 22 | data.ppn_1 | Decimal | 10 | PPN for periode 1 |
+| 23 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
+| 24 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
+| 25 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
+| 26 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
+| 27 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
+| 28 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
+| 29 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
+| 30 | data.bill_period_2 | String | 6 | The second bill period |
+| 31 | data.due_date_2 | String | 8 | The second period billing due date |
+| 32 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
+| 33 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
+| 34 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
+| 35 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
+| 36 | data.ppn_2 | Decimal | 10 | PPN for periode 2 |
+| 37 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
+| 38 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
+| 39 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
+| 40 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
+| 41 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
+| 42 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
+| 43 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
+| 44 | data.bill_period_3 | String | 6 | The third bill period |
+| 45 | data.due_date_3 | String | 8 | The third period billing due date |
+| 46 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
+| 47 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
+| 48 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
+| 49 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
+| 50 | data.ppn_3 | Decimal | 10 | PPN for periode 3 |
+| 51 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
+| 52 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
+| 53 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
+| 54 | wbp_before_3 | Decimal | 8 | WBP before for period 3 |
+| 55 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
+| 56 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
+| 57 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
+| 58 | data.bill_period_4 | String | 6 | The fourth bill period |
+| 59 | data.due_date_4 | String | 8 | The fourth period billing due date |
+| 60 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
+| 61 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
+| 62 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
+| 63 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
+| 64 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
+| 65 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
+| 66 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 67 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
+| 68 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
+| 69 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
+| 70 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 71 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
+| 72 | data.fwd_stan | String | 6 | STAN forwarded from inquiry response to be used on related transaction |
+| 73 | data.fwd_reference_number | String | 12 | Reference number forwarded from inquiry response to be used on related transaction |
+| 74 | data.locket_code | String | 32 | Locket code where customer pay |
+| 75 | data.locket_name | String | 30 | Locket name where customer pay |
+| 76 | data.locket_address | String | 50 | Locket address where customer pay |
+| 77 | data.locket_phone | String | 18 | Locket phone where customer pay |
+| 78 | data.amount | Decimal | 12 | Amount |
 
 ### 5.2.4 Payment Response
 
 **Field Description**
 
-| No | Type    | Length | Variable                | Description                                    |
-|----|---------|--------|-------------------------|------------------------------------------------|
-| 1  | String  | 12     | customer_id             | Customer ID                                    |
-| 2  | Decimal | 1      | bill_count              | Count of bills to pay                          |
-| 3  | Decimal | 1      | payment_count           | The number of payment on the date              |
-| 4  | Decimal | 2      | outstanding_bill_count  | Count of outstanding bill to pay               |
-| 5  | String  | 32     | biller_reference_number | Biller reference number                        |
-| 6  | String  | 32     | ba_reference_number     | Biller aggregator reference number             |
-| 7  | String  | 25     | customer_name           | Customer Name                                  |
-| 8  | String  | 5      | service_unit_name       | Service Unit Name                              |
-| 9  | String  | 15     | service_unit_phone      | Service Unit Phone                             |
-| 10 | String  | 4      | tariff                  | Tariff applied                                 |
-| 11 | Decimal | 9      | ceiling                 | Maximum power limits that can be used          |
-| 12 | Decimal | 9      | admin_fee               | Admin fee for the transaction                  |
-| 13 | String  | 6      | bill_period_1           | The first bill period                          |
-| 14 | String  | 8      | due_date_1              | The first period billing due date              |
-| 15 | String  | 8      | bill_record_date_1      | Date of the first period of electricity usage  |
-| 16 | Decimal | 12     | bill_amount_1           | Total bill amount for the first period         |
-| 17 | String  | 1      | incentive_sign_1        | Incentive sign of the first bills period       |
-| 18 | Decimal | 10     | incentive_amount_1      | Incentive amount of the first bills period     |
-| 19 | Decimal | 10     | ppn_1                   | PPN for period 1                              |
-| 20 | Decimal | 12     | late_fees_1             | Late fee for period 1                          |
-| 21 | Decimal | 8      | lwbp_before_1           | LWBP before period 1                           |
-| 22 | Decimal | 8      | lwbp_after_1            | LWBP after for period 1                        |
-| 23 | Decimal | 8      | wbp_before_1            | WBP after for period 1                         |
-| 24 | Decimal | 8      | wbp_after_1             | BWP after for period 1                         |
-| 25 | Decimal | 8      | kvarh_before_1          | KVARH before for period 1                      |
-| 26 | Decimal | 8      | kvarh_after_1           | KVARH after for period 1                       |
-| 27 | String  | 6      | bill_period_2           | The second bill period                         |
-| 28 | String  | 8      | due_date_2              | The second period billing due date             |
-| 29 | String  | 8      | bill_record_date_2      | Date of the second period of electricity usage |
-| 30 | Decimal | 12     | bill_amount_2           | Total bill amount for the second period        |
-| 31 | String  | 1      | incentive_sign_2        | Incentive sign of the second bills period      |
-| 32 | String  | 10     | incentive_amount_2      | Incentive amount of the second bills period    |
-| 33 | Decimal | 10     | ppn_2                   | PPN for period 2                              |
-| 34 | Decimal | 12     | late_fees_2             | Late fees for period 2                         |
-| 35 | Decimal | 8      | lwbp_before_2           | LWBP before for period 2                       |
-| 36 | Decimal | 8      | lwbp_after_2            | LWBP after for period 2                        |
-| 37 | Decimal | 8      | wbp_before_2            | WBP before for period 2                        |
-| 38 | Decimal | 8      | wbp_after_2             | BWP after for period 2                         |
-| 39 | Decimal | 8      | kvarh_before_2          | KVARH before for period 2                      |
-| 40 | Decimal | 8      | kvarh_after_2           | KVARH after for period 2                       |
-| 41 | String  | 6      | bill_period_3           | The third bill period                          |
-| 42 | String  | 8      | due_date_3              | The third period billing due date              |
-| 43 | String  | 8      | bill_record_date_3      | Date of the third period of electricity usage  |
-| 44 | Decimal | 12     | bill_amount_3           | Total bill amount for the third period         |
-| 45 | String  | 1      | incentive_sign_3        | Incentive sign of the third bills period       |
-| 46 | Decimal | 10     | incentive_amount_3      | Incentive amount of the third bills period     |
-| 47 | Decimal | 10     | ppn_3                   | PPN for period 3                              |
-| 48 | Decimal | 12     | late_fees_3             | Late fees for period 3                         |
-| 49 | Decimal | 8      | lwbp_before_3           | LWBP before for period 3                       |
-| 50 | Decimal | 8      | lwbp_after_3            | LWBP after for period 3                        |
-| 51 | Decimal | 8      | wbp_before_3            | WBP before for period 3                        |
-| 52 | Decimal | 8      | wbp_after_3             | BWP after for period 3                         |
-| 53 | Decimal | 8      | kvarh_before_3          | KVARH before for period 3                      |
-| 54 | Decimal | 8      | kvarh_after_3           | KVARH after for period 3                       |
-| 55 | String  | 6      | bill_period_4           | The fourth bill period                         |
-| 56 | String  | 8      | due_date_4              | The fourth period billing due date             |
-| 57 | String  | 8      | bill_record_date_4      | Date of the fourth period of electricity usage |
-| 58 | Decimal | 12     | bill_amount_4           | Total bill amount for the fourth period        |
-| 59 | String  | 1      | incentive_sign_4        | Incentive sign of the fourth bills period      |
-| 60 | Decimal | 10     | incentive_amount_4      | Incentive amount of the fourth bills period    |
-| 61 | Decimal | 10     | ppn_4                   | PPN for period 4                               |
-| 62 | Decimal | 12     | late_fees_4             | Late fees for period 4                         |
-| 63 | Decimal | 8      | lwbp_before_4           | LWBP before for period 4                       |
-| 64 | Decimal | 8      | lwbp_after_4            | LWBP after for period 4                        |
-| 65 | Decimal | 8      | wbp_before_4            | WBP before for period 4                        |
-| 66 | Decimal | 8      | wbp_after_4             | BWP after for period 4                         |
-| 67 | Decimal | 8      | kvarh_before_4          | LWBP before for period 4                       |
-| 68 | Decimal | 8      | kvarh_after_4           | KVARH after for period 4                       |
-| 69 | String  | 8      | payment_date            | Payment date                                   |
-| 70 | String  | 6      | payment_time            | Payment date                                   |
-| 71 | Decimal | 12     | amount                  | Amount                                         |
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String  Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
+| 11 | data.payment_count | Decimal | 1 | The number of payment on the date |
+| 12 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
+| 13 | data.biller_reference_number | String | 32 | Biller reference number |
+| 14 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 15 | data.customer_name | String | 25 | Customer Name |
+| 16 | data.service_unit_name | String | 5 | Service Unit Name |
+| 17 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 18 | data.tariff | String | 4 | Tariff applied |
+| 19 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
+| 20 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
+| 21 | data.bill_period_1 | String | 6 | The first bill period |
+| 22 | data.due_date_1 | String | 8 | The first period billing due date |
+| 23 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
+| 24 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
+| 25 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
+| 26 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
+| 27 | data.ppn_1 | Decimal | 10 | PPN for period 1 |
+| 28 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
+| 29 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
+| 30 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
+| 31 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
+| 32 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
+| 33 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
+| 34 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
+| 35 | data.bill_period_2 | String | 6 | The second bill period |
+| 36 | data.due_date_2 | String | 8 | The second period billing due date |
+| 37 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
+| 38 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
+| 39 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
+| 40 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
+| 41 | data.ppn_2 | Decimal | 10 | PPN for period 2 |
+| 42 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
+| 43 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
+| 44 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
+| 45 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
+| 46 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
+| 47 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
+| 48 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
+| 49 | data.bill_period_3 | String | 6 | The third bill period |
+| 50 | data.due_date_3 | String | 8 | The third period billing due date |
+| 51 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
+| 52 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
+| 53 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
+| 54 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
+| 55 | data.ppn_3 | Decimal | 10 | PPN for period 3 |
+| 56 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
+| 57 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
+| 58 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
+| 59 | data.wbp_before_3 | Decimal | 8 | WBP before for period 3 |
+| 60 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
+| 61 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
+| 62 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
+| 63 | data.bill_period_4 | String | 6 | The fourth bill period |
+| 64 | data.due_date_4 | String | 8 | The fourth period billing due date |
+| 65 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
+| 66 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
+| 67 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
+| 68 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
+| 69 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
+| 70 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
+| 71 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 72 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
+| 73 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
+| 74 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
+| 75 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 76 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
+| 77 | data.payment_date | String | 8 | Payment date |
+| 78 | data.payment_time | String | 6 | Payment date |
+| 79 | data.amount | Decimal | 12 | Amount |
+
 
 ### 5.2.5 Advice Request
 
+**Message Sample**
+
+```
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
+Content-length: 274
+
+{
+	"command":"advice",
+	"product_code":"00500050001",
+	"data":{
+		"date_time":"2019-10T23:58:59.987Z",
+		"customer_id":"149999999911",
+		"adv_reference_number":"000000002161"
+	}
+}
+```
+
+**Field Description**
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.customer_id | String | 12 | Customer ID |
+| 6 | data.adv_reference_number | String | 32 | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+| 7 | data.date_time | String | 24 | Transmission date and time |
+
 ### 5.2.6 Advice Response
 
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String  Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
+| 11 | data.payment_count | Decimal | 1 | The number of payment on the date |
+| 12 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
+| 13 | data.biller_reference_number | String | 32 | Biller reference number |
+| 14 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 15 | data.customer_name | String | 25 | Customer Name |
+| 16 | data.service_unit_name | String | 5 | Service Unit Name |
+| 17 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 18 | data.tariff | String | 4 | Tariff applied |
+| 19 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
+| 20 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
+| 21 | data.bill_period_1 | String | 6 | The first bill period |
+| 22 | data.due_date_1 | String | 8 | The first period billing due date |
+| 23 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
+| 24 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
+| 25 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
+| 26 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
+| 27 | data.ppn_1 | Decimal | 10 | PPN for period 1 |
+| 28 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
+| 29 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
+| 30 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
+| 31 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
+| 32 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
+| 33 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
+| 34 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
+| 35 | data.bill_period_2 | String | 6 | The second bill period |
+| 36 | data.due_date_2 | String | 8 | The second period billing due date |
+| 37 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
+| 38 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
+| 39 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
+| 40 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
+| 41 | data.ppn_2 | Decimal | 10 | PPN for period 2 |
+| 42 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
+| 43 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
+| 44 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
+| 45 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
+| 46 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
+| 47 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
+| 48 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
+| 49 | data.bill_period_3 | String | 6 | The third bill period |
+| 50 | data.due_date_3 | String | 8 | The third period billing due date |
+| 51 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
+| 52 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
+| 53 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
+| 54 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
+| 55 | data.ppn_3 | Decimal | 10 | PPN for period 3 |
+| 56 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
+| 57 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
+| 58 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
+| 59 | data.wbp_before_3 | Decimal | 8 | WBP before for period 3 |
+| 60 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
+| 61 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
+| 62 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
+| 63 | data.bill_period_4 | String | 6 | The fourth bill period |
+| 64 | data.due_date_4 | String | 8 | The fourth period billing due date |
+| 65 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
+| 66 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
+| 67 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
+| 68 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
+| 69 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
+| 70 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
+| 71 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 72 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
+| 73 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
+| 74 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
+| 75 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 76 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
+| 77 | data.payment_date | String | 8 | Payment date |
+| 78 | data.payment_time | String | 6 | Payment date |
+| 79 | data.amount | Decimal | 12 | Amount |
 
 ## Prepaid Cell Phone Credit
 
@@ -1145,6 +1330,19 @@ Content-length: 200
 }
 ```
 
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time| String | | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
+| 8 | data.amount | Decimal | 12 | Amount |
+
 ### Payment Response
 
 **Message Sample**
@@ -1173,6 +1371,21 @@ Content-length: 336
 }
 ```
 
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | response_code | String | | Response code |
+| 4 | response_text | String | | Response text |
+| 5 | data.time_stamp | String | | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.customer_name | String | 40 | Customer Name |
+| 11 | data.amount | Decimal | 12 | Amount |
 
 ## Postpaid Cell Phone Credit
 
@@ -1205,6 +1418,16 @@ Content-length: 176
 }
 ```
 
+**Field Description**
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time| String | | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
 
 ### Inquiry Response
 
@@ -1234,6 +1457,22 @@ Content-length: 363
 	}
 }
 ```
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | response_code | String | | Response code |
+| 4 | response_text | String | | Response text |
+| 5 | data.time_stamp | String | | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.customer_name | String | 40 | Customer Name |
+| 11 | data.amount | Decimal | 12 | Amount |
 
 ### Payment Request
 
@@ -1268,6 +1507,17 @@ Content-length: 296
 }
 ```
 
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time| String | | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
+| 8 | data.customer_name | String | 40 | Customer Name |
+| 9 | data.amount | Decimal | 12 | Amount |
 
 ### Payment Response
 
@@ -1298,6 +1548,21 @@ Content-length: 363
 }
 ```
 
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | response_code | String | | Response code |
+| 4 | response_text | String | | Response text |
+| 5 | data.time_stamp | String | | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.customer_name | String | 40 | Customer Name |
+| 11 | data.amount | Decimal | 12 | Amount |
 
 ## General Bill
 
@@ -1331,6 +1596,16 @@ Content-length: 177
 }
 ```
 
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time| String | | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
+
 ### Inquiry Response
 
 **Message Sample**
@@ -1359,6 +1634,22 @@ Content-length: 364
 	}
 }
 ```
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | response_code | String | | Response code |
+| 4 | response_text | String | | Response text |
+| 5 | data.time_stamp | String | | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.customer_name | String | 40 | Customer Name |
+| 11 | data.amount | Decimal | 12 | Amount |
 
 ### Payment Request
 
@@ -1393,6 +1684,20 @@ Content-length: 285
 }
 ```
 
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time| String | | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
+| 8 | data.customer_name | String | 40 | Customer Name |
+| 9 | data.amount | Decimal | 12 | Amount |
+
 ### Payment Response
 
 **Message Sample**
@@ -1422,3 +1727,18 @@ Content-length: 364
 }
 ```
 
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | response_code | String | | Response code |
+| 4 | response_text | String | | Response text |
+| 5 | data.time_stamp | String | | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | [sp /] | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.customer_name | String | 40 | Customer Name |
+| 11 | data.amount | Decimal | 12 | Amount |
