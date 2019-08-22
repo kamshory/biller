@@ -12,7 +12,7 @@ The message format used is JavaScript Object Notation (JSON). JSON is sent throu
 
 ## 1.3 Request Headers
 
-HTTP headers allow the client and the server to pass additional information with the request or the response. An HTTP header consists of its case-insensitive name followed by a colon '`:`', then by its value (without line breaks). Leading white space before the value is ignored. Some of headers used to make Inquiry Request and Payment are as follows:
+HTTP headers allow the client and the server to pass additional information with the request or the response. An HTTP header consists of its case-insensitive name followed by a colon "`:`", then by its value (without line breaks). Leading white space before the value is ignored. Some of headers used to make Inquiry Request and Payment are as follows:
 
 1. **X-timestamp**
 **`X-timestamp`** is the time stamp of the transaction with ISO Format in UTC. Time stamp can be used to validate the transaction time. For example `2019-12-31T23:59:59.999Z`.
@@ -58,19 +58,20 @@ $response = curl_exec($ch);
 $err = curl_error($ch);
 curl_close( $ch );
 ```
+**Parameter Description**
 
 | Parameter | Description | Example |
 | -- | -- | -- |
-| method | Request Method (GET, PUT, POST) | POST |
+| method | Request Method (GET, PUT, POST). | POST |
 | path | Relative path of URL | /virtual-account/ |
 | body | Original request body without any modification | {“command”:”inquiry”, “data”:{}} |
-| timestamp | ISO Time Stamp | 2019-07-07T23:59:59.999Z |
-| apikey | API Key |   |
-| password | Client password |   |
+| timestamp | ISO Time stamp. | 2019-07-07T23:59:59.999Z |
+| apikey | API Key. It will be different for each client. |   |
+| password | Client password. Client can change this password anytime. |   |
 
 **Note:**
-a. timestamp and apikey sent on request header.
-b. password is not sent on request.
+a. timestamp and apikey are sent on request header.
+b. password is not sent on request header.
 
 5. **Content-type**
 **`Content-type`** is filled with `json/application`.
@@ -112,7 +113,7 @@ The message format on one product will be different from the message format on o
 
 ## 4.1 Inquiry
 
-Inquiry is an electronic transaction to find out billing information for certain customer ID of the biller.
+Inquiry is an electronic transaction to find out billing information for certain customer ID of the biller. Some products has no inquiry and some products require inquiry. 
 
 ### 4.1.1 Request
 
@@ -356,7 +357,6 @@ The `Date` general HTTP header contains the date and time at which the message w
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
-
 # Chapter 5 – Product Message Format
 
 Each product has a different message format depending on each biller. AltoPay adjusts the message format for each product according to its needs. Some products have far more data attributes than other products because they are related to biller policy.
@@ -378,35 +378,35 @@ To prevent mistakes when purchasing, PLN requires customers to conduct an inquir
 **Message Sample**
 
 ```
-POST /biller/ HTTP/1.1
-Content-type: application/json
-Accept: application/json
-Content-encoding: identity
-Accept-encoding: identity
-Host: dev.altopay.id:9090/biller/
-Connection: close
-User-agent: Planet POS
-X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
-X-timestamp: 2019-08-08T08:08:08
-X-signature: 769ab57e146beaefa1f0536f230e2ca0a86bafbe4186a8c9b2fe69fdac1f2026
-Content-length: 388
-
-{
-	"command":"inquiry",
-	"product_code":"00500050001",
-	"data":{
-		"date_time":"2019-10T23:56:59.987Z",
-		"reference_number":"1234567889",
-		"customer_id":"000000000000",
-		"meter_id":"14987654321",
-		"id_selector":"0",
-		"merchant_type":"6021",
-		"locket_name":"PPOB",
-		"locket_address":"Jalan Anggrek Neli Murni",
-		"locket_code":"1234",
-		"locket_phone":"02199999"
-	}
-}
+    POST /biller/ HTTP/1.1
+    Content-type: application/json
+    Accept: application/json
+    Content-encoding: identity
+    Accept-encoding: identity
+    Host: dev.altopay.id:9090/biller/
+    Connection: close
+    User-agent: Planet POS
+    X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+    X-timestamp: 2019-08-08T08:08:08
+    X-signature: 769ab57e146beaefa1f0536f230e2ca0a86bafbe4186a8c9b2fe69fdac1f2026
+    Content-length: 388
+    
+    {
+    	"command":"inquiry",
+    	"product_code":"00500050001",
+    	"data":{
+    		"date_time":"2019-10T23:56:59.987Z",
+    		"reference_number":"1234567889",
+    		"customer_id":"000000000000",
+    		"meter_id":"14987654321",
+    		"id_selector":"0",
+    		"merchant_type":"6021",
+    		"locket_name":"PPOB",
+    		"locket_address":"Jalan Anggrek Neli Murni",
+    		"locket_code":"1234",
+    		"locket_phone":"02199999"
+    	}
+    }
 ```
 
 **Field Description**
