@@ -377,36 +377,36 @@ To prevent mistakes when purchasing, PLN requires customers to conduct an inquir
 
 **Message Sample**
 
-```
-    POST /biller/ HTTP/1.1
-    Content-type: application/json
-    Accept: application/json
-    Content-encoding: identity
-    Accept-encoding: identity
-    Host: dev.altopay.id:9090/biller/
-    Connection: close
-    User-agent: Planet POS
-    X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
-    X-timestamp: 2019-08-08T08:08:08
-    X-signature: 769ab57e146beaefa1f0536f230e2ca0a86bafbe4186a8c9b2fe69fdac1f2026
-    Content-length: 388
-    
-    {
-    	"command":"inquiry",
-    	"product_code":"00500050001",
-    	"data":{
-    		"date_time":"2019-10T23:56:59.987Z",
-    		"reference_number":"1234567889",
-    		"customer_id":"000000000000",
-    		"meter_id":"14987654321",
-    		"id_selector":"0",
-    		"merchant_type":"6021",
-    		"locket_name":"PPOB",
-    		"locket_address":"Jalan Anggrek Neli Murni",
-    		"locket_code":"1234",
-    		"locket_phone":"02199999"
-    	}
-    }
+```http
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 769ab57e146beaefa1f0536f230e2ca0a86bafbe4186a8c9b2fe69fdac1f2026
+Content-length: 388
+
+{
+	"command":"inquiry",
+	"product_code":"00500050001",
+	"data":{
+		"date_time":"2019-10T23:56:59.987Z",
+		"reference_number":"1234567889",
+		"customer_id":"000000000000",
+		"meter_id":"14987654321",
+		"id_selector":"0",
+		"merchant_type":"6021",
+		"locket_name":"PPOB",
+		"locket_address":"Jalan Anggrek Neli Murni",
+		"locket_code":"1234",
+		"locket_phone":"02199999"
+	}
+}
 ```
 
 **Field Description**
@@ -430,7 +430,7 @@ To prevent mistakes when purchasing, PLN requires customers to conduct an inquir
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -503,7 +503,7 @@ Content-length: 935
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -584,7 +584,7 @@ Content-length: 879
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -704,7 +704,7 @@ If the customer does not know the reference number, AltoPay Biller will select t
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -754,7 +754,7 @@ Content-length: 274
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -885,7 +885,7 @@ Content-length: 1819
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1178,7 +1178,7 @@ Content-length: 274
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1305,7 +1305,7 @@ Content-length: 274
 
 ### Payment Request
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1348,7 +1348,7 @@ Content-length: 200
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -1394,7 +1394,7 @@ Content-length: 336
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1434,7 +1434,7 @@ Content-length: 176
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -1479,7 +1479,7 @@ Content-length: 363
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1524,7 +1524,7 @@ Content-length: 296
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -1572,7 +1572,7 @@ Content-length: 363
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1611,7 +1611,7 @@ Content-length: 177
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
@@ -1656,7 +1656,7 @@ Content-length: 364
 
 **Message Sample**
 
-```
+```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
 Accept: application/json
@@ -1703,7 +1703,7 @@ Content-length: 285
 
 **Message Sample**
 
-```
+```http
 HTTP/1.1 200 OK
 Content-type: application/json
 Content-encoding: identity
