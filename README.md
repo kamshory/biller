@@ -63,7 +63,7 @@ curl_close( $ch );
 | Parameter | Description | Example |
 | -- | -- | -- |
 | method | Request Method (GET, PUT, POST). | POST |
-| path | Relative path of URL | /virtual-account/ |
+| path | Relative path of URL | /biller/json |
 | body | Original request body without any modification | {“command”:”inquiry”, “data”:{}} |
 | timestamp | ISO Time stamp. | 2019-07-07T23:59:59.999Z |
 | apikey | API Key. It will be different for each client. |   |
