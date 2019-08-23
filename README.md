@@ -1,7 +1,6 @@
 
 
 
-
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -487,16 +486,13 @@ Content-length: 935
 | 14 | data.customer_name | String | 25 | Customer Name |
 | 15 | data.ariff | String | 4 | Tariff applied |
 | 16 | data.ceiling | String | 9 | Maximum power limits that can be used |
-| 17 | data.fwd_stan | String | 6 | STAN forwarded from inquiry response to be used on related transaction |
-| 18 | data.fwd_reference_number | String | 12 | Reference number forwarded from inquiry response to be used on related transaction |
-| 19 | data.distribution_code_print | String | 2 | Distribution Code for Print |
-| 20 | data.service_unit_name_print | String | 5 | Service Unit Name for Print |
-| 21 | data.service_unit_phone_print | String | 15 | Service Unit Phone for Print |
-| 22 | data.maximum_power_unit_print | String | 5 | Maximum power unit for print |
-| 23 | data.total_repeat_print | String | 1 | Total Repeat for Print |
-| 24 | data.power_purchase_unsold_print_1 | Decimal | 11 | Power purchase unsold 1 for print |
-| 25 | data.power_purchase_unsold_print_2 | Decimal | 11 | Power purchase unsold 2 for print |
-
+| 17 | data.distribution_code_print | String | 2 | Distribution Code for Print |
+| 18 | data.service_unit_name_print | String | 5 | Service Unit Name for Print |
+| 19 | data.service_unit_phone_print | String | 15 | Service Unit Phone for Print |
+| 20 | data.maximum_power_unit_print | String | 5 | Maximum power unit for print |
+| 21 | data.total_repeat_print | String | 1 | Total Repeat for Print |
+| 22 | data.power_purchase_unsold_print_1 | Decimal | 11 | Power purchase unsold 1 for print |
+| 23 | data.power_purchase_unsold_print_2 | Decimal | 11 | Power purchase unsold 2 for print |
 ### 5.1.3 Purchase Request
 
 **Message Sample**
@@ -686,11 +682,6 @@ Content-length: 1298
 | 39 | data.total_repeat | Decimal | 1 | Total Repeat |
 | 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
 | 41 | data.amount | Decimal | 12 | Amount |
-| 42 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 43 | data.locket_code | String | 32 | Locket code where customer pay |
-| 44 | data.locket_name | String | 30 | Locket name where customer pay |
-| 45 | data.locket_address | String | 50 | Locket address where customer pay |
-| 46 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.1.5 Prepaid Advice Request
 
@@ -882,11 +873,6 @@ Content-length: 1819
 | 39 | data.total_repeat | Decimal | 1 | Total Repeat |
 | 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
 | 41 | data.amount | Decimal | 12 | Amount |
-| 42 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 43 | data.locket_code | String | 32 | Locket code where customer pay |
-| 44 | data.locket_name | String | 30 | Locket name where customer pay |
-| 45 | data.locket_address | String | 50 | Locket address where customer pay |
-| 46 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 
 ## 5.2 Postpaid Electrictity
@@ -1183,11 +1169,6 @@ Content-length: 274
 | 77 | data.payment_date | String | 8 | Payment date |
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
-| 80 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 81 | data.locket_code | String | 32 | Locket code where customer pay |
-| 82 | data.locket_name | String | 30 | Locket name where customer pay |
-| 83 | data.locket_address | String | 50 | Locket address where customer pay |
-| 84 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 
 
@@ -1316,11 +1297,6 @@ Content-length: 274
 | 77 | data.payment_date | String | 8 | Payment date |
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
-| 80 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 81 | data.locket_code | String | 32 | Locket code where customer pay |
-| 82 | data.locket_name | String | 30 | Locket name where customer pay |
-| 83 | data.locket_address | String | 50 | Locket address where customer pay |
-| 84 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.2.7 Reversal Request
 
@@ -1549,11 +1525,6 @@ Content-length: 274
 | 20 | payment_date | String | 8 | Payment date |
 | 21 | payment_time | String | 6 | Payment date |
 | 22 | data.amount | Decimal |  | Amount |
-| 23 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 24 | data.locket_code | String | 32 | Locket code where customer pay |
-| 25 | data.locket_name | String | 30 | Locket name where customer pay |
-| 26 | data.locket_address | String | 50 | Locket address where customer pay |
-| 27 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 
 ### 5.3.5 Advice Request
@@ -1625,12 +1596,6 @@ Content-length: 274
 | 20 | payment_date | String | 8 | Payment date |
 | 21 | payment_time | String | 6 | Payment date |
 | 22 | data.amount | Decimal |  | Amount |
-| 23 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 24 | data.locket_code | String | 32 | Locket code where customer pay |
-| 25 | data.locket_name | String | 30 | Locket name where customer pay |
-| 26 | data.locket_address | String | 50 | Locket address where customer pay |
-| 27 | data.locket_phone | String | 18 | Locket phone where customer pay |
-
 
 ### 5.3.7 Reversal Request
 
@@ -1784,11 +1749,6 @@ Content-length: 336
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
-| 12 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
-| 13 | data.locket_code | String | 32 | Locket code where customer pay |
-| 14 | data.locket_name | String | 30 | Locket name where customer pay |
-| 15 | data.locket_address | String | 50 | Locket address where customer pay |
-| 16 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ## 5.5 Postpaid Cell Phone Credit
 
@@ -1913,7 +1873,7 @@ Content-length: 296
 | No | Variable | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
@@ -1921,6 +1881,11 @@ Content-length: 296
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.customer_name | String | 40 | Customer Name |
 | 9 | data.amount | Decimal | 12 | Amount |
+| 10 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 11 | data.locket_code | String | 32 | Locket code where customer pay |
+| 12 | data.locket_name | String | 30 | Locket name where customer pay |
+| 13 | data.locket_address | String | 50 | Locket address where customer pay |
+| 14 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### Payment Response
 
@@ -2094,14 +2059,19 @@ Content-length: 285
 | No | Variable | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time| String | 23 | Response time stamp |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.customer_name | String | 40 | Customer Name |
 | 9 | data.amount | Decimal | 12 | Amount |
+| 10 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 11 | data.locket_code | String | 32 | Locket code where customer pay |
+| 12 | data.locket_name | String | 30 | Locket name where customer pay |
+| 13 | data.locket_address | String | 50 | Locket address where customer pay |
+| 14 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### Payment Response
 
