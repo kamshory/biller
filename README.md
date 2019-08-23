@@ -1,6 +1,7 @@
 
 
 
+
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -421,11 +422,7 @@ Content-length: 388
 | 5 | data.meter_id | String | 11 | Meter ID |
 | 6 | data.customer_id | String | 12 | Customer ID |
 | 7 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 8 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay |
-| 9 | data.locket_code | String | 32 | Locket code where customer pay |
-| 10 | data.locket_name | String | 30 | Locket name where customer pay |
-| 11 | data.locket_address | String | 50 | Locket address where customer pay |
-| 12 | data.locket_phone | String | 18 | Locket phone where customer pay |
+
 
 ### 5.1.2 Inquiry Response
 
@@ -476,12 +473,12 @@ Content-length: 935
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
-| 3 | response_code | String |  | |
+| 3 | response_code | String |  |  |
 | 4 | response_text | String |  |  |
 | 5 | data.time_stamp | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
-| 7 | data.fwd_reference_number | String  | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.meter_id | String | 11 | Meter ID |
 | 10 | data.customer_id | String | 12 | Customer ID |
 | 11 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
@@ -555,10 +552,10 @@ Content-length: 879
 
 | No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
-| 1 | command | String | | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | data.date_time | String (23) | | Response time stamp |
-| 4 | data.data.reference_number | String (32) | | Reference number |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | data.date_time | String (23) |  | Response time stamp |
+| 4 | data.data.reference_number | String (32) |  | Reference number |
 | 5 | data.meter_id | String | 11 | Meter ID |
 | 6 | data.customer_id | String | 12 | Customer ID |
 | 7 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
@@ -575,11 +572,12 @@ Content-length: 879
 | 18 | data.total_repeat_print | String | 1 | Total Repeat for Print |
 | 19 | data.power_purchase_unsold_print_1 | Decimal | 11 | Power purchase unsold 1 for print |
 | 20 | data.power_purchase_unsold_print_2 | Decimal | 11 | Power purchase unsold 2 for print |
-| 21 | data.locket_code | String | 32 | Locket code where customer pay |
-| 22 | data.locket_name | String | 30 | Locket name where customer pay |
-| 23 | data.locket_address | String | 50 | Locket address where customer pay |
-| 24 | data.locket_phone | String | 18 | Locket phone where customer pay |
-| 25 | data.amount | Decimal | 12 | Amount |
+| 21 | data.amount | Decimal | 12 | Amount |
+| 22 | data.merchant_type | String | 4 | Merchant type of the channel where customer pay the bill |
+| 23 | data.locket_code | String | 32 | Locket code where customer pay |
+| 24 | data.locket_name | String | 30 | Locket name where customer pay |
+| 25 | data.locket_address | String | 50 | Locket address where customer pay |
+| 26 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.1.4 Purchase Response
 
@@ -647,7 +645,7 @@ Content-length: 1298
 
 | No | Variable | Type | Length | Description |
 | -- | -- | -- | -- | -- |
-| 1 | command | String | | Transaction command |
+| 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | response_code | String |  | Response code |
 | 4 | response_text | String |  | Response text |
@@ -688,6 +686,11 @@ Content-length: 1298
 | 39 | data.total_repeat | Decimal | 1 | Total Repeat |
 | 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
 | 41 | data.amount | Decimal | 12 | Amount |
+| 42 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 43 | data.locket_code | String | 32 | Locket code where customer pay |
+| 44 | data.locket_name | String | 30 | Locket name where customer pay |
+| 45 | data.locket_address | String | 50 | Locket address where customer pay |
+| 46 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.1.5 Prepaid Advice Request
 
@@ -745,7 +748,7 @@ Content-length: 274
 | 6 | data.meter_id | String | 11 | Meter ID |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
-| 9 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay |
+| 9 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
 | 10 | data.locket_code | String | 32 | Locket code where customer pay |
 | 11 | data.locket_name | String | 30 | Locket name where customer pay |
 | 12 | data.locket_address | String | 50 | Locket address where customer pay |
@@ -838,14 +841,14 @@ Content-length: 1819
 
 | No | Variable | Type | Length | Description |
 | -- | -- | -- | -- | -- |
-| 1 | command | String | | Transaction command |
+| 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | response_code | String |  | Response code |
-| 4 | response_text | String | | Response text |
+| 4 | response_text | String |  | Response text |
 | 5 | data.time_stamp | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric | | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.meter_id | Decimal | 11 | Meter ID |
 | 10 | data.customer_id | Decimal | 12 | Customer ID |
 | 11 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
@@ -878,6 +881,12 @@ Content-length: 1819
 | 38 | data.maximum_power_unit | Decimal | 5 | Maximum power unit |
 | 39 | data.total_repeat | Decimal | 1 | Total Repeat |
 | 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
+| 41 | data.amount | Decimal | 12 | Amount |
+| 42 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 43 | data.locket_code | String | 32 | Locket code where customer pay |
+| 44 | data.locket_name | String | 30 | Locket name where customer pay |
+| 45 | data.locket_address | String | 50 | Locket address where customer pay |
+| 46 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 
 ## 5.2 Postpaid Electrictity
@@ -934,7 +943,7 @@ Content-length: 274
 | 5 | data.time_stamp | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
 | 11 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
@@ -1009,84 +1018,85 @@ Content-length: 274
 
 | No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
-| 1 | command | String | | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
 | 4 | data.reference_number | String | 32 | Reference number |
-| 5 | data.customer_id | String | 12 | Customer ID |
-| 6 | data.bill_count | Decimal | 1 | Count of bills to pay |
-| 7 | data.payment_count | Decimal | 1 | The number of payment on the date |
-| 8 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
-| 9 | data.biller_reference_number | String | 32 | Biller reference number |
-| 10 | data.customer_name | String | 25 | Customer Name |
-| 11 | data.service_unit_name | String | 5 | Service Unit Name |
-| 12 | data.service_unit_phone | String | 15 | Service Unit Phone |
-| 13 | data.tariff | String | 4 | Tariff applied |
-| 14 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
-| 15 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
-| 16 | data.bill_period_1 | String | 6 | The first bill period |
-| 17 | data.due_date_1 | String | 8 | The first period billing due date |
-| 18 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
-| 19 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
-| 20 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
-| 21 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
-| 22 | data.ppn_1 | Decimal | 10 | PPN for periode 1 |
-| 23 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
-| 24 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
-| 25 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
-| 26 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
-| 27 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
-| 28 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
-| 29 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
-| 30 | data.bill_period_2 | String | 6 | The second bill period |
-| 31 | data.due_date_2 | String | 8 | The second period billing due date |
-| 32 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
-| 33 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
-| 34 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
-| 35 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
-| 36 | data.ppn_2 | Decimal | 10 | PPN for periode 2 |
-| 37 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
-| 38 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
-| 39 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
-| 40 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
-| 41 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
-| 42 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
-| 43 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
-| 44 | data.bill_period_3 | String | 6 | The third bill period |
-| 45 | data.due_date_3 | String | 8 | The third period billing due date |
-| 46 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
-| 47 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
-| 48 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
-| 49 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
-| 50 | data.ppn_3 | Decimal | 10 | PPN for periode 3 |
-| 51 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
-| 52 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
-| 53 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
-| 54 | wbp_before_3 | Decimal | 8 | WBP before for period 3 |
-| 55 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
-| 56 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
-| 57 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
-| 58 | data.bill_period_4 | String | 6 | The fourth bill period |
-| 59 | data.due_date_4 | String | 8 | The fourth period billing due date |
-| 60 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
-| 61 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
-| 62 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
-| 63 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
-| 64 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
-| 65 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
-| 66 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
-| 67 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
-| 68 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
-| 69 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
-| 70 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
-| 71 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
-| 72 | data.fwd_stan | String | 6 | STAN forwarded from inquiry response to be used on related transaction |
-| 73 | data.fwd_reference_number | String | 12 | Reference number forwarded from inquiry response to be used on related transaction |
-| 74 | data.locket_code | String | 32 | Locket code where customer pay |
-| 75 | data.locket_name | String | 30 | Locket name where customer pay |
-| 76 | data.locket_address | String | 50 | Locket address where customer pay |
-| 77 | data.locket_phone | String | 18 | Locket phone where customer pay |
-| 78 | data.amount | Decimal | 12 | Amount |
+| 5 | data.fwd_reference_number | String | 12 | Reference number forwarded from inquiry response to be used on related transaction |
+| 6 | data.fwd_stan | String | 6 | STAN forwarded from inquiry response to be used on related transaction |
+| 7 | data.customer_id | String | 12 | Customer ID |
+| 8 | data.bill_count | Decimal | 1 | Count of bills to pay |
+| 9 | data.payment_count | Decimal | 1 | The number of payment on the date |
+| 10 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
+| 11 | data.biller_reference_number | String | 32 | Biller reference number |
+| 12 | data.customer_name | String | 25 | Customer Name |
+| 13 | data.service_unit_name | String | 5 | Service Unit Name |
+| 14 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 15 | data.tariff | String | 4 | Tariff applied |
+| 16 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
+| 17 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
+| 18 | data.bill_period_1 | String | 6 | The first bill period |
+| 19 | data.due_date_1 | String | 8 | The first period billing due date |
+| 20 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
+| 21 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
+| 22 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
+| 23 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
+| 24 | data.ppn_1 | Decimal | 10 | PPN for periode 1 |
+| 25 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
+| 26 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
+| 27 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
+| 28 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
+| 29 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
+| 30 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
+| 31 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
+| 32 | data.bill_period_2 | String | 6 | The second bill period |
+| 33 | data.due_date_2 | String | 8 | The second period billing due date |
+| 34 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
+| 35 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
+| 36 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
+| 37 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
+| 38 | data.ppn_2 | Decimal | 10 | PPN for periode 2 |
+| 39 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
+| 40 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
+| 41 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
+| 42 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
+| 43 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
+| 44 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
+| 45 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
+| 46 | data.bill_period_3 | String | 6 | The third bill period |
+| 47 | data.due_date_3 | String | 8 | The third period billing due date |
+| 48 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
+| 49 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
+| 50 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
+| 51 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
+| 52 | data.ppn_3 | Decimal | 10 | PPN for periode 3 |
+| 53 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
+| 54 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
+| 55 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
+| 56 | wbp_before_3 | Decimal | 8 | WBP before for period 3 |
+| 57 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
+| 58 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
+| 59 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
+| 60 | data.bill_period_4 | String | 6 | The fourth bill period |
+| 61 | data.due_date_4 | String | 8 | The fourth period billing due date |
+| 62 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
+| 63 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
+| 64 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
+| 65 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
+| 66 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
+| 67 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
+| 68 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 69 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
+| 70 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
+| 71 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
+| 72 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 73 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
+| 74 | data.amount | Decimal | 12 | Amount |
+| 75 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 76 | data.locket_code | String | 32 | Locket code where customer pay |
+| 77 | data.locket_name | String | 30 | Locket name where customer pay |
+| 78 | data.locket_address | String | 50 | Locket address where customer pay |
+| 79 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.2.4 Payment Response
 
@@ -1098,10 +1108,10 @@ Content-length: 274
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | response_code | String |  | Response code |
 | 4 | response_text | String |  | Response text |
-| 5 | data.time_stamp | String  Response time stamp |
+| 5 | data.time_stamp | String |  | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
 | 11 | data.payment_count | Decimal | 1 | The number of payment on the date |
@@ -1173,6 +1183,12 @@ Content-length: 274
 | 77 | data.payment_date | String | 8 | Payment date |
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
+| 80 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 81 | data.locket_code | String | 32 | Locket code where customer pay |
+| 82 | data.locket_name | String | 30 | Locket name where customer pay |
+| 83 | data.locket_address | String | 50 | Locket address where customer pay |
+| 84 | data.locket_phone | String | 18 | Locket phone where customer pay |
+
 
 
 ### 5.2.5 Advice Request
@@ -1225,10 +1241,10 @@ Content-length: 274
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | response_code | String |  | Response code |
 | 4 | response_text | String |  | Response text |
-| 5 | data.time_stamp | String  Response time stamp |
+| 5 | data.time_stamp | String |  | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
 | 11 | data.payment_count | Decimal | 1 | The number of payment on the date |
@@ -1300,6 +1316,11 @@ Content-length: 274
 | 77 | data.payment_date | String | 8 | Payment date |
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
+| 80 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 81 | data.locket_code | String | 32 | Locket code where customer pay |
+| 82 | data.locket_name | String | 30 | Locket name where customer pay |
+| 83 | data.locket_address | String | 50 | Locket address where customer pay |
+| 84 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### 5.2.7 Reversal Request
 
@@ -1396,6 +1417,7 @@ Content-length: 274
 | 76 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
 | 77 | data.reversal_date | String | 8 | Reversal date |
 | 78 | data.reversal_time | String | 6 | Reversal date |
+| 79 | data.amount | Decimal | 12 | Amount |
 
 ## 5.3 Nonusage Electrictity
 
@@ -1492,6 +1514,12 @@ Content-length: 274
 | 18 | data.amount_100 | Decimal | 17 |  |
 | 19 | data.admin_fee_100 | Decimal | 10 |  |
 | 20 | data.amount | Decimal | 12 | Amount |
+| 21 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 22 | data.locket_code | String | 32 | Locket code where customer pay |
+| 23 | data.locket_name | String | 30 | Locket name where customer pay |
+| 24 | data.locket_address | String | 50 | Locket address where customer pay |
+| 25 | data.locket_phone | String | 18 | Locket phone where customer pay |
+
 
 ### 5.3.4 Payment Response
 
@@ -1520,7 +1548,12 @@ Content-length: 274
 | 19 | admin_fee_100 | Decimal | 10 |  |
 | 20 | payment_date | String | 8 | Payment date |
 | 21 | payment_time | String | 6 | Payment date |
-| 20 | data.amount | Decimal |  | Amount |
+| 22 | data.amount | Decimal |  | Amount |
+| 23 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 24 | data.locket_code | String | 32 | Locket code where customer pay |
+| 25 | data.locket_name | String | 30 | Locket name where customer pay |
+| 26 | data.locket_address | String | 50 | Locket address where customer pay |
+| 27 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 
 ### 5.3.5 Advice Request
@@ -1591,7 +1624,13 @@ Content-length: 274
 | 19 | admin_fee_100 | Decimal | 10 |  |
 | 20 | payment_date | String | 8 | Payment date |
 | 21 | payment_time | String | 6 | Payment date |
-| 20 | data.amount | Decimal |  | Amount |
+| 22 | data.amount | Decimal |  | Amount |
+| 23 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 24 | data.locket_code | String | 32 | Locket code where customer pay |
+| 25 | data.locket_name | String | 30 | Locket name where customer pay |
+| 26 | data.locket_address | String | 50 | Locket address where customer pay |
+| 27 | data.locket_phone | String | 18 | Locket phone where customer pay |
+
 
 ### 5.3.7 Reversal Request
 
@@ -1689,13 +1728,18 @@ Content-length: 200
 | No | Variable | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.amount | Decimal | 12 | Amount |
+| 9 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 10 | data.locket_code | String | 32 | Locket code where customer pay |
+| 11 | data.locket_name | String | 30 | Locket name where customer pay |
+| 12 | data.locket_address | String | 50 | Locket address where customer pay |
+| 13 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ### Payment Response
 
@@ -1730,9 +1774,9 @@ Content-length: 336
 | No | Variable | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
-| 2 | product_code | Numeric, can begin with 0 | | Product code |
-| 3 | response_code | String | | Response code |
-| 4 | response_text | String | | Response text |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
 | 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
@@ -1740,6 +1784,11 @@ Content-length: 336
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
+| 12 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 13 | data.locket_code | String | 32 | Locket code where customer pay |
+| 14 | data.locket_name | String | 30 | Locket name where customer pay |
+| 15 | data.locket_address | String | 50 | Locket address where customer pay |
+| 16 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 ## 5.5 Postpaid Cell Phone Credit
 
