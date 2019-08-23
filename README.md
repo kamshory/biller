@@ -1301,7 +1301,202 @@ Content-length: 274
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
 
-## Prepaid Cell Phone Credit
+## 5.3 Nonusage Electrictity
+
+### 5.3.1 Inquiry Request
+
+**Message Sample**
+
+```http
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
+Content-length: 274
+
+{
+	"command":"inquiry",
+	"product_code":"00500050003",
+	"data":{
+		"date_time":"2019-10T23:58:59.987Z",
+		"customer_id":"149999999911",
+		"registration_number":"5200112006074"
+	}
+}
+```
+
+**Field Description**
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | data.date_time | String | 23 | Request time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 6 | data.registration_number | String | 13 | Registration number |
+
+### 5.3.2 Inquiry Response
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.registration_number | String | 13 | Registration number |
+| 10 | data.transaction_type | String | 25 | Transaction Type |
+| 11 | data.registration_date | String | 8 | Registration date |
+| 12 | data.registration_expire_date | String | 8 | Registration expiration date |
+| 13 | data.customer_id | String | 12 | Customer ID |
+| 14 | data.customer_name | String | 25 | Customer Name |
+| 15 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 16 | data.reference_id | String | 20 | Reference ID |
+| 17 | data.total_amount_100 | Decimal | 17 |  |
+| 18 | data.amount_100 | Decimal | 17 |  |
+| 19 | data.admin_fee_100 | Decimal | 10 |  |
+| 20 | data.amount | Decimal | 12 | Amount |
+
+### 5.3.3 Payment Request
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.date_time | String | 23 | Request time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.registration_number | String | 13 | Registration number |
+| 10 | data.transaction_type | String | 25 | Transaction Type |
+| 11 | data.registration_date | String | 8 | Registration date |
+| 12 | data.registration_expire_date | String | 8 | Registration expiration date |
+| 13 | data.customer_id | String | 12 | Customer ID |
+| 14 | data.customer_name | String | 25 | Customer Name |
+| 15 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 16 | data.reference_id | String | 20 | Reference ID |
+| 17 | data.total_amount_100 | Decimal | 17 |  |
+| 18 | data.amount_100 | Decimal | 17 |  |
+| 19 | data.admin_fee_100 | Decimal | 10 |  |
+| 20 | data.amount | Decimal | 12 | Amount |
+
+### 5.3.4 Payment Response
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | registration_number | String | 13 |  |
+| 10 | transaction_type | String | 25 |  |
+| 11 | registration_date | String | 8 |  |
+| 12 | registration_expire_date | String | 8 |  |
+| 13 | customer_id | String | 12 | Customer ID |
+| 14 | customer_name | String | 25 | Customer Name |
+| 15 | reference_id | String | 32 |  |
+| 16 | ba_reference_number | String | 20 | Biller aggregator reference number |
+| 17 | total_amount_100 | Decimal | 17 |  |
+| 18 | amount_100 | Decimal | 17 |  |
+| 19 | admin_fee_100 | Decimal | 10 |  |
+| 20 | payment_date | String | 8 | Payment date |
+| 21 | payment_time | String | 6 | Payment date |
+| 20 | data.amount | Decimal |  | Amount |
+
+
+### 5.3.5 Advice Request
+
+**Message Sample**
+
+```http
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: a01dcd3b41fd6e71ed55e4d92402826f7f369e0af01db194cc9d32d7eb2c322a
+Content-length: 274
+
+{
+	"command":"advice",
+	"product_code":"00500050001",
+	"data":{
+		"date_time":"2019-10T23:58:59.987Z",
+		"registration_number":"149999999911",
+		"adv_reference_number":"000000002161"
+	}
+}
+```
+
+**Field Description**
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String | | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.registration_number | String | 13 | Registration number |
+| 6 | data.adv_reference_number | String | 32 | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+| 7 | data.date_time | String | 24 | Transmission date and time |
+
+### 5.3.6 Advice Response
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | registration_number | String | 13 |  |
+| 10 | transaction_type | String | 25 |  |
+| 11 | registration_date | String | 8 |  |
+| 12 | registration_expire_date | String | 8 |  |
+| 13 | customer_id | String | 12 | Customer ID |
+| 14 | customer_name | String | 25 | Customer Name |
+| 15 | reference_id | String | 32 |  |
+| 16 | ba_reference_number | String | 20 | Biller aggregator reference number |
+| 17 | total_amount_100 | Decimal | 17 |  |
+| 18 | amount_100 | Decimal | 17 |  |
+| 19 | admin_fee_100 | Decimal | 10 |  |
+| 20 | payment_date | String | 8 | Payment date |
+| 21 | payment_time | String | 6 | Payment date |
+| 20 | data.amount | Decimal |  | Amount |
+
+## 5.4 Prepaid Cell Phone Credit
 
 ### Payment Request
 
@@ -1388,7 +1583,7 @@ Content-length: 336
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
 
-## Postpaid Cell Phone Credit
+## 5.5 Postpaid Cell Phone Credit
 
 ### Inquiry Request
 
@@ -1565,7 +1760,9 @@ Content-length: 363
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
 
-## General Bill
+## 5.6 Moble Data
+
+## 5.7 General Bill
 
 
 ### Inquiry Request
