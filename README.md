@@ -1,5 +1,6 @@
 
 
+
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -1213,7 +1214,6 @@ Content-length: 274
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.customer_id | String | 12 | Customer ID |
 | 6 | data.adv_reference_number | String | 32 | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
-| 7 | data.date_time | String | 24 | Transmission date and time |
 
 ### 5.2.6 Advice Response
 
@@ -1301,6 +1301,102 @@ Content-length: 274
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
 
+### 5.2.7 Reversal Request
+
+**Field Description**
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | data.date_time | String | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.customer_id | String | 12 | Customer ID |
+| 6 | data.rev_reference_number | String | 32 | Reference number to be reversed. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
+
+### 5.2.8 Reversal Response
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 24 | Response date and time |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | Forwarding reference number received from inquiry |
+| 8 | data.fwd_stan | String | 6 | Forwarding STAN received from inquiry |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.bill_count | Decimal | 1 | Count of bills to pay |
+| 11 | data.payment_count | Decimal | 1 | The number of payment on the date |
+| 12 | data.outstanding_bill_count | Decimal | 2 | Count of outstanding bill to pay |
+| 13 | data.biller_reference_number | String | 32 | Biller reference number |
+| 14 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 15 | data.customer_name | String | 25 | Customer Name |
+| 16 | data.service_unit_name | String | 5 | Service Unit Name |
+| 17 | data.service_unit_phone | String | 15 | Service Unit Phone |
+| 18 | data.tariff | String | 4 | Tariff applied |
+| 19 | data.ceiling | Decimal | 9 | Maximum power limits that can be used |
+| 20 | data.admin_fee | Decimal | 9 | Admin fee for the transaction |
+| 21 | data.bill_period_1 | String | 6 | The first bill period |
+| 22 | data.due_date_1 | String | 8 | The first period billing due date |
+| 23 | data.bill_record_date_1 | String | 8 | Date of the first period of electricity usage |
+| 24 | data.bill_amount_1 | Decimal | 12 | Total bill amount for the first period |
+| 25 | data.incentive_sign_1 | String | 1 | Incentive sign of the first bills period |
+| 26 | data.incentive_amount_1 | Decimal | 10 | Incentive amount of the first bills period |
+| 27 | data.ppn_1 | Decimal | 10 | PPN for periode 1 |
+| 28 | data.late_fees_1 | Decimal | 12 | Late fee for period 1 |
+| 29 | data.lwbp_before_1 | Decimal | 8 | LWBP before period 1 |
+| 30 | data.lwbp_after_1 | Decimal | 8 | LWBP after for period 1 |
+| 31 | data.wbp_before_1 | Decimal | 8 | WBP after for period 1 |
+| 32 | data.wbp_after_1 | Decimal | 8 | BWP after for period 1 |
+| 33 | data.kvarh_before_1 | Decimal | 8 | KVARH before for period 1 |
+| 34 | data.kvarh_after_1 | Decimal | 8 | KVARH after for period 1 |
+| 35 | data.bill_period_2 | String | 6 | The second bill period |
+| 36 | data.due_date_2 | String | 8 | The second period billing due date |
+| 37 | data.bill_record_date_2 | String | 8 | Date of the second period of electricity usage |
+| 38 | data.bill_amount_2 | Decimal | 12 | Total bill amount for the second period |
+| 39 | data.incentive_sign_2 | String | 1 | Incentive sign of the second bills period |
+| 40 | data.incentive_amount_2 | String | 10 | Incentive amount of the second bills period |
+| 41 | data.ppn_2 | Decimal | 10 | PPN for periode 2 |
+| 42 | data.late_fees_2 | Decimal | 12 | Late fees for period 2 |
+| 43 | data.lwbp_before_2 | Decimal | 8 | LWBP before for period 2 |
+| 44 | data.lwbp_after_2 | Decimal | 8 | LWBP after for period 2 |
+| 45 | data.wbp_before_2 | Decimal | 8 | WBP before for period 2 |
+| 46 | data.wbp_after_2 | Decimal | 8 | BWP after for period 2 |
+| 47 | data.kvarh_before_2 | Decimal | 8 | KVARH before for period 2 |
+| 48 | data.kvarh_after_2 | Decimal | 8 | KVARH after for period 2 |
+| 49 | data.bill_period_3 | String | 6 | The third bill period |
+| 50 | data.due_date_3 | String | 8 | The third period billing due date |
+| 51 | data.bill_record_date_3 | String | 8 | Date of the third period of electricity usage |
+| 52 | data.bill_amount_3 | Decimal | 12 | Total bill amount for the third period |
+| 53 | data.incentive_sign_3 | String | 1 | Incentive sign of the third bills period |
+| 54 | data.incentive_amount_3 | Decimal | 10 | Incentive amount of the third bills period |
+| 55 | data.ppn_3 | Decimal | 10 | PPN for periode 3 |
+| 56 | data.late_fees_3 | Decimal | 12 | Late fees for period 3 |
+| 57 | data.lwbp_before_3 | Decimal | 8 | LWBP before for period 3 |
+| 58 | data.lwbp_after_3 | Decimal | 8 | LWBP after for period 3 |
+| 59 | data.wbp_before_3 | Decimal | 8 | WBP before for period 3 |
+| 60 | data.wbp_after_3 | Decimal | 8 | BWP after for period 3 |
+| 61 | data.kvarh_before_3 | Decimal | 8 | KVARH before for period 3 |
+| 62 | data.kvarh_after_3 | Decimal | 8 | KVARH after for period 3 |
+| 63 | data.bill_period_4 | String | 6 | The fourth bill period |
+| 64 | data.due_date_4 | String | 8 | The fourth period billing due date |
+| 65 | data.bill_record_date_4 | String | 8 | Date of the fourth period of electricity usage |
+| 66 | data.bill_amount_4 | Decimal | 12 | Total bill amount for the fourth period |
+| 67 | data.incentive_sign_4 | String | 1 | Incentive sign of the fourth bills period |
+| 68 | data.incentive_amount_4 | Decimal | 10 | Incentive amount of the fourth bills period |
+| 69 | data.ppn_4 | Decimal | 10 | PPN for period 4 |
+| 70 | data.late_fees_4 | Decimal | 12 | Late fees for period 4 |
+| 71 | data.lwbp_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 72 | data.lwbp_after_4 | Decimal | 8 | LWBP after for period 4 |
+| 73 | data.wbp_before_4 | Decimal | 8 | WBP before for period 4 |
+| 74 | data.wbp_after_4 | Decimal | 8 | BWP after for period 4 |
+| 75 | data.kvarh_before_4 | Decimal | 8 | LWBP before for period 4 |
+| 76 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
+| 77 | data.reversal_date | String | 8 | Reversal date |
+| 78 | data.reversal_time | String | 6 | Reversal date |
+
 ## 5.3 Nonusage Electrictity
 
 ### 5.3.1 Inquiry Request
@@ -1341,6 +1437,7 @@ Content-length: 274
 | 3 | data.date_time | String | 23 | Request time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 6 | data.registration_number | String | 13 | Registration number |
+| 7 | data.transaction_type | String | 25 | Transaction Type |
 
 ### 5.3.2 Inquiry Response
 
@@ -1496,10 +1593,71 @@ Content-length: 274
 | 21 | payment_time | String | 6 | Payment date |
 | 20 | data.amount | Decimal |  | Amount |
 
+### 5.3.7 Reversal Request
+
+**Message Sample**
+
+**Field Description**
+
+| No | Type | Variable | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | String | command |  | Transaction command |
+| 2 | Numeric, can begin with 0 | product_code |  | Product code |
+| 3 | String | data.date_time | 23 | Transmission date and time in GMT (Format: yyyy-MM-d’T’HH:mm:ss.SSS’Z’) |
+| 4 | String | data.reference_number | 32 | Reference number |
+| 5 | String | data.registration_number | 13 | Registration number |
+| 6 | String | data.fwd_reference_number | 32 | Forwarding reference number received from inquiry |
+| 7 | String | data.fwd_stan | 6 | Forwarding STAN received from inquiry |
+| 8 | String | data.date_time | 24 | Transmission date and time |
+| 9 | String | data.registration_number | 13 | Registration number |
+| 10 | String | data.transaction_type | 25 | Transaction type |
+| 11 | String | data.registration_date | 8 | Registration date |
+| 12 | String | data.registration_expire_date | 8 | Registration expiration date |
+| 12 | String | data.customer_id | 12 | Customer ID |
+| 13 | String | data.customer_name | 25 | Customer Name |
+| 14 | String | data.ba_reference_number | 32 | Biller aggregator reference number |
+| 15 | String | data.reference_id | 20 | Reference ID |
+| 16 | Decimal | data.total_amount_100 | 17 |  |
+| 17 | Decimal | data.amount_100 | 17 |  |
+| 18 | Decimal | data.admin_fee_100 | 10 |  |
+| 19 | Decimal | data.amount | 12 | Amount |
+
+### 5.3.8 Reversal Response
+
+**Field Description**
+
+| No | Variable | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.time_stamp | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.registration_number | String | 13 | Registration number |
+| 8 | data.fwd_reference_number | String | 32 | Forwarding reference number received from inquiry |
+| 9 | data.fwd_stan | String | 6 | Forwarding STAN received from inquiry |
+| 10 | data.date_time | String | 24 | Transmission date and time |
+| 11 | data.registration_number | String | 13 | Registration number |
+| 12 | data.transaction_type | String | 25 | Transaction type |
+| 13 | data.registration_date | String | 8 | Registration date |
+| 14 | data.registration_expire_date | String | 8 | Registration expiration date |
+| 15 | data.customer_id | String | 12 | Customer ID |
+| 16 | data.customer_name | String | 25 | Customer name |
+| 17 | data.ba_reference_number | String | 32 | Biller aggregator reference number |
+| 18 | data.reference_id | String | 20 | Rererence ID |
+| 19 | data.total_amount_100 | Decimal | 17 |  |
+| 20 | data.amount_100 | Decimal | 17 |  |
+| 21 | data.admin_fee_100 | Decimal | 10 |  |
+| 22 | data.payment_date | String | 8 | Payment date |
+| 23 | data.payment_time | String | 6 | Payment date |
+| 24 | data.amount | Decimal | 12 | Amount |
+
 ## 5.4 Prepaid Cell Phone Credit
 
 ### Payment Request
 
+**Message Sample**
 ```http
 POST /biller/ HTTP/1.1
 Content-type: application/json
