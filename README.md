@@ -1,6 +1,5 @@
 
 
-
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -468,7 +467,7 @@ Content-length: 935
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -639,7 +638,7 @@ Content-length: 1298
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -830,7 +829,7 @@ Content-length: 1819
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -920,7 +919,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1088,7 +1087,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1216,7 +1215,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1313,7 +1312,7 @@ Content-length: 274
 
 ### 5.2.8 Reversal Response
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1441,7 +1440,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1468,7 +1467,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1501,7 +1500,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1572,7 +1571,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1630,7 +1629,7 @@ Content-length: 274
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1690,7 +1689,7 @@ Content-length: 200
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1736,7 +1735,7 @@ Content-length: 336
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1782,7 +1781,7 @@ Content-length: 176
 ```
 
 **Field Description**
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
@@ -1823,7 +1822,7 @@ Content-length: 363
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
@@ -1870,7 +1869,7 @@ Content-length: 296
 }
 ```
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -1918,7 +1917,7 @@ Content-length: 363
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
@@ -1933,6 +1932,97 @@ Content-length: 363
 | 11 | data.amount | Decimal | 12 | Amount |
 
 ## 5.6 Moble Data
+
+### Payment Request
+
+**Message Sample**
+```http
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 21834cad678df58049af0a0b17d44d850a84f0525e4443e41e9385a4208ceb1e
+Content-length: 200
+
+{
+	"command":"payment",
+	"process_category":"1010",
+	"data":{
+		"date_time":"2019-10T23:56:59.987Z",
+		"reference_number":"1234567889",
+		"customer_id":"08123456789",
+		"amount":"100000"
+	}
+}
+```
+
+**Field Description**
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | data.date_time | String | 23 | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
+| 8 | data.amount | Decimal | 12 | Amount |
+| 9 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
+| 10 | data.locket_code | String | 32 | Locket code where customer pay |
+| 11 | data.locket_name | String | 30 | Locket name where customer pay |
+| 12 | data.locket_address | String | 50 | Locket address where customer pay |
+| 13 | data.locket_phone | String | 18 | Locket phone where customer pay |
+
+### Payment Response
+
+**Message Sample**
+
+```http
+HTTP/1.1 200 OK
+Content-type: application/json
+Content-encoding: identity
+Date: Thu, 8 Aug 2019 08:08:08 GMT
+Content-length: 336
+
+{
+	"command":"payment",
+	"process_category":"1011",
+	"response_code":"00",
+	"response_text":"Success",
+	"command":"payment",
+	"data":{
+		"time_stamp":"2019-10T23:56:59.987Z",
+		"reference_number":"1234567889",
+		"fwd_reference_number":"99999",
+		"fwd_stan":"556287",
+		"customer_id":"08123456789",
+		"amount":"100000"
+	}
+}
+```
+
+**Field Description**
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 |  | Product code |
+| 3 | response_code | String |  | Response code |
+| 4 | response_text | String |  | Response text |
+| 5 | data.date_time | String | 23 | Response time stamp |
+| 6 | data.reference_number | String | 32 | Reference number |
+| 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 9 | data.customer_id | String | 12 | Customer ID |
+| 10 | data.customer_name | String | 40 | Customer Name |
+| 11 | data.amount | Decimal | 12 | Amount |
 
 ## 5.7 General Bill
 
@@ -1966,7 +2056,7 @@ Content-length: 177
 }
 ```
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
@@ -2007,7 +2097,7 @@ Content-length: 364
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
@@ -2056,7 +2146,7 @@ Content-length: 285
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 |  | Product code |
@@ -2104,7 +2194,7 @@ Content-length: 364
 
 **Field Description**
 
-| No | Variable | Type | Length | Description |
+| No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
 | 1 | command | String |  | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
