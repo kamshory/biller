@@ -1952,7 +1952,7 @@ Content-length: 200
 
 {
 	"command":"payment",
-	"process_category":"1010",
+	"process_category":"1011",
 	"data":{
 		"date_time":"2019-10T23:56:59.987Z",
 		"reference_number":"1234567889",
