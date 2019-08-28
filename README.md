@@ -1,5 +1,6 @@
 
 
+
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -105,17 +106,35 @@ The URL for production is different from the URL for development. The URL for pr
 
 # Chapter 2 - Topology
 
-# Chapter 3 – Transaction Flow
 
-# Chapter 4 – General Message Format
+# Chapter 3 - Transaction Flow
+
+# Chapter 4 - Product and Service
+
+The list of products and services attached separately from this document is due to the large and growing numbers in accordance with the development of billers. Each product has a different message format according to the type of bill and also the policy of each biller.
+
+The following are product categories based on the transaction process.
+
+| No | Code | Description |
+| -- | -- | -- |
+| 1 | 1004 | Postpaid Electricity |
+| 2 | 1005 | Prepaid Electricity |
+| 3 | 1003 | Nonusage Electricity |
+| 4 | 1010 | Prepaid Pone Cell |
+| 5 | 1008 | Postpaid Phone Cell |
+| 6 | 1009 | Mobile Data |
+| 7 | 1007 | Water |
+| 8 | 1006 | General Bill |
+
+# Chapter 5 - General Message Format
 
 The message format on one product will be different from the message format on other products. However, in general, each product has a uniform message format. This chapter will explain the general message format for all products.
 
-## 4.1 Inquiry
+## 5.1 Inquiry
 
 Inquiry is an electronic transaction to find out billing information for certain customer ID of the biller. Some products has no inquiry and some products require inquiry. 
 
-### 4.1.1 Request
+### 5.1.1 Request
 
 #### a. Header
 
@@ -193,7 +212,7 @@ See **Request Headers** section on Chapter 1.
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
-### 4.1.2 Response
+### 5.1.2 Response
 
 #### a. Header
 
@@ -233,11 +252,11 @@ The `Date` general HTTP header contains the date and time at which the message w
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
-## 4.2 Payment
+## 5.2 Payment
 
 Payment is an electronic transaction to pay the bills for certain customer ID of the biller.
 
-### 4.2.1 Request
+### 5.2.1 Request
 
 #### a. Header
 
@@ -316,7 +335,7 @@ See **Request Headers** section on Chapter 1.
 | 9 | data.fwd_reference_number | String (32) | Reference number | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
 | 8 | data.fwd_stan | Numeric | Payment amount | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 
-### 4.2.2 Response
+### 5.2.2 Response
 
 #### a. Header
 
@@ -357,7 +376,7 @@ The `Date` general HTTP header contains the date and time at which the message w
 
 Note: The data length above is the maximum allowed. Shorter will be better.
 
-# Chapter 5 – Product Message Format
+# Chapter 6 – Product Message Format
 
 Each product has a different message format depending on each biller. AltoPay adjusts the message format for each product according to its needs. Some products have far more data attributes than other products because they are related to biller policy.
 
@@ -365,7 +384,7 @@ Some products that have the same attributes and processes are combined into one 
 
 Every message is always listed one of _product_code_ and _category_process. category_process_ is only used for prepaid cellular phone top up and postpaid cell phone bill payments.
 
-## 5.1 Prepaid Electricity
+## 6.1 Prepaid Electricity
 
 Prepaid electricity is a product of the _Perusahaan Listrik Negara_ (PLN) where customers can use electricity in accordance with the quota that has been purchased. By purchasing a power quota, customers will get a token that can be entered into the power controller.
 
@@ -373,7 +392,7 @@ The customer must enter the customer ID or meter number at the time of purchase 
 
 To prevent mistakes when purchasing, PLN requires customers to conduct an inquiry to confirm whether the customer number or meter number entered is correct.
 
-### 5.1.1 Inquiry Request
+### 6.1.1 Inquiry Request
 
 **Message Sample**
 
@@ -422,7 +441,7 @@ Content-length: 388
 | 7 | data.id_selector | Decimal | 1 | ID Selector. 0 if the reference is meter ID and 1 if the reference is customer ID. |
 
 
-### 5.1.2 Inquiry Response
+### 6.1.2 Inquiry Response
 
 **Message Sample**
 
@@ -492,7 +511,7 @@ Content-length: 935
 | 21 | data.total_repeat_print | String | 1 | Total Repeat for Print |
 | 22 | data.power_purchase_unsold_print_1 | Decimal | 11 | Power purchase unsold 1 for print |
 | 23 | data.power_purchase_unsold_print_2 | Decimal | 11 | Power purchase unsold 2 for print |
-### 5.1.3 Purchase Request
+### 6.1.3 Purchase Request
 
 **Message Sample**
 
@@ -574,7 +593,7 @@ Content-length: 879
 | 25 | data.locket_address | String | 50 | Locket address where customer pay |
 | 26 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
-### 5.1.4 Purchase Response
+### 6.1.4 Purchase Response
 
 **Message Sample**
 
@@ -682,7 +701,7 @@ Content-length: 1298
 | 40 | data.power_purchase_unsold | Decimal | 11 | Power Purchase Unsold |
 | 41 | data.amount | Decimal | 12 | Amount |
 
-### 5.1.5 Prepaid Advice Request
+### 6.1.5 Prepaid Advice Request
 
 
 If the connection is lost when the token has been generated by the vending machine but has not been received by the customer, the customer can request the token again by sending a advice message. The same thing happens if the token has been received by the customer but is lost while the token has not been entered into the power controller.
@@ -744,7 +763,7 @@ Content-length: 274
 | 12 | data.locket_address | String | 50 | Locket address where customer pay |
 | 13 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
-### 5.1.6 Prepaid Advice Response
+### 6.1.6 Prepaid Advice Response
 
 **Message Sample**
 
@@ -874,9 +893,9 @@ Content-length: 1819
 | 41 | data.amount | Decimal | 12 | Amount |
 
 
-## 5.2 Postpaid Electrictity
+## 6.2 Postpaid Electrictity
 
-### 5.2.1 Inquiry Request
+### 6.2.1 Inquiry Request
 
 **Message Sample**
 
@@ -915,7 +934,7 @@ Content-length: 274
 | 4 | data.reference_number | String | 32 | Reference number |
 | 6 | data.customer_id | String | 12 | Customer ID |
 
-### 5.2.2 Inquiry Response
+### 6.2.2 Inquiry Response
 
 **Field Description**
 
@@ -997,7 +1016,7 @@ Content-length: 274
 | 74 | data.kvarh_after_4 | Decimal | 8 | KVARH after for period 4 |
 | 75 | data.amount | Decimal | 12 | Amount |
 
-### 5.2.3 Payment Request
+### 6.2.3 Payment Request
 
 **Field Description**
 
@@ -1083,7 +1102,7 @@ Content-length: 274
 | 78 | data.locket_address | String | 50 | Locket address where customer pay |
 | 79 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
-### 5.2.4 Payment Response
+### 6.2.4 Payment Response
 
 **Field Description**
 
@@ -1171,7 +1190,7 @@ Content-length: 274
 
 
 
-### 5.2.5 Advice Request
+### 6.2.5 Advice Request
 
 **Message Sample**
 
@@ -1211,7 +1230,7 @@ Content-length: 274
 | 5 | data.customer_id | String | 12 | Customer ID |
 | 6 | data.adv_reference_number | String | 32 | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
 
-### 5.2.6 Advice Response
+### 6.2.6 Advice Response
 
 **Field Description**
 
@@ -1297,7 +1316,7 @@ Content-length: 274
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
 
-### 5.2.7 Reversal Request
+### 6.2.7 Reversal Request
 
 **Field Description**
 
@@ -1310,7 +1329,7 @@ Content-length: 274
 | 5 | data.customer_id | String | 12 | Customer ID |
 | 6 | data.rev_reference_number | String | 32 | Reference number to be reversed. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
 
-### 5.2.8 Reversal Response
+### 6.2.8 Reversal Response
 
 | No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
@@ -1394,9 +1413,9 @@ Content-length: 274
 | 78 | data.reversal_time | String | 6 | Reversal date |
 | 79 | data.amount | Decimal | 12 | Amount |
 
-## 5.3 Nonusage Electrictity
+## 6.3 Nonusage Electrictity
 
-### 5.3.1 Inquiry Request
+### 6.3.1 Inquiry Request
 
 **Message Sample**
 
@@ -1436,7 +1455,7 @@ Content-length: 274
 | 6 | data.registration_number | String | 13 | Registration number |
 | 7 | data.transaction_type | String | 25 | Transaction Type |
 
-### 5.3.2 Inquiry Response
+### 6.3.2 Inquiry Response
 
 **Field Description**
 
@@ -1463,7 +1482,7 @@ Content-length: 274
 | 19 | data.admin_fee_100 | Decimal | 10 |  |
 | 20 | data.amount | Decimal | 12 | Amount |
 
-### 5.3.3 Payment Request
+### 6.3.3 Payment Request
 
 **Field Description**
 
@@ -1496,7 +1515,7 @@ Content-length: 274
 | 25 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
 
-### 5.3.4 Payment Response
+### 6.3.4 Payment Response
 
 **Field Description**
 
@@ -1526,7 +1545,7 @@ Content-length: 274
 | 22 | data.amount | Decimal |  | Amount |
 
 
-### 5.3.5 Advice Request
+### 6.3.5 Advice Request
 
 **Message Sample**
 
@@ -1567,7 +1586,7 @@ Content-length: 274
 | 6 | data.adv_reference_number | String | 32 | Advice reference number. If this reference number is not provided by customer, AltoPay Biller will choose last transaction |
 | 7 | data.date_time | String | 24 | Transmission date and time |
 
-### 5.3.6 Advice Response
+### 6.3.6 Advice Response
 
 **Field Description**
 
@@ -1596,7 +1615,7 @@ Content-length: 274
 | 21 | payment_time | String | 6 | Payment date |
 | 22 | data.amount | Decimal |  | Amount |
 
-### 5.3.7 Reversal Request
+### 6.3.7 Reversal Request
 
 **Message Sample**
 
@@ -1625,7 +1644,7 @@ Content-length: 274
 | 18 | Decimal | data.admin_fee_100 | 10 |  |
 | 19 | Decimal | data.amount | 12 | Amount |
 
-### 5.3.8 Reversal Response
+### 6.3.8 Reversal Response
 
 **Field Description**
 
@@ -1656,7 +1675,7 @@ Content-length: 274
 | 23 | data.payment_time | String | 6 | Payment date |
 | 24 | data.amount | Decimal | 12 | Amount |
 
-## 5.4 Prepaid Cell Phone Credit
+## 6.4 Prepaid Cell Phone Credit
 
 ### Payment Request
 
@@ -1749,7 +1768,7 @@ Content-length: 336
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
 
-## 5.5 Postpaid Cell Phone Credit
+## 6.5 Postpaid Cell Phone
 
 ### Inquiry Request
 
@@ -1770,12 +1789,12 @@ X-signature: f3571b283dfd6579e9208c25e24a19e07941dae1e0c5b11d905ece2f34ec8585
 Content-length: 176
 
 {
-	"command":"inquiry",
-	"process_category":"1011",
-	"data":{
-		"date_time":"2019-10T23:56:59.987Z",
-		"reference_number":"1234567889",
-		"customer_id":"081234567"
+	"command": "inquiry",
+	"process_category": "1008",
+	"data": {
+		"reference_number": "1566985456",
+		"date_time": "2019-08-28T16:44:16.000Z",
+		"customer_id": "0811000000"
 	}
 }
 ```
@@ -1788,7 +1807,7 @@ Content-length: 176
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 
 ### Inquiry Response
@@ -1803,21 +1822,23 @@ Date: Thu, 8 Aug 2019 08:08:08 GMT
 Content-length: 363
 
 {
-	"command":"payment",
-	"process_category":"1011",
-	"response_code":"00",
-	"response_text":"Success",
-	"command":"payment",
-	"data":{
-		"time_stamp":"2019-10T23:56:59.987Z",
-		"reference_number":"1234567889",
-		"fwd_reference_number":"99999",
-		"fwd_stan":"556287",
-		"customer_id":"08123456789",
-		"customer_name":"Jono",
-		"amount":"100000"
-	}
+	"response_code": "00",
+	"biller_message": "Sukses",
+	"data": {
+		"amount": "235000",
+		"time_stamp": "2019-08-28T09:44:18.650Z",
+		"fwd_stan": "000025",
+		"customer_name": "Kamshory",
+		"fwd_reference_number": "00000000869",
+		"customer_id": "0811000000",
+		"reference_number": "1566985456"
+	},
+	"biller_response": "Sukses",
+	"response_text": "Sukses",
+	"product_code": "00800080001",
+	"command": "inquiry"
 }
+
 ```
 
 **Field Description**
@@ -1831,7 +1852,7 @@ Content-length: 363
 | 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
@@ -1855,16 +1876,23 @@ X-signature: 8a3f728a8b2ae70e80b46742c74dc9bad45dea8a9671bb7b2e403c6ba4cca125
 Content-length: 296
 
 {
-	"command":"payment",
-	"process_category":"6666",
-	"data":{
-		"date_time":"2019-10T23:56:59.987Z",
-		"reference_number":"1234567889",
-		"reference_number":"1234567889",
-		"fwd_reference_number":"99999",
-		"customer_id":"081234567",
-		"customer_name":"Jono",
-		"amount":"100000"
+	"command": "payment",
+	"process_category": "1008",
+	"data": {
+		"locket_address": "Jalan Anggrek Neli Murni",
+		"currency_code": "IDR",
+		"locket_name": "ALTO",
+		"merchant_type": "6021",
+		"locket_code": "123",
+		"reference_number": "1566985456",
+		"locket_phone": "02199999",
+		"date_time": "2019-08-28T16:46:08.000Z",
+		"amount": "235000",
+		"time_stamp": "2019-08-28T09:44:18.650Z",
+		"fwd_stan": "000025",
+		"customer_name": "Kamshory",
+		"fwd_reference_number": "00000000869",
+		"customer_id": "0811000000"
 	}
 }
 ```
@@ -1876,7 +1904,7 @@ Content-length: 296
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.customer_name | String | 40 | Customer Name |
 | 9 | data.amount | Decimal | 12 | Amount |
@@ -1898,20 +1926,21 @@ Date: Thu, 8 Aug 2019 08:08:08 GMT
 Content-length: 363
 
 {
-	"command":"payment",
-	"process_category":"6666",
-	"response_code":"00",
-	"response_text":"Success",
-	"command":"payment",
-	"data":{
-		"time_stamp":"2019-10T23:56:59.987Z",
-		"reference_number":"1234567889",
-		"fwd_reference_number":"99999",
-		"fwd_stan":"556287",
-		"customer_id":"08123456789",
-		"customer_name":"Jono",
-		"amount":"100000"
-	}
+	"response_code": "00",
+	"biller_message": "Sukses",
+	"data": {
+		"amount": "235000",
+		"time_stamp": "2019-08-28T09:46:09.458Z",
+		"fwd_stan": "000025",
+		"customer_name": "Kamshory",
+		"fwd_reference_number": "00000000869",
+		"customer_id": "0811000000",
+		"reference_number": "1566985456"
+	},
+	"biller_response": "Sukses",
+	"response_text": "Sukses",
+	"product_code": "00800080001",
+	"command": "payment"
 }
 ```
 
@@ -1926,12 +1955,12 @@ Content-length: 363
 | 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
 
-## 5.6 Moble Data
+## 6.6 Moble Data
 
 ### Payment Request
 
@@ -1971,7 +2000,7 @@ Content-length: 200
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.amount | Decimal | 12 | Amount |
 | 9 | data.merchant_type | Numeric | 4 | Merchant type of the channel where customer pay the bill |
@@ -2019,15 +2048,75 @@ Content-length: 336
 | 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
 
-## 5.7 General Bill
+## 6.7 Water
+
+Drinking Water Company is a company domiciled in each region. Each company has a different policy that causes the message format is also different. Each water company will form a separate product.
+
+If the customer does not enter manatory data in both the inquiry and payment process, the biller might assume the transaction is invalid and will cause the transaction to fail. For this reason, every mandatory parameter must be filled in as appropriate.
+
+### 6.7.1 Inquiry Request
+
+**Message Sample**
+
+```http
+POST /biller/ HTTP/1.1
+Content-type: application/json
+Accept: application/json
+Content-encoding: identity
+Accept-encoding: identity
+Host: dev.altopay.id:9090/biller/
+Connection: close
+User-agent: Planet POS
+X-api-key: 650a8e7e-b97f-11e9-a2a3-2a2ae2dbcce4
+X-timestamp: 2019-08-08T08:08:08
+X-signature: 526709aaf22e9523cb5dcea826e586b36955a17d6ceb0da06d9d629913d29c48
+Content-length: 177
+
+{
+	"command":"inquiry",
+	"product_code":"99999999",
+	"data":{
+		"date_time":"2019-10T23:56:59.987Z",
+		"reference_number":"1234567889",
+		"customer_id":"081234567"
+	}
+}
+```
+
+| No | Parameter | Type | Length | Description |
+| -- | -- | -- | -- | -- |
+| 1 | command | String |  | Transaction command |
+| 2 | product_code | Numeric, can begin with 0 | | Product code |
+| 3 | data.date_time | String | 23 | Response time stamp |
+| 4 | data.reference_number | String | 32 | Reference number |
+| 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
+| 6 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 7 | data.customer_id | String | 12 | Customer ID |
+
+### 6.7.2 Inquiry Response
+
+### 6.7.3 Payment Request
+
+### 6.7.4 Payment Response
+
+### 6.7.5 Advice Request
+
+### 6.7.6 Advice Response
+
+### 6.7.5 Reversal Request
+
+### 6.7.8 Reversal Response
 
 
-### Inquiry Request
+
+## 6.8 General Bill
+
+### 6.8.1 Inquiry Request
 
 **Message Sample**
 
@@ -2063,10 +2152,10 @@ Content-length: 177
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 
-### Inquiry Response
+### 6.8.2 Inquiry Response
 
 **Message Sample**
 
@@ -2106,12 +2195,12 @@ Content-length: 364
 | 5 | data.date_time | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
 
-### Payment Request
+### 6.8.3 Payment Request
 
 **Message Sample**
 
@@ -2153,7 +2242,7 @@ Content-length: 285
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
 | 5 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 6 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 6 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 7 | data.customer_id | String | 12 | Customer ID |
 | 8 | data.customer_name | String | 40 | Customer Name |
 | 9 | data.amount | Decimal | 12 | Amount |
@@ -2163,7 +2252,7 @@ Content-length: 285
 | 13 | data.locket_address | String | 50 | Locket address where customer pay |
 | 14 | data.locket_phone | String | 18 | Locket phone where customer pay |
 
-### Payment Response
+### 6.8.4 Payment Response
 
 **Message Sample**
 
@@ -2203,7 +2292,7 @@ Content-length: 364
 | 5 | data.time_stamp | String | 23 | Response time stamp |
 | 6 | data.reference_number | String | 32 | Reference number |
 | 7 | data.fwd_reference_number | String | 32 | For several product, fwd_reference_number must be same with fwd_reference_number on inquiry response |
-| 8 | data.fwd_stan | Numeric |  | For several product, fwd_stan must be same with fwd_stan on inquiry response |
+| 8 | data.fwd_stan | Numeric | 6 | For several product, fwd_stan must be same with fwd_stan on inquiry response |
 | 9 | data.customer_id | String | 12 | Customer ID |
 | 10 | data.customer_name | String | 40 | Customer Name |
 | 11 | data.amount | Decimal | 12 | Amount |
