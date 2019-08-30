@@ -1,6 +1,3 @@
-
-
-
 # Chapter 1 – Introduction
 
 ## 1.1 Protocol
@@ -106,7 +103,6 @@ The URL for production is different from the URL for development. The URL for pr
 
 # Chapter 2 - Topology
 
-
 # Chapter 3 - Transaction Flow
 
 # Chapter 4 - Product and Service
@@ -140,7 +136,7 @@ Inquiry is an electronic transaction to find out billing information for certain
 
 **Accept**
 
-The `Accept` request HTTP header advertises which content types, expressed as MIME types, the client is able to understand. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice with the Content-Type response header.
+The `Accept` request HTTP header advertises which content types, expressed as MIME types, the client is able to understand. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice with the `Content-Type` response header.
 
 **Accept-encoding**
 
@@ -171,7 +167,7 @@ The `User-Agent` request header contains a characteristic string that allows the
 
 **Host**
 
-`Host` is the name of the server accessed by AltoPay. From this header, the merchant server can find out how AltoPay is connected to the merchant server.
+`Host` is the name of the server accessed by client. From this header, the AltoPay can find out how client is connected to AltoPay.
 
 **X-api-key**
 
@@ -293,7 +289,7 @@ The **User-Agent** request header contains a characteristic string that allows t
 
 **Host**
 
-Host is the name of the server accessed by AltoPay. From this header, the merchant server can find out how AltoPay is connected to the merchant server.
+`Host` is the name of the server accessed by client. From this header, the AltoPay can find out how client is connected to AltoPay.
 
 **X-api-key**
 
@@ -1187,8 +1183,6 @@ Content-length: 274
 | 77 | data.payment_date | String | 8 | Payment date |
 | 78 | data.payment_time | String | 6 | Payment date |
 | 79 | data.amount | Decimal | 12 | Amount |
-
-
 
 ### 6.2.5 Advice Request
 
