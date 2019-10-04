@@ -1794,9 +1794,10 @@ Content-length: 176
 ```
 
 **Field Description**
+
 | No | Parameter | Type | Length | Description |
 | -- | -- | -- | -- | -- |
-| 1 | command | String |  | Transaction command |
+| 1 | command | String | | Transaction command |
 | 2 | product_code | Numeric, can begin with 0 | | Product code |
 | 3 | data.date_time | String | 23 | Response time stamp |
 | 4 | data.reference_number | String | 32 | Reference number |
